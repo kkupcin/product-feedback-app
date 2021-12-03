@@ -1,0 +1,21 @@
+.container {
+    box-sizing: border-box;
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+}
+
+h1 {
+    color: #fff;
+    font-size: 18px;
+}
+
+p {
+    color: #f2f4ff;
+}
+
+img:hover {
+    cursor: pointer;
+}

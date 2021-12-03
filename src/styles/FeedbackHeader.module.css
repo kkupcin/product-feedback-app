@@ -1,0 +1,16 @@
+.container {
+  box-sizing: border-box;
+  background-color: #373f68;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.textContainer {
+  display: flex;
+}
+
+h4 {
+  color: #fff;
+}

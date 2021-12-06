@@ -1,8 +1,18 @@
-const NewFeedbackPage = () => {};
+import styles from "../styles/NewFeedbackPage.module.css"
+import FeedbackForm from "../components/FeedbackForm";
+
+const NewFeedbackPage = () => {
+  return (
+    <div className={styles.container}>
+      <button>Go Back</button>
+      <FeedbackForm />
+    </div>
+  );
+};
 
 export default NewFeedbackPage;
 
-// - Create new feedback page 
+// - Create new feedback page
 // 	1.- Go back button
 
 // 	2.- Create new feedback FORM

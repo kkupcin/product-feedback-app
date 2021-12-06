@@ -1,0 +1,23 @@
+.outerModal {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.39);
+  top: 83px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.container {
+  position: absolute;
+  background-color: #f7f8fd;
+  width: 70%;
+  height: 100vh;
+  z-index: 3;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+}

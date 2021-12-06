@@ -1,0 +1,25 @@
+.container {
+  background-color: #fff;
+  width: 85%;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 223px;
+}
+
+.list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.category {
+  display: inline-block;
+  background-color: #f2f4ff;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #4661e6;
+  font-weight: 600;
+  margin-bottom: 12px;
+}

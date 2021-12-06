@@ -1,12 +1,15 @@
 import React from "react";
 import Header from "../components/Header";
 import FeedbackHeader from "../components/FeedbackHeader";
+import FeedbackList from "../components/FeedbackList";
+import MobileSidebar from "../components/MobileSidebar";
 
 const HomePage = () => {
   return (
     <React.Fragment>
       <Header />
       <FeedbackHeader />
+      <FeedbackList />
     </React.Fragment>
   );
 };

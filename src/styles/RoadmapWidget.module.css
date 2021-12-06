@@ -1,0 +1,65 @@
+.container {
+  background-color: #fff;
+  width: 85%;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 223px;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: 18px;
+  color: #3a4374;
+  letter-spacing: -0.25px;
+}
+
+.button {
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  text-decoration: underline;
+  font-size: 13px;
+  color: #4661e6;
+  font-weight: 600;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.itemTitleBox {
+  display: flex;
+  align-items: center;
+}
+
+.itemSpan {
+  border-radius: 50%;
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  margin-right: 16px;
+}
+
+.itemTitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: #647196;
+}
+
+.counter {
+  font-size: 16px;
+  font-weight: 700;
+  color: #647196;
+}

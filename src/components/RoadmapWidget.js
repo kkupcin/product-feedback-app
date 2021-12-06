@@ -1,24 +1,42 @@
-import styles from '../styles/RoadmapWidget.module.css'
+import styles from "../styles/RoadmapWidget.module.css";
 
 const RoadmapWidget = (props) => {
   return (
-    <div>
-      <div>
-        <h1>Roadmap</h1>
-        <button>View</button>
+    <div className={styles.container}>
+      <div className={styles.headerContainer}>
+        <h1 className={styles.title}>Roadmap</h1>
+        <button className={styles.button}>View</button>
       </div>
-      <div>
-        <div>
-          <h2>Planned</h2>
-          <p>2</p>
+      <div className={styles.listContainer}>
+        <div className={styles.listItem}>
+          <div className={styles.itemTitleBox}>
+            <span
+              className={styles.itemSpan}
+              style={{ backgroundColor: "#F49F85" }}
+            />
+            <h2 className={styles.itemTitle}>Planned</h2>
+          </div>
+          <p className={styles.counter}>2</p>
         </div>
-        <div>
-          <h2>In-Progress</h2>
-          <p>3</p>
+        <div className={styles.listItem}>
+          <div className={styles.itemTitleBox}>
+            <span
+              className={styles.itemSpan}
+              style={{ backgroundColor: "#AD1FEA" }}
+            />
+            <h2 className={styles.itemTitle}>In-Progress</h2>
+          </div>
+          <p className={styles.counter}>3</p>
         </div>
-        <div>
-          <h2>Live</h2>
-          <p>1</p>
+        <div className={styles.listItem}>
+          <div className={styles.itemTitleBox}>
+            <span
+              className={styles.itemSpan}
+              style={{ backgroundColor: "#62BCFA" }}
+            />
+            <h2 className={styles.itemTitle}>Live</h2>
+          </div>
+          <p className={styles.counter}>1</p>
         </div>
       </div>
     </div>

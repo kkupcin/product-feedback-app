@@ -1,0 +1,32 @@
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  width: 85%;
+  padding: 32px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: -25px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formTitle {
+  font-size: 18px;
+  letter-spacing: 0.25px;
+}
+
+.formBox {
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+}

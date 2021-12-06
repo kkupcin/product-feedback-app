@@ -1,15 +1,15 @@
-import styles from '../styles/Categories.module.css'
+import styles from "../styles/Categories.module.css";
 
 const Categories = (props) => {
   return (
-    <div>
-      <ul>
-        <li>All</li>
-        <li>UI</li>
-        <li>UX</li>
-        <li>Enhancement</li>
-        <li>Bug</li>
-        <li>Feature</li>
+    <div className={styles.container}>
+      <ul className={styles.list}>
+        <li className={styles.category}>All</li>
+        <li className={styles.category}>UI</li>
+        <li className={styles.category}>UX</li>
+        <li className={styles.category}>Enhancement</li>
+        <li className={styles.category}>Bug</li>
+        <li className={styles.category}>Feature</li>
       </ul>
     </div>
   );

@@ -9,10 +9,10 @@ const Header = (props) => {
       className={styles.container}
     >
       <div>
-        <h1>Product Feedback App</h1>
-        <p>Feedback Board</p>
+        <h1 className={styles.title}>Product Feedback App</h1>
+        <p className={styles.subtitle}>Feedback Board</p>
       </div>
-      <img src={hamburgerLogo} alt="Hamburger" />
+      <img src={hamburgerLogo} alt="Hamburger" className={styles.icon} />
     </div>
   );
 };

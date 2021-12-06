@@ -1,0 +1,62 @@
+.container {
+  background-color: #fff;
+  width: 85%;
+  border-radius: 10px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 13px;
+  letter-spacing: -0.18px;
+  margin-bottom: 8px;
+}
+
+.description {
+  color: #647196;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.category {
+  display: inline-block;
+  background-color: #f2f4ff;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #4661e6;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.counterContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upvoteContainer {
+  background-color: #f2f4fe;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 6px 14px;
+}
+
+.commentContainer {
+  display: flex;
+  align-items: center;
+}
+
+.counter {
+  font-size: 13px;
+  margin-left: 8px;
+  letter-spacing: -0.18px;
+}
+
+.arrow {
+  width: 8px;
+}
+
+.comment {
+  width: 18px;
+}

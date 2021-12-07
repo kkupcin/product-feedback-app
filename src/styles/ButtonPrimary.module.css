@@ -12,6 +12,10 @@
   margin-bottom: 16px;
 }
 
+.buttonFeedbackEditor {
+  margin: 10px 0;
+}
+
 .icon {
   width: 7px;
   margin-right: 4px;

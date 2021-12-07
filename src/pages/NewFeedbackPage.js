@@ -1,23 +1,19 @@
-import styles from "../styles/NewFeedbackPage.module.css"
+import styles from "../styles/NewFeedbackPage.module.css";
 import FeedbackForm from "../components/FeedbackForm";
+import ButtonSecondary from "../components/ButtonSecondary";
+import plusIcon from "../assets/shared/icon-new-feedback.svg";
 
 const NewFeedbackPage = () => {
   return (
     <div className={styles.container}>
-      <button>Go Back</button>
-      <FeedbackForm />
+      <ButtonSecondary title="Go Back" class="buttonForm" icon={true}>
+        Go Back
+      </ButtonSecondary>
+      <FeedbackForm icon={plusIcon} />
     </div>
   );
 };
 
 export default NewFeedbackPage;
 
-// - Create new feedback page
-// 	1.- Go back button
-
-// 	2.- Create new feedback FORM
-// 		- Feedback title and input
-// 		- Category title and input (dropdown)
-// 		- Feedback detail title and input
-// 		- Add feedback button
-// 		- Cancel button
+// DROPDOWNS AND BUTTONS!

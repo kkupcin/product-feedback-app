@@ -1,35 +1,82 @@
 import styles from "../styles/FeedbackForm.module.css";
-import plusIcon from "../assets/shared/icon-new-feedback.svg";
+import ButtonPrimary from "./ButtonPrimary";
 
-const FeedbackForm = () => {
+const FeedbackForm = (props) => {
   return (
     <div className={styles.container}>
-      <img src={plusIcon} alt="icon" className={styles.icon} />
+      <img src={props.icon} alt="icon" className={styles.icon} />
       <div className={styles.formContainer}>
-        <h1 className={styles.formTitle}>Create New Feedback</h1>
+        <h1 className={styles.formTitle}>
+          {props.editForm
+            ? `Editing "${props.feedbackTitle}"`
+            : "Create New Feedback"}
+        </h1>
         <div className={styles.formBox}>
           <label className={styles.label}>Feedback Title</label>
           <p className={styles.description}>
             Add a short, descriptive headline
           </p>
-          <input className={styles.textInput}></input>
+          <input
+            className={`${styles.textInput} ${styles.input}`}
+            type="text"
+          ></input>
         </div>
         <div className={styles.formBox}>
           <label className={styles.label}>Category</label>
           <p className={styles.description}>
             Choose a category for your feedback
           </p>
-          <input className={styles.dropdownInput}></input>
+          <input
+            className={`${styles.dropdownInput} ${styles.input}`}
+            type="dropdown"
+          ></input>
         </div>
+        {props.editForm && (
+          <div className={styles.formBox}>
+            <label className={styles.label}>Update Status</label>
+            <p className={styles.description}>Change feature state</p>
+            <input
+              className={`${styles.dropdownInput} ${styles.input}`}
+              type="dropdown"
+            ></input>
+          </div>
+        )}
         <div className={styles.formBox}>
           <label className={styles.label}>Feedback Detail</label>
           <p className={styles.description}>
             Include any specific comments on what should be improved, added,
             etc.
           </p>
-          <input className={styles.richTextInput}></input>
+          <textarea
+            className={`${styles.largeTextInput} ${styles.input}`}
+            type="textarea"
+            rows="6"
+          ></textarea>
         </div>
       </div>
+      <ButtonPrimary
+        title={props.editForm ? "Save Changes" : "Add Feedback"}
+        color="#AD1FEA"
+        icon={false}
+        width="100%"
+        class="buttonFeedbackEditor"
+      ></ButtonPrimary>
+      <ButtonPrimary
+        title="Cancel"
+        color="#3A4374"
+        icon={false}
+        width="100%"
+        class="buttonFeedbackEditor"
+      ></ButtonPrimary>
+      {props.editForm && (
+        <ButtonPrimary
+          title="Delete"
+          color="#d73737"
+          icon={false}
+          width="100%"
+          class="buttonFeedbackEditor"
+        ></ButtonPrimary>
+      )}
     </div>
   );
 };

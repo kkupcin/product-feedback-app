@@ -3,8 +3,10 @@
   border-radius: 10px;
   width: 85%;
   padding: 32px;
+  padding-top: 64px;
   box-sizing: border-box;
   position: relative;
+  margin-bottom: 24px;
 }
 
 .icon {
@@ -15,7 +17,7 @@
 .formContainer {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .formTitle {
@@ -23,10 +25,39 @@
   letter-spacing: 0.25px;
 }
 
-.formBox {
+.formBox:last-child {
+  margin-bottom: 18px;
 }
 
 .label {
   font-size: 13px;
   font-weight: 700;
+  line-height: 2;
+  letter-spacing: -0.18pxs;
+}
+
+.description {
+  font-size: 13px;
+  color: #647196;
+  margin-bottom: 16px;
+}
+
+.input {
+  border: none;
+  background-color: #f7f8fd;
+  border-radius: 5px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  padding: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  color: #3a4374;
+}
+
+.dropdownInput {
+}
+
+.largeTextInput {
+  resize: none;
 }

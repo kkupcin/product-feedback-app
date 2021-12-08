@@ -23,3 +23,16 @@
   color: #647196;
   margin-bottom: 32px;
 }
+
+@media screen and (min-width: 601px) {
+  .title {
+    font-size: 24px;
+    letter-spacing: -0.33px;
+    margin: 64px auto 32px;
+  }
+
+  .description {
+    font-size: 16px;
+    margin-bottom: 64px;
+  }
+}

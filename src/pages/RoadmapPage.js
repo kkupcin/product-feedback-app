@@ -14,24 +14,30 @@ const RoadmapPage = () => {
             icon={true}
             class="buttonRoadmap"
             color="#fff"
+            iconWhite={true}
           />
           <h2 className={styles.mainTitle}>Roadmap</h2>
         </div>
         <ButtonPrimary title="Add Feedback" icon={true} color="#AD1FEA" />
       </div>
-      <div>
-        <div>Planned (2)</div>
-        <div>In-Progress (3)</div>
-        <div>Live(1)</div>
-      </div>
-      <div>
-        <div>
-          <h1>In-Progress (3)</h1>
-          <p>Features currently being developed</p>
+      <div className={styles.mainNav}>
+        <div className={`${styles.mainNavItem}`}>Planned (2)</div>
+        <div className={`${styles.mainNavItem} ${styles.selected}`}>
+          In-Progress (3)
         </div>
-        <FeatureDetails />
-        <FeatureDetails />
-        <FeatureDetails />
+        <div className={`${styles.mainNavItem}`}>Live(1)</div>
+        <span className={`${styles.selectionBar} ${styles.positionTwo}`}></span>
+      </div>
+      <div className={styles.mainContainer}>
+        <div className={styles.infoText}>
+          <h1 className={styles.largeTitle}>In-Progress (3)</h1>
+          <p className={styles.description}>
+            Features currently being developed
+          </p>
+        </div>
+        <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+        <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+        <FeatureDetails roadmapPage={true} color="#AD1FEA" />
       </div>
     </React.Fragment>
   );

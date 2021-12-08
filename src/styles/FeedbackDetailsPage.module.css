@@ -115,6 +115,7 @@
 
 .options {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
@@ -122,4 +123,15 @@
 .charCounter {
   font-size: 13px;
   color: #647196;
+  margin-bottom: 24px;
+}
+
+@media screen and (min-width: 375px) {
+  .options {
+    flex-direction: row;
+  }
+
+  .charCounter {
+    margin-bottom: 0;
+  }
 }

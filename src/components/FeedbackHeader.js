@@ -14,6 +14,7 @@ const FeedbackHeader = () => {
         color="#ad1fea"
         title="Add Feedback"
         class="buttonHeader"
+        icon={true}
       ></ButtonPrimary>
     </div>
   );

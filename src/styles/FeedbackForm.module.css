@@ -22,7 +22,7 @@
 
 .formTitle {
   font-size: 18px;
-  letter-spacing: 0.25px;
+  letter-spacing: -0.25px;
 }
 
 .formBox:last-child {
@@ -33,7 +33,7 @@
   font-size: 13px;
   font-weight: 700;
   line-height: 2;
-  letter-spacing: -0.18pxs;
+  letter-spacing: -0.18px;
 }
 
 .description {
@@ -60,4 +60,36 @@
 
 .largeTextInput {
   resize: none;
+}
+
+@media screen and (min-width: 601px) {
+  .formTitle {
+    font-size: 24px;
+    letter-spacing: -0.33px;
+  }
+
+  .label {
+    font-size: 14px;
+    letter-spacing: -0.19px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .input {
+    font-size: 14px;
+  }
+
+  .buttonBox {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .createButtonBox {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 16px;
+  }
 }

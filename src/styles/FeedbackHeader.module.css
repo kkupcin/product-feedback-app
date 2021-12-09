@@ -35,3 +35,35 @@
     flex-direction: row;
   }
 }
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 85%;
+    border-radius: 10px;
+  }
+
+  .mainTitleBox {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon {
+    margin-right: 16px;
+  }
+
+  .mainTitle {
+    font-size: 18px;
+    letter-spacing: -0.25px;
+    color: #fff;
+    font-weight: 700;
+    margin-right: 24px;
+  }
+
+  .filterName {
+    font-size: 14px;
+  }
+
+  .textTitle {
+    font-size: 14px;
+  }
+}

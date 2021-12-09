@@ -1,0 +1,14 @@
+.mainNav {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 32px 0;
+    flex: 1;
+    width: 85%;
+    gap: 16px;
+}
+
+.homePageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

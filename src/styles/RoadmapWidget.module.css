@@ -63,3 +63,10 @@
   font-weight: 700;
   color: #647196;
 }
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 223px;
+    flex: 1;
+  }
+}

@@ -14,6 +14,7 @@
 
 .buttonFeedbackEditor {
   margin: 10px 0;
+  width: 100%;
 }
 
 .icon {
@@ -24,5 +25,19 @@
 @media screen and (min-width: 375px) {
   .buttonHeader {
     margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .button {
+    font-size: 14px;
+  }
+
+  .buttonFeedbackEditor {
+    width: auto;
+  }
+
+  .buttonFeedbackEditor:nth-child(3) {
+    align-self: flex-start;
   }
 }

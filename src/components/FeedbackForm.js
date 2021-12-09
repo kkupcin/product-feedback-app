@@ -54,29 +54,30 @@ const FeedbackForm = (props) => {
           ></textarea>
         </div>
       </div>
-      <ButtonPrimary
-        title={props.editForm ? "Save Changes" : "Add Feedback"}
-        color="#AD1FEA"
-        icon={false}
-        width="100%"
-        class="buttonFeedbackEditor"
-      ></ButtonPrimary>
-      <ButtonPrimary
-        title="Cancel"
-        color="#3A4374"
-        icon={false}
-        width="100%"
-        class="buttonFeedbackEditor"
-      ></ButtonPrimary>
-      {props.editForm && (
-        <ButtonPrimary
-          title="Delete"
-          color="#d73737"
-          icon={false}
-          width="100%"
-          class="buttonFeedbackEditor"
-        ></ButtonPrimary>
-      )}
+      <div className={styles.buttonBox}>
+        <div className={styles.createButtonBox}>
+          <ButtonPrimary
+            title={props.editForm ? "Save Changes" : "Add Feedback"}
+            color="#AD1FEA"
+            icon={false}
+            class="buttonFeedbackEditor"
+          ></ButtonPrimary>
+          <ButtonPrimary
+            title="Cancel"
+            color="#3A4374"
+            icon={false}
+            class="buttonFeedbackEditor"
+          ></ButtonPrimary>
+        </div>
+        {props.editForm && (
+          <ButtonPrimary
+            title="Delete"
+            color="#d73737"
+            icon={false}
+            class="buttonFeedbackEditor"
+          ></ButtonPrimary>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,16 +1,26 @@
 import React from "react";
+import styles from "../styles/HomePage.module.css";
 import Header from "../components/Header";
 import FeedbackHeader from "../components/FeedbackHeader";
 import FeedbackList from "../components/FeedbackList";
 import MobileSidebar from "../components/MobileSidebar";
+import Categories from "../components/Categories";
+import RoadmapWidget from "../components/RoadmapWidget";
 
 const HomePage = () => {
   return (
-    <React.Fragment>
-      <Header />
+    <div className={styles.homePageWrapper}>
+      <div className={styles.mainNav}>
+        <Header />
+        <MobileSidebar />
+        <React.Fragment>
+          <Categories />
+          <RoadmapWidget />
+        </React.Fragment>
+      </div>
       <FeedbackHeader />
       <FeedbackList />
-    </React.Fragment>
+    </div>
   );
 };
 

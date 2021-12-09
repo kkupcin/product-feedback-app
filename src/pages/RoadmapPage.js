@@ -6,7 +6,7 @@ import styles from "../styles/RoadmapPage.module.css";
 
 const RoadmapPage = () => {
   return (
-    <React.Fragment>
+    <div className={styles.container}>
       <div className={styles.topNav}>
         <div className={styles.navText}>
           <ButtonSecondary
@@ -39,7 +39,7 @@ const RoadmapPage = () => {
         <FeatureDetails roadmapPage={true} color="#AD1FEA" />
         <FeatureDetails roadmapPage={true} color="#AD1FEA" />
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

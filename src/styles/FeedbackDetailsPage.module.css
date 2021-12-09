@@ -31,6 +31,11 @@
 .userCommentBox {
   border-bottom: 1px solid rgba(140, 146, 179, 0.25);
   padding-bottom: 24px;
+  display: grid;
+  grid-template-areas:
+    "icon userInfo . button"
+    "text text text text";
+  align-items: center;
 }
 
 .userCommentBox:last-child {
@@ -42,18 +47,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  grid-area: userInfo;
+  justify-self: start;
+  margin-left: 12px;
 }
 
-.userIconAndInfo {
+.userInfoText {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 }
 
 .userIcon {
   border-radius: 50%;
   width: 40px;
   height: 40px;
+  grid-area: icon;
+  justify-self: start;
 }
 
 .userInfoName {
@@ -74,12 +85,18 @@
   font-size: 13px;
   color: #647196;
   width: 95%;
+  grid-area: text;
 }
 
 .userReplyBox {
   padding-left: 24px;
   border-left: 1px solid rgba(100, 113, 150, 0.1);
   border-bottom: none;
+  display: grid;
+  grid-template-areas:
+    "icon userInfo . button"
+    "text text text text";
+  align-items: center;
 }
 
 .addCommentContainer {
@@ -133,5 +150,40 @@
 
   .charCounter {
     margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .userCommentBox,
+  .userReplyBox {
+    grid-template-areas:
+      "icon . . userInfo . button"
+      ". . . text text text"
+      ". . . text text text";
+  }
+
+  .userIcon {
+    margin-right: 32px;
+  }
+
+  .userInfoContainer {
+    margin-left: 0;
+  }
+
+  .userInfoName {
+    font-size: 14px;
+    letter-spacing: -0.19px;
+  }
+
+  .username {
+    font-size: 14px;
+  }
+
+  .commentText {
+    font-size: 15px;
+  }
+
+  .charCounter {
+    font-size: 15px;
   }
 }

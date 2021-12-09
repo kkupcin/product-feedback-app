@@ -5,6 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 32px;
+  background-image: url("../assets/shared/mobile/background-header.png");
 }
 
 .title {
@@ -26,4 +27,27 @@
 
 .icon:hover {
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    background-image: url("../assets/shared/tablet/background-header.png");
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 223px;
+    align-items: flex-end;
+    flex: 1;
+  }
+
+  .title {
+    font-size: 20px;
+    letter-spacing: -0.25px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
 }

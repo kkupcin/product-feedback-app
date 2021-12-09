@@ -12,14 +12,24 @@
 }
 
 .buttonForm {
-  margin: 32px 0 60px 24px;
+  margin: 32px 0 60px 7.5%;
 }
 
 .buttonRoadmap {
   margin: 0 0 4px;
 }
 
+.buttonReply {
+  grid-area: button;
+}
+
 .arrow {
   margin-right: 20px;
   width: 8px;
+}
+
+@media screen and (min-width: 601px) {
+  .button {
+    font-size: 14px;
+  }
 }

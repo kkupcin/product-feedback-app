@@ -70,7 +70,14 @@
   flex-direction: column;
   align-items: center;
   padding: 32px 0;
-  gap: 16px;
+  gap: 18px;
+}
+
+.mainList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
 }
 
 .infoText {
@@ -118,59 +125,23 @@
     display: none;
   }
 
-  .mainNavItem {
-    flex: 1;
-    text-align: center;
-  }
-
-  .selected {
-    color: #3a4374;
-  }
-
-  .selectionBar {
-    position: absolute;
-    height: 4px;
-    width: 33.33%;
-    bottom: 0;
-    transition: all 0.1s ease-in-out;
-  }
-
-  .positionOne {
-    background-color: #f49f85;
-    left: 0;
-  }
-
-  .positionTwo {
-    background-color: #ad1fea;
-    left: 33.33%;
-  }
-
-  .positionThree {
-    background-color: #62bcfa;
-    left: 66.66%;
-  }
-
   .mainContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 32px 0;
-    gap: 16px;
+    flex-direction: row;
+    padding: 16px 0;
+    width: 85%;
   }
 
   .infoText {
-    align-self: flex-start;
-    margin-left: 8%;
+    margin-left: 0;
+    margin-bottom: 24px;
   }
 
   .largeTitle {
-    font-size: 18px;
-    letter-spacing: -0.25px;
-    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.19px;
   }
 
   .description {
-    font-size: 13px;
-    color: #647196;
+    font-size: 14px;
   }
 }

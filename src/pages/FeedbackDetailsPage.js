@@ -11,7 +11,7 @@ const FeedbackDetailsPage = () => {
         <ButtonSecondary title="Go Back" icon={true} />
         <ButtonPrimary title="Edit Feedback" icon={false} color="#4661e6" />
       </div>
-      <FeedbackDetails width="85%" />
+      <FeedbackDetails width="85%" feedbackDetailsPage={true} />
       <div className={styles.commentsContainer}>
         <h1 className={styles.commentCounter}>4 Comments</h1>
         <div className={styles.userCommentBox}>

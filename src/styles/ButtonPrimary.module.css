@@ -6,6 +6,16 @@
   font-size: 13px;
   padding: 12px 20px;
   border-radius: 10px;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.purple {
+  background-color: #ad1fea;
+}
+
+.purple:hover {
+  background-color: #c75af6;
 }
 
 .buttonHeader {

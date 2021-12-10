@@ -4,8 +4,9 @@ import icon from "../assets/shared/icon-plus.svg";
 const ButtonPrimary = (props) => {
   return (
     <button
-      className={`${styles.button} ${styles[props.class] || ""}`}
-      style={{ backgroundColor: `${props.color}`, width: `${props.width}` }}
+      className={`${styles.button} ${styles[props.class] || ""} ${
+        styles[props.color] || ""
+      }`}
     >
       {props.icon && <img src={icon} alt="plus" className={styles.icon} />}
       {props.title}

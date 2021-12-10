@@ -29,15 +29,39 @@ const RoadmapPage = () => {
         <span className={`${styles.selectionBar} ${styles.positionTwo}`}></span>
       </div>
       <div className={styles.mainContainer}>
-        <div className={styles.infoText}>
-          <h1 className={styles.largeTitle}>In-Progress (3)</h1>
-          <p className={styles.description}>
-            Features currently being developed
-          </p>
+        <div className={styles.mainList}>
+          <div className={styles.infoText}>
+            <h1 className={styles.largeTitle}>In-Progress (3)</h1>
+            <p className={styles.description}>
+              Features currently being developed
+            </p>
+          </div>
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
         </div>
-        <FeatureDetails roadmapPage={true} color="#AD1FEA" />
-        <FeatureDetails roadmapPage={true} color="#AD1FEA" />
-        <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+        <div className={styles.mainList}>
+          <div className={styles.infoText}>
+            <h1 className={styles.largeTitle}>In-Progress (3)</h1>
+            <p className={styles.description}>
+              Features currently being developed
+            </p>
+          </div>
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+        </div>
+        <div className={styles.mainList}>
+          <div className={styles.infoText}>
+            <h1 className={styles.largeTitle}>In-Progress (3)</h1>
+            <p className={styles.description}>
+              Features currently being developed
+            </p>
+          </div>
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+          <FeatureDetails roadmapPage={true} color="#AD1FEA" />
+        </div>
       </div>
     </div>
   );

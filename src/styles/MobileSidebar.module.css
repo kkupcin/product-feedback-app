@@ -12,6 +12,7 @@
   position: absolute;
   background-color: #f7f8fd;
   width: 70%;
+  max-width: 260px;
   height: 100vh;
   z-index: 3;
   right: 0;

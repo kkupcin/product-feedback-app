@@ -16,12 +16,14 @@
   letter-spacing: -0.25px;
   color: #3a4374;
   margin: 32px auto 18px;
+  font-weight: 700;
 }
 
 .description {
   font-size: 13px;
   color: #647196;
   margin-bottom: 32px;
+  line-height: 1.5;
 }
 
 @media screen and (min-width: 601px) {
@@ -40,5 +42,11 @@
 @media screen and (min-width: 768px) {
   .container {
     width: 100%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .description {
+    width: 80%;
   }
 }

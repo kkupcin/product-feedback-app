@@ -2,7 +2,7 @@ import styles from "../styles/RoadmapWidget.module.css";
 
 const RoadmapWidget = (props) => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${props.sidebar ? styles.sidebar : ""}`}>
       <div className={styles.headerContainer}>
         <h1 className={styles.title}>Roadmap</h1>
         <button className={styles.button}>View</button>

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
 }
 
 .buttonContainer {
@@ -113,6 +113,7 @@
   color: #3a4374;
   letter-spacing: -0.25px;
   margin-bottom: 16px;
+  font-weight: 700;
 }
 
 .textInput {
@@ -185,5 +186,15 @@
 
   .charCounter {
     font-size: 15px;
+  }
+
+  .textInput {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .container {
+    max-width: 730px;
   }
 }

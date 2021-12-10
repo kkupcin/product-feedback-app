@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/HomePage.module.css";
 import Header from "../components/Header";
 import FeedbackHeader from "../components/FeedbackHeader";
@@ -8,18 +8,27 @@ import Categories from "../components/Categories";
 import RoadmapWidget from "../components/RoadmapWidget";
 
 const HomePage = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const showSidebarHandler = (showSidebar) => {
+    setShowMenu(showSidebar);
+  };
+
+  // FIX MOBILE SIDEBAR OVERFLOW
+  // ADD SIDEBAR ANIMATION
+
   return (
     <div className={styles.homePageWrapper}>
       <div className={styles.mainNav}>
-        <Header />
-        <MobileSidebar />
-        <React.Fragment>
-          <Categories />
-          <RoadmapWidget />
-        </React.Fragment>
+        <Header onShowSidebar={showSidebarHandler} showCloseIcon={showMenu}/>
+        <MobileSidebar showSidebar={showMenu} />
+        <Categories />
+        <RoadmapWidget />
       </div>
-      <FeedbackHeader />
-      <FeedbackList />
+      <div className={styles.mainContent}>
+        <FeedbackHeader />
+        <FeedbackList />
+      </div>
     </div>
   );
 };

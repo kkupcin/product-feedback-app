@@ -18,12 +18,14 @@
   letter-spacing: -0.18px;
   margin-bottom: 8px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .description {
   color: #647196;
   font-size: 13px;
   margin-bottom: 8px;
+  line-height: 1.2;
 }
 
 .category {
@@ -63,6 +65,7 @@
   font-size: 13px;
   margin-left: 8px;
   letter-spacing: -0.18px;
+  font-weight: 700;
 }
 
 .arrow {
@@ -100,10 +103,11 @@
 @media screen and (min-width: 601px) {
   .container {
     grid-template-areas:
-      "upvotes main-text comments"
-      ". main-text comments"
-      ". main-text comments";
+      "upvotes main-text main-text comments"
+      ". main-text main-text comments"
+      ". main-text main-text comments";
     padding: 32px 24px;
+    grid-template-columns: 1fr 4fr 4fr 1fr;
   }
 
   .category {
@@ -148,7 +152,50 @@
     width: 100%;
   }
 
+  .feedbackDetailsPage {
+    width: 85%;
+  }
+
   .textContainer {
     justify-content: stretch;
+    padding: 0;
+  }
+
+  .cardRoadmap {
+    grid-template-areas:
+      "main-text main-text"
+      "upvotes comments";
+    align-items: center;
+    padding: 32px 24px;
+  }
+
+  .cardRoadmap .title {
+    font-size: 13px;
+    letter-spacing: -0.18px;
+    line-height: 1.2;
+  }
+
+  .cardRoadmap .description {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .cardRoadmap .category {
+    margin-bottom: 16px;
+  }
+
+  .cardRoadmap .upvoteContainer {
+    flex-direction: row;
+    padding: 8px 12px;
+  }
+
+  .cardRoadmap .counter {
+    font-size: 13px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cardRoadmap {
+    max-width: 350px;
   }
 }

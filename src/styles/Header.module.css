@@ -1,4 +1,5 @@
 .container {
+  width: 100%;
   box-sizing: border-box;
   background-size: cover;
   display: flex;
@@ -13,6 +14,8 @@
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.19px;
+  font-weight: 700;
+  line-height: 2;
 }
 
 .subtitle {
@@ -31,6 +34,7 @@
 
 @media screen and (min-width: 768px) {
   .container {
+    width: auto;
     background-image: url("../assets/shared/tablet/background-header.png");
     border-radius: 10px;
     padding: 20px;
@@ -49,5 +53,19 @@
 
   .subtitle {
     font-size: 15px;
+  }
+
+  .icon {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .container {
+    min-width: 255px;
+  }
+
+  .title {
+    padding-top: 64px;
   }
 }

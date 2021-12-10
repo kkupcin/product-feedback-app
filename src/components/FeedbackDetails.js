@@ -4,7 +4,11 @@ import commentIcon from "../assets/shared/icon-comments.svg";
 
 const FeedbackDetails = (props) => {
   return (
-    <div className={styles.container} style={{width: props.width || "100%"}}>
+    <div
+      className={`${styles.container} ${
+        props.roadmapPage ? styles.cardRoadmap : ""
+      } ${props.feedbackDetailsPage ? styles.feedbackDetailsPage : ""}`}
+    >
       <div className={styles.textContainer}>
         {props.roadmapPage && (
           <div className={styles.cardRoadmapInfo}>

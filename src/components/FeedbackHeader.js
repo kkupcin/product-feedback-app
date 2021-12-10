@@ -7,18 +7,16 @@ const FeedbackHeader = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
-        {!props.mobileView && (
-          <div className={styles.mainTitleBox}>
-            <img src={icon} alt="suggestions" className={styles.icon} />
-            <h1 className={styles.mainTitle}>6 Suggestions</h1>
-          </div>
-        )}
+        <div className={styles.mainTitleBox}>
+          <img src={icon} alt="suggestions" className={styles.icon} />
+          <h1 className={styles.mainTitle}>6 Suggestions</h1>
+        </div>
         <p className={styles.textTitle}>Sort by :</p>
         <h4 className={styles.filterName}>Most Upvotes</h4>
         <img src={arrowDown} className={styles.arrow} alt="arrow" />
       </div>
       <ButtonPrimary
-        color="#ad1fea"
+        color="purple"
         title="Add Feedback"
         class="buttonHeader"
         icon={true}

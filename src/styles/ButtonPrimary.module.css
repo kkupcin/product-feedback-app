@@ -8,6 +8,7 @@
   border-radius: 10px;
   transition: all 0.1s ease-in-out;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .purple {
@@ -18,6 +19,30 @@
   background-color: #c75af6;
 }
 
+.blue {
+  background-color: #4661e6;
+}
+
+.blue:hover {
+  background-color: #7c91f9;
+}
+
+.darkblue {
+  background-color: #3a4374;
+}
+
+.darkblue:hover {
+  background-color: #656ea3;
+}
+
+.red {
+  background-color: #d73737;
+}
+
+.red:hover {
+  background-color: #e98888;
+}
+
 .buttonHeader {
   margin-bottom: 16px;
 }
@@ -25,6 +50,10 @@
 .buttonFeedbackEditor {
   margin: 10px 0;
   width: 100%;
+}
+
+.buttonReply {
+  align-self: flex-start;
 }
 
 .icon {

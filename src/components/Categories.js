@@ -6,7 +6,7 @@ const Categories = (props) => {
       className={`${styles.container} ${props.sidebar ? styles.sidebar : ""}`}
     >
       <ul className={styles.list}>
-        <li className={styles.category}>All</li>
+        <li className={`${styles.category} ${styles.selected}`}>All</li>
         <li className={styles.category}>UI</li>
         <li className={styles.category}>UX</li>
         <li className={styles.category}>Enhancement</li>

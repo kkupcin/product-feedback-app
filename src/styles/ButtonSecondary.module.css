@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   margin: 32px 0;
+  transition: all 0.1s ease-in-out;
 }
 
 .buttonForm {
@@ -26,6 +27,11 @@
 .arrow {
   margin-right: 20px;
   width: 8px;
+}
+
+.button:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 @media screen and (min-width: 601px) {

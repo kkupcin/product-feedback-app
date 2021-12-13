@@ -11,6 +11,7 @@
     "main-text main-text"
     "upvotes comments";
   align-items: center;
+  cursor: pointer;
 }
 
 .title {
@@ -19,6 +20,11 @@
   margin-bottom: 8px;
   font-weight: 700;
   line-height: 1.2;
+  transition: all 0.2s ease-in-out;
+}
+
+.container:hover .title {
+  color: #4661e6;
 }
 
 .description {
@@ -52,6 +58,7 @@
   padding: 6px 14px;
   grid-area: upvotes;
   justify-self: start;
+  transition: all 0.1s ease-in-out;
 }
 
 .commentContainer {
@@ -74,6 +81,22 @@
 
 .comment {
   width: 18px;
+}
+
+.upvoteContainer:hover {
+  background-color: #cfd7ff;
+  cursor: pointer;
+}
+
+.selected {
+  color: #fff;
+  background-color: #4661e6;
+}
+
+.selected:hover {
+  color: #fff;
+  background-color: #4661e6;
+  cursor: pointer;
 }
 
 .cardRoadmapInfo {
@@ -163,8 +186,8 @@
 
   .cardRoadmap {
     grid-template-areas:
-      "main-text main-text"
-      "upvotes comments";
+      "main-text main-text main-text"
+      "upvotes . comments";
     align-items: center;
     padding: 32px 24px;
   }
@@ -197,5 +220,17 @@
 @media screen and (min-width: 1200px) {
   .cardRoadmap {
     max-width: 350px;
+  }
+
+  .cardRoadmap .title {
+    font-size: 18px;
+  }
+
+  .cardRoadmap .description {
+    font-size: 16px;
+  }
+
+  .cardRoadmapInfo {
+    font-size: 16px;
   }
 }

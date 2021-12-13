@@ -15,7 +15,6 @@
 }
 
 .filterName {
-  color: #fff;
   font-size: 13px;
   color: #f2f4fe;
   font-weight: 700;
@@ -30,15 +29,71 @@
 .arrow {
   width: 8px;
   margin-left: 8px;
+  cursor: pointer;
 }
 
 .mainTitleBox {
   display: none;
 }
 
+.filterMenu {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+}
+
+.filterMenu ul {
+  position: absolute;
+  width: 255px;
+  background-color: #fff;
+  z-index: 3;
+  border-radius: 10px;
+  box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
+  top: 48px;
+  left: -120%;
+}
+
+.filterItem {
+  padding: 20px 18px;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(58, 67, 116, 0.15);
+  font-size: 16px;
+  color: #647196;
+}
+
+.filterItem:last-child {
+  border-bottom: none;
+}
+
+.filterItem:hover {
+  color: #ad1fea;
+  cursor: pointer;
+}
+
+.selectedFilter {
+  color: #ad1fea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selectedFilter::after {
+  content: "";
+  background-image: url("../assets/shared/icon-check.svg");
+  height: 11px;
+  width: 13px;
+  display: inline-block;
+}
+
 @media screen and (min-width: 375px) {
   .container {
     flex-direction: row;
+  }
+
+  .filterMenu ul {
+    left: -80%;
   }
 }
 

@@ -18,7 +18,7 @@ const RoadmapPage = () => {
           />
           <h2 className={styles.mainTitle}>Roadmap</h2>
         </div>
-        <ButtonPrimary title="Add Feedback" icon={true} color="#AD1FEA" />
+        <ButtonPrimary title="Add Feedback" icon={true} color="purple" />
       </div>
       <div className={styles.mainNav}>
         <div className={`${styles.mainNavItem}`}>Planned (2)</div>

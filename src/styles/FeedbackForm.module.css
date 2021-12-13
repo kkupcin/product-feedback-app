@@ -5,13 +5,12 @@
   padding: 32px;
   padding-top: 64px;
   box-sizing: border-box;
-  position: relative;
   margin-bottom: 24px;
 }
 
 .icon {
-  position: absolute;
-  top: -25px;
+  margin-top: -95px;
+  margin-bottom: 48px;
 }
 
 .formContainer {
@@ -54,13 +53,65 @@
   width: 100%;
   box-sizing: border-box;
   color: #3a4374;
+  border: 1px solid transparent;
+  transition: all 0.1s ease-in-out;
 }
 
-.dropdownInput {
+.filterMenu {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterList {
+  position: absolute;
+  background-color: #fff;
+  z-index: 3;
+  border-radius: 10px;
+  box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
+  top: 50px;
+  left: 0;
+  width: 100%;
+}
+
+.filterItem {
+  padding: 20px 18px;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(58, 67, 116, 0.15);
+  font-size: 16px;
+  color: #647196;
+}
+
+.filterItem:last-child {
+  border-bottom: none;
+}
+
+.filterItem:hover {
+  color: #ad1fea;
+  cursor: pointer;
 }
 
 .largeTextInput {
   resize: none;
+}
+
+.input:focus {
+  border: 1px solid #4661e6;
+}
+
+.fieldEmpty .input {
+  border: 1px solid #d73737;
+  margin-bottom: 4px;
+}
+
+.fieldEmpty .messageSpan::after {
+  content: "Can't be empty";
+  color: #d73737;
+  font-size: 14px;
+}
+
+.arrow {
+  align-self: flex-end;
 }
 
 @media screen and (min-width: 601px) {

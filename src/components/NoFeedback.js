@@ -12,7 +12,7 @@ const NoFeedback = () => {
         about new ideas to improve our app.
       </p>
       <ButtonPrimary
-        color="#ad1fea"
+        color="purple"
         title="Add Feedback"
         icon={true}
       ></ButtonPrimary>

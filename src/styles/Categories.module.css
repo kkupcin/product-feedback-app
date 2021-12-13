@@ -27,6 +27,23 @@
   color: #4661e6;
   font-weight: 600;
   margin-bottom: 12px;
+  transition: all 0.1s ease-in-out;
+}
+
+.category:hover {
+  cursor: pointer;
+  background-color: #cfd7ff;
+}
+
+.selected {
+  color: #fff;
+  background-color: #4661e6;
+}
+
+.selected:hover {
+  color: #fff;
+  background-color: #4661e6;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

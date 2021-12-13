@@ -15,7 +15,7 @@
 .headerContainer {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .title {
@@ -33,6 +33,12 @@
   font-size: 13px;
   color: #4661e6;
   font-weight: 600;
+  transition: all 0.1s ease-in-out;
+}
+
+.button:hover {
+  color: #8397f8;
+  cursor: pointer;
 }
 
 .listContainer {

@@ -34,7 +34,8 @@
   display: grid;
   grid-template-areas:
     "icon userInfo . button"
-    "text text text text";
+    "text text text text"
+    "replyInput replyInput replyInput replyButton";
   align-items: center;
 }
 
@@ -86,6 +87,7 @@
   color: #647196;
   width: 95%;
   grid-area: text;
+  line-height: 1.5;
 }
 
 .userReplyBox {
@@ -95,7 +97,8 @@
   display: grid;
   grid-template-areas:
     "icon userInfo . button"
-    "text text text text";
+    "text text text text"
+    "replyInput replyInput replyInput replyInput";
   align-items: center;
 }
 
@@ -129,6 +132,27 @@
   color: #3a4374;
   resize: none;
   margin-bottom: 16px;
+  border: 1px solid transparent;
+  transition: all 0.1s ease-in-out;
+}
+
+.textInput:focus {
+  border: 1px solid #4661e6;
+}
+
+.fieldEmpty .textInput {
+  border: 1px solid #d73737;
+  margin-bottom: 4px;
+}
+
+.fieldEmpty .messageSpan::after {
+  content: "Can't be empty";
+  color: #d73737;
+  font-size: 14px;
+}
+
+.fieldEmpty .options {
+  margin-top: 18px;
 }
 
 .options {
@@ -142,6 +166,15 @@
   font-size: 13px;
   color: #647196;
   margin-bottom: 24px;
+}
+
+.replyInputBox {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  grid-area: replyInput;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 @media screen and (min-width: 375px) {
@@ -160,7 +193,8 @@
     grid-template-areas:
       "icon . . userInfo . button"
       ". . . text text text"
-      ". . . text text text";
+      ". . . text text text"
+      ". replyInput replyInput replyInput replyInput replyInput";
   }
 
   .userIcon {
@@ -190,6 +224,10 @@
 
   .textInput {
     font-size: 15px;
+  }
+
+  .replyInputBox {
+    flex-direction: row;
   }
 }
 

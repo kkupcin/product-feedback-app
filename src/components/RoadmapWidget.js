@@ -1,11 +1,16 @@
 import styles from "../styles/RoadmapWidget.module.css";
+import { Link } from "react-router-dom";
 
 const RoadmapWidget = (props) => {
   return (
-    <div className={`${styles.container} ${props.sidebar ? styles.sidebar : ""}`}>
+    <div
+      className={`${styles.container} ${props.sidebar ? styles.sidebar : ""}`}
+    >
       <div className={styles.headerContainer}>
         <h1 className={styles.title}>Roadmap</h1>
-        <button className={styles.button}>View</button>
+        <Link className={styles.button} to="/roadmap">
+          View
+        </Link>
       </div>
       <div className={styles.listContainer}>
         <div className={styles.listItem}>

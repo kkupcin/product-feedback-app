@@ -1,18 +1,15 @@
 import styles from "../styles/FeedbackHeader.module.css";
 import ButtonPrimary from "./ButtonPrimary";
-import arrowDown from "../assets/shared/icon-arrow-down.svg";
 import icon from "../assets/suggestions/icon-suggestions.svg";
-import arrowUp from "../assets/shared/icon-arrow-up-white.svg";
-import { useState } from "react";
+import Dropdown from "./Dropdown";
 
 const FeedbackHeader = (props) => {
-  const [displayFilterSelection, setDisplayFilterSelection] = useState(false);
-
-  const menuDisplayHandler = () => {
-    setDisplayFilterSelection(!displayFilterSelection);
-  };
-
-  const menuSelectionHandler = () => {};
+  const sortList = [
+    { title: "Most Upvotes", id: "most-upvotes" },
+    { title: "Least Upvotes", id: "least-upvotes" },
+    { title: "Most Comments", id: "most-comments" },
+    { title: "Least Comments", id: "least-comments" },
+  ];
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
@@ -21,33 +18,7 @@ const FeedbackHeader = (props) => {
           <h1 className={styles.mainTitle}>6 Suggestions</h1>
         </div>
         <p className={styles.textTitle}>Sort by :</p>
-        <div className={styles.filterMenu} onClick={menuDisplayHandler}>
-          <p className={styles.filterName}>Most Upvotes</p>
-          {displayFilterSelection && (
-            <ul onClick={menuSelectionHandler}>
-              <li
-                id="most-upvotes"
-                className={`${styles.selectedFilter} ${styles.filterItem}`}
-              >
-                Most Upvotes
-              </li>
-              <li id="least-upvotes" className={styles.filterItem}>
-                Least Upvotes
-              </li>
-              <li id="most-comments" className={styles.filterItem}>
-                Most Comments
-              </li>
-              <li id="least-comments" className={styles.filterItem}>
-                Least Comments
-              </li>
-            </ul>
-          )}
-          {displayFilterSelection ? (
-            <img src={arrowUp} className={styles.arrow} alt="arrow" />
-          ) : (
-            <img src={arrowDown} className={styles.arrow} alt="arrow" />
-          )}
-        </div>
+        <Dropdown dropdownList={sortList} dropdownClass="feedbackFilter" />
       </div>
       <ButtonPrimary
         color="purple"

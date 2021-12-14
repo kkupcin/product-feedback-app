@@ -1,21 +1,22 @@
 import styles from "../styles/FeedbackForm.module.css";
 import ButtonPrimary from "./ButtonPrimary";
-import { useState } from "react";
-import arrowUp from "../assets/shared/icon-arrow-up.svg";
-import arrowDown from "../assets/shared/icon-arrow-down-blue.svg";
+import Dropdown from "./Dropdown";
 
 const FeedbackForm = (props) => {
-  const [displayCategoryFilter, setDisplayCategoryFilter] = useState(false);
-  const [displayStatusFilter, setDisplayStatusFilter] = useState(false);
+  const categoryList = [
+    { title: "Feature", id: "feature" },
+    { title: "UI", id: "ui" },
+    { title: "UX", id: "ux" },
+    { title: "Enhancement", id: "enhancement" },
+    { title: "Bug", id: "bug" },
+  ];
 
-  const categorySelectionHandler = () => {
-    setDisplayCategoryFilter(!displayCategoryFilter);
-  };
-  const statusSelectionHandler = () => {
-    setDisplayStatusFilter(!displayStatusFilter);
-  };
-
-  // CREATE SEPARATE DROPDOWN COMPONENT
+  const statusList = [
+    { title: "Suggestion", id: "suggestion" },
+    { title: "Planned", id: "planned" },
+    { title: "In-Progress", id: "in-progress" },
+    { title: "Live", id: "live" },
+  ];
 
   return (
     <div className={styles.container}>
@@ -42,68 +43,13 @@ const FeedbackForm = (props) => {
           <p className={styles.description}>
             Choose a category for your feedback
           </p>
-          <div
-            className={`${styles.filterMenu} ${styles.input}`}
-            onClick={categorySelectionHandler}
-          >
-            Feature
-            {displayCategoryFilter ? (
-              <img src={arrowUp} className={styles.arrow} alt="arrow" />
-            ) : (
-              <img src={arrowDown} className={styles.arrow} alt="arrow" />
-            )}
-            {displayCategoryFilter && (
-              <ul className={styles.filterList}>
-                <li className={styles.filterItem} id="feature">
-                  Feature
-                </li>
-                <li className={styles.filterItem} id="ui">
-                  UI
-                </li>
-                <li className={styles.filterItem} id="ux">
-                  UX
-                </li>
-                <li className={styles.filterItem} id="enhancement">
-                  Enhancement
-                </li>
-                <li className={styles.filterItem} id="bug">
-                  Bug
-                </li>
-              </ul>
-            )}
-          </div>
+          <Dropdown dropdownClass="filterForm" dropdownList={categoryList} />
         </div>
         {props.editForm && (
           <div className={styles.formBox}>
             <p className={styles.label}>Update Status</p>
             <p className={styles.description}>Change feature state</p>
-            <div
-              className={`${styles.filterMenu} ${styles.input}`}
-              onClick={statusSelectionHandler}
-            >
-              Suggestion
-              {displayStatusFilter ? (
-                <img src={arrowUp} className={styles.arrow} alt="arrow" />
-              ) : (
-                <img src={arrowDown} className={styles.arrow} alt="arrow" />
-              )}
-              {displayStatusFilter && (
-                <ul className={styles.filterList}>
-                  <li className={styles.filterItem} id="suggestion">
-                    Suggestion
-                  </li>
-                  <li className={styles.filterItem} id="planned">
-                    Planned
-                  </li>
-                  <li className={styles.filterItem} id="in-progress">
-                    In-Progress
-                  </li>
-                  <li className={styles.filterItem} id="live">
-                    Live
-                  </li>
-                </ul>
-              )}
-            </div>
+            <Dropdown dropdownClass="filterForm" dropdownList={statusList} />
           </div>
         )}
         <div className={`${styles.formBox}`}>

@@ -1,0 +1,84 @@
+.filterMenu {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.feedbackFilter {
+  padding: 12px 18px;
+}
+
+.filterList {
+  position: absolute;
+  background-color: #fff;
+  z-index: 3;
+  border-radius: 10px;
+  box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
+  top: 50px;
+  left: 0;
+  width: 100%;
+}
+
+.feedbackFilter .filterList {
+  width: 225px;
+  top: 55px;
+  left: -50%;
+}
+
+.filterItem {
+  padding: 20px 18px;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(58, 67, 116, 0.15);
+  font-size: 16px;
+  color: #647196;
+}
+
+.filterItem:last-child {
+  border-bottom: none;
+}
+
+.filterItem:hover {
+  color: #ad1fea;
+  cursor: pointer;
+}
+
+.filterForm {
+  background-color: #f7f8fd;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  color: #3a4374;
+  border: 1px solid transparent;
+}
+
+.selectedFilter {
+  color: #ad1fea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selectedFilter::after {
+  content: "";
+  background-image: url("../assets/shared/icon-check.svg");
+  height: 11px;
+  width: 13px;
+  display: inline-block;
+}
+
+@media screen and (min-width: 375px) {
+  .feedbackFilter .filterList {
+    top: 55px;
+    left: -40%;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .filterForm {
+    font-size: 14px;
+  }
+}

@@ -10,19 +10,8 @@
   align-items: center;
   margin: 32px 0;
   transition: all 0.1s ease-in-out;
-}
-
-.buttonForm {
-  margin: 32px 0 60px;
-}
-
-.buttonRoadmap {
-  margin: 0 0 4px;
-}
-
-.arrow {
-  margin-right: 20px;
-  width: 8px;
+  color: #4661e6;
+  grid-area: button;
 }
 
 .button:hover {

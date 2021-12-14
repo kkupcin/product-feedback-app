@@ -1,7 +1,6 @@
 .container {
   background-color: #fff;
   border-radius: 10px;
-  width: 85%;
   padding: 32px;
   padding-top: 64px;
   box-sizing: border-box;
@@ -55,40 +54,6 @@
   color: #3a4374;
   border: 1px solid transparent;
   transition: all 0.1s ease-in-out;
-}
-
-.filterMenu {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-}
-
-.filterList {
-  position: absolute;
-  background-color: #fff;
-  z-index: 3;
-  border-radius: 10px;
-  box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
-  top: 50px;
-  left: 0;
-  width: 100%;
-}
-
-.filterItem {
-  padding: 20px 18px;
-  white-space: nowrap;
-  border-bottom: 1px solid rgba(58, 67, 116, 0.15);
-  font-size: 16px;
-  color: #647196;
-}
-
-.filterItem:last-child {
-  border-bottom: none;
-}
-
-.filterItem:hover {
-  color: #ad1fea;
-  cursor: pointer;
 }
 
 .largeTextInput {

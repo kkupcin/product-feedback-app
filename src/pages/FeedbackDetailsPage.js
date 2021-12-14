@@ -4,12 +4,14 @@ import styles from "../styles/FeedbackDetailsPage.module.css";
 import FeedbackDetails from "../components/FeedbackDetails";
 import icon from "../assets/shared/image-elijah.jpg";
 import { useState } from "react";
+import ButtonTertiary from "../components/ButtonTertiary";
 
 const FeedbackDetailsPage = () => {
   const [replyBoxActive, setReplyBoxActive] = useState(false);
 
   const replyBtnHandler = () => {
-    setReplyBoxActive(true);
+    console.log("here");
+    setReplyBoxActive(!replyBoxActive);
   };
 
   return (
@@ -29,12 +31,7 @@ const FeedbackDetailsPage = () => {
               <p className={styles.username}>@hexagon.bestagon</p>
             </div>
           </div>
-          <ButtonSecondary
-            title="Reply"
-            class="buttonReply"
-            icon={false}
-            color="#4661E6"
-          />
+          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
           <p className={styles.commentText}>
             Also, please allow styles to be applied based on system preferences.
             I would love to be able to browse Frontend Mentor in the evening
@@ -61,7 +58,7 @@ const FeedbackDetailsPage = () => {
               <p className={styles.username}>@hexagon.bestagon</p>
             </div>
           </div>
-          <ButtonSecondary title="Reply" class="buttonReply" icon={false} />
+          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
           <p className={styles.commentText}>
             Also, please allow styles to be applied based on system preferences.
             I would love to be able to browse Frontend Mentor in the evening
@@ -77,12 +74,7 @@ const FeedbackDetailsPage = () => {
               <p className={styles.username}>@hexagon.bestagon</p>
             </div>
           </div>
-          <ButtonSecondary
-            title="Reply"
-            class="buttonReply"
-            icon={false}
-            color="#4661E6"
-          />
+          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
           <p className={styles.commentText}>
             Also, please allow styles to be applied based on system preferences.
             I would love to be able to browse Frontend Mentor in the evening
@@ -98,12 +90,7 @@ const FeedbackDetailsPage = () => {
               <p className={styles.username}>@hexagon.bestagon</p>
             </div>
           </div>
-          <ButtonSecondary
-            title="Reply"
-            class="buttonReply"
-            icon={false}
-            color="#4661E6"
-          />
+          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
           <p className={styles.commentText}>
             Also, please allow styles to be applied based on system preferences.
             I would love to be able to browse Frontend Mentor in the evening

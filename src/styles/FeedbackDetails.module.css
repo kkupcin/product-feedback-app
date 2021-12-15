@@ -58,7 +58,6 @@
   padding: 6px 14px;
   grid-area: upvotes;
   justify-self: start;
-  transition: all 0.1s ease-in-out;
 }
 
 .commentContainer {

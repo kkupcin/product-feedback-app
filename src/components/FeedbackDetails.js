@@ -5,19 +5,13 @@ import arrowUpWhite from "../assets/shared/icon-arrow-up-white.svg";
 import { useState } from "react";
 
 const FeedbackDetails = (props) => {
-  const [isArrowWhite, setIsArrowWhite] = useState(false);
+  const [upvoteClicked, setUpvoteClicked] = useState(false);
 
-  const selectedItemHandler = (e) => {
-    if (e.target.parentNode.classList.includes("selected")) {
-      setIsArrowWhite(true);
-    } else {
-      setIsArrowWhite(false);
-    }
+  const upvoteClickHandler = () => {
+    setUpvoteClicked(!upvoteClicked);
   };
 
-  const upvoteClickHandler = (e) => {
-    e.target.classList.toggle(styles.selected);
-  };
+  // ADD COMMENT COUNT
 
   return (
     <div
@@ -32,25 +26,28 @@ const FeedbackDetails = (props) => {
               className={styles.cardRoadmapInfoSpan}
               style={{ backgroundColor: props.color }}
             />
-            In Progress
+            {props.info.get("status")}
           </div>
         )}
-        <h3 className={styles.title}>Add tags for solutions</h3>
-        <p className={styles.description}>
-          Easier to search for solutions based on a specific stack.
-        </p>
-        <div className={styles.category}>Enhancement</div>
+        <h3 className={styles.title}>{props.info.get("title")}</h3>
+        <p className={styles.description}>{props.info.get("description")}</p>
+        <div className={styles.category}>{props.info.get("category")}</div>
       </div>
       <div
-        className={styles.upvoteContainer}
-        onClick={upvoteClickHandler} id="upvoteContainer"
+        className={`${styles.upvoteContainer} ${
+          upvoteClicked && styles.selected
+        }`}
+        onClick={upvoteClickHandler}
+        id="upvoteContainer"
       >
-        {isArrowWhite ? (
+        {upvoteClicked ? (
           <img src={arrowUpWhite} alt="arrow" className={styles.arrow}></img>
         ) : (
           <img src={arrowUp} alt="arrow" className={styles.arrow}></img>
         )}
-        <h4 className={`${styles.counter} ${styles.upvotes}`}>112</h4>
+        <h4 className={`${styles.counter} ${styles.upvotes}`}>
+          {props.info.get("upvotes")}
+        </h4>
       </div>
       <div className={styles.commentContainer}>
         <img src={commentIcon} alt="comment" className={styles.comment}></img>

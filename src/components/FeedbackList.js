@@ -2,14 +2,21 @@ import FeedbackDetails from "./FeedbackDetails";
 import styles from "../styles/FeedbackList.module.css";
 import NoFeedback from "./NoFeedback";
 
-const FeedbackList = () => {
+const FeedbackList = (props) => {
   return (
     <div className={styles.container}>
-      <FeedbackDetails />
-      <FeedbackDetails />
-      <FeedbackDetails />
-      <FeedbackDetails />
-      {/* <NoFeedback /> */}
+      {props.feedback.length !== 0 ? (
+        props.feedback.map((feedbackItem) => {
+          return (
+            <FeedbackDetails
+              info={feedbackItem}
+              key={feedbackItem.get("objectId")}
+            />
+          );
+        })
+      ) : (
+        <NoFeedback />
+      )}
     </div>
   );
 };

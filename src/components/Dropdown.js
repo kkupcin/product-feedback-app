@@ -2,7 +2,8 @@ import { useState } from "react";
 import styles from "../styles/Dropdown.module.css";
 import arrowUp from "../assets/shared/icon-arrow-up.svg";
 import arrowDown from "../assets/shared/icon-arrow-down-blue.svg";
-import check from "../assets/shared/icon-check.svg";
+import arrowUpWhite from "../assets/shared/icon-arrow-up-white.svg";
+import arrowDownWhite from "../assets/shared/icon-arrow-down.svg";
 
 const Dropdown = (props) => {
   const [displayMenu, setDisplayMenu] = useState(false);
@@ -26,7 +27,13 @@ const Dropdown = (props) => {
     >
       {selectedItem.title}
       {displayMenu ? (
-        <img src={arrowUp} className={styles.arrow} alt="arrow" />
+        props.feedbackComp ? (
+          <img src={arrowUpWhite} className={styles.arrow} alt="arrow" />
+        ) : (
+          <img src={arrowUp} className={styles.arrow} alt="arrow" />
+        )
+      ) : props.feedbackComp ? (
+        <img src={arrowDownWhite} className={styles.arrow} alt="arrow" />
       ) : (
         <img src={arrowDown} className={styles.arrow} alt="arrow" />
       )}

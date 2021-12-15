@@ -15,10 +15,16 @@ const FeedbackHeader = (props) => {
       <div className={styles.textContainer}>
         <div className={styles.mainTitleBox}>
           <img src={icon} alt="suggestions" className={styles.icon} />
-          <h1 className={styles.mainTitle}>6 Suggestions</h1>
+          <h1 className={styles.mainTitle}>
+            {props.feedbackCount} Suggestions
+          </h1>
         </div>
         <p className={styles.textTitle}>Sort by :</p>
-        <Dropdown dropdownList={sortList} dropdownClass="feedbackFilter" />
+        <Dropdown
+          dropdownList={sortList}
+          dropdownClass="feedbackFilter"
+          feedbackComp={true}
+        />
       </div>
       <ButtonPrimary
         color="purple"

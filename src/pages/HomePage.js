@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/HomePage.module.css";
 import Header from "../components/Header";
 import FeedbackHeader from "../components/FeedbackHeader";
@@ -6,9 +6,21 @@ import FeedbackList from "../components/FeedbackList";
 import MobileSidebar from "../components/MobileSidebar";
 import Categories from "../components/Categories";
 import RoadmapWidget from "../components/RoadmapWidget";
+import Parse from "parse";
 
 const HomePage = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [feedbackList, setFeedbackList] = useState([]);
+
+  async function getList() {
+    let query = new Parse.Query("ProductRequest");
+    let results = await query.find();
+    setFeedbackList(results);
+  }
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   const showSidebarHandler = (showSidebar) => {
     setShowMenu(showSidebar);
@@ -20,14 +32,14 @@ const HomePage = () => {
   return (
     <div className={styles.homePageWrapper}>
       <div className={styles.mainNav}>
-        <Header onShowSidebar={showSidebarHandler} showCloseIcon={showMenu}/>
+        <Header onShowSidebar={showSidebarHandler} showCloseIcon={showMenu} />
         <MobileSidebar showSidebar={showMenu} />
         <Categories />
-        <RoadmapWidget />
+        <RoadmapWidget feedback={feedbackList} />
       </div>
       <div className={styles.mainContent}>
-        <FeedbackHeader />
-        <FeedbackList />
+        <FeedbackHeader feedbackCount={feedbackList.length} />
+        <FeedbackList feedback={feedbackList} />
       </div>
     </div>
   );

@@ -3,39 +3,30 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const RoadmapWidget = (props) => {
-  const [statusCount, setStatusCount] = useState(
-    {
-      title: "In-Progress",
-      count: props.feedback.get("status", "In-Progress").length,
-    },
-    {
-      title: "Planned",
-      count: props.feedback.get("status", "Planned").length,
-    },
-    {
-      title: "Live",
-      count: props.feedback.get("status", "Live").length,
-    }
-  );
+  const [sortedList, setSortedList] = useState({
+    inprogress: [],
+    live: [],
+    planned: [],
+  });
 
   useEffect(() => {
-    setStatusCount(
-      {
-        title: "In-Progress",
-        count: props.feedback.get("status", "In-Progress").length,
-        color: "#AD1FEA",
-      },
-      {
-        title: "Planned",
-        count: props.feedback.get("status", "Planned").length,
-        color: "#F49F85",
-      },
-      {
-        title: "Live",
-        count: props.feedback.get("status", "Live").length,
-        color: "#62BCFA",
-      }
+    const inProgressArray = props.feedback.filter(
+      (feedbackItem) => feedbackItem.get("status") === "In-Progress"
     );
+
+    const plannedArray = props.feedback.filter(
+      (feedbackItem) => feedbackItem.get("status") === "Planned"
+    );
+
+    const liveArray = props.feedback.filter(
+      (feedbackItem) => feedbackItem.get("status") === "Live"
+    );
+
+    setSortedList({
+      inprogress: inProgressArray,
+      live: liveArray,
+      planned: plannedArray,
+    });
   }, [props.feedback]);
 
   return (
@@ -53,31 +44,31 @@ const RoadmapWidget = (props) => {
           <div className={styles.itemTitleBox}>
             <span
               className={styles.itemSpan}
-              style={{ backgroundColor: statusCount[0].color }}
+              style={{ backgroundColor: "#AD1FEA" }}
             />
-            <h2 className={styles.itemTitle}>statusCount[0].title</h2>
+            <h2 className={styles.itemTitle}>In-Progress</h2>
           </div>
-          <p className={styles.counter}>statusCount[0].count</p>
+          <p className={styles.counter}>{sortedList.inprogress.length}</p>
         </div>
         <div className={styles.listItem}>
           <div className={styles.itemTitleBox}>
             <span
               className={styles.itemSpan}
-              style={{ backgroundColor: statusCount[1].color }}
+              style={{ backgroundColor: "#F49F85" }}
             />
-            <h2 className={styles.itemTitle}>statusCount[1].title</h2>
+            <h2 className={styles.itemTitle}>Planned</h2>
           </div>
-          <p className={styles.counter}>statusCount[1].count</p>
+          <p className={styles.counter}>{sortedList.planned.length}</p>
         </div>
         <div className={styles.listItem}>
           <div className={styles.itemTitleBox}>
             <span
               className={styles.itemSpan}
-              style={{ backgroundColor: statusCount[2].color }}
+              style={{ backgroundColor: "#62BCFA" }}
             />
-            <h2 className={styles.itemTitle}>statusCount[2].title</h2>
+            <h2 className={styles.itemTitle}>Live</h2>
           </div>
-          <p className={styles.counter}>statusCount[2].count</p>
+          <p className={styles.counter}>{sortedList.live.length}</p>
         </div>
       </div>
     </div>

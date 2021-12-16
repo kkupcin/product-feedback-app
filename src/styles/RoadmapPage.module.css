@@ -37,6 +37,7 @@
 .mainNavItem {
   flex: 1;
   text-align: center;
+  cursor: pointer;
 }
 
 .selected {
@@ -79,6 +80,21 @@
   flex-direction: column;
   gap: 24px;
   align-items: center;
+}
+
+.inProgress .plannedList,
+.inProgress .liveList {
+  display: none;
+}
+
+.planned .inProgressList,
+.planned .liveList {
+  display: none;
+}
+
+.live .plannedList,
+.live .inProgressList {
+  display: none;
 }
 
 .infoText {
@@ -131,11 +147,31 @@
     flex-direction: row;
     padding: 16px 0;
     width: 85%;
+    align-items: flex-start;
+  }
+
+  .inProgress .inProgressList,
+  .inProgress .plannedList,
+  .inProgress .liveList {
+    display: flex;
+  }
+
+  .live .inProgressList,
+  .live .plannedList,
+  .live .liveList {
+    display: flex;
+  }
+
+  .planned .inProgressList,
+  .planned .plannedList,
+  .planned .liveList {
+    display: flex;
   }
 
   .infoText {
     margin-left: 0;
     margin-bottom: 24px;
+    height: 45px;
   }
 
   .largeTitle {

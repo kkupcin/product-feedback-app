@@ -189,6 +189,7 @@
       "upvotes . comments";
     align-items: center;
     padding: 32px 24px;
+    height: 251px;
   }
 
   .cardRoadmap .title {
@@ -219,6 +220,7 @@
 @media screen and (min-width: 1200px) {
   .cardRoadmap {
     max-width: 350px;
+    height: 272px;
   }
 
   .cardRoadmap .title {

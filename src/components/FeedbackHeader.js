@@ -2,14 +2,26 @@ import styles from "../styles/FeedbackHeader.module.css";
 import ButtonPrimary from "./ButtonPrimary";
 import icon from "../assets/suggestions/icon-suggestions.svg";
 import Dropdown from "./Dropdown";
+import { useNavigate } from "react-router-dom";
 
 const FeedbackHeader = (props) => {
+  let navigate = useNavigate();
+
+  const redirectHandler = () => {
+    navigate("/new-feedback");
+  };
+
   const sortList = [
     { title: "Most Upvotes", id: "most-upvotes" },
     { title: "Least Upvotes", id: "least-upvotes" },
     { title: "Most Comments", id: "most-comments" },
     { title: "Least Comments", id: "least-comments" },
   ];
+
+  const setSortOrder = (currSort) => {
+    props.onSort(currSort);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
@@ -24,6 +36,7 @@ const FeedbackHeader = (props) => {
           dropdownList={sortList}
           dropdownClass="feedbackFilter"
           feedbackComp={true}
+          sortOrder={setSortOrder}
         />
       </div>
       <ButtonPrimary
@@ -31,6 +44,7 @@ const FeedbackHeader = (props) => {
         title="Add Feedback"
         class="buttonHeader"
         icon={true}
+        onBtnClick={redirectHandler}
       ></ButtonPrimary>
     </div>
   );

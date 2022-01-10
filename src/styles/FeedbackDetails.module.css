@@ -217,6 +217,12 @@
   }
 }
 
+@media screen and (min-width: 1000px) {
+  .feedbackDetailsPage {
+    gap: 24px;
+  }
+}
+
 @media screen and (min-width: 1200px) {
   .cardRoadmap {
     max-width: 350px;

@@ -11,10 +11,13 @@ const FeedbackDetails = (props) => {
     setUpvoteClicked(!upvoteClicked);
   };
 
-  // ADD COMMENT COUNT
+  const feedbackClickHandler = () => {
+    props.onFeedbackClick(props.info.id);
+  };
 
   return (
     <div
+      onClick={feedbackClickHandler}
       className={`${styles.container} ${
         props.roadmapPage ? styles.cardRoadmap : ""
       } ${props.feedbackDetailsPage ? styles.feedbackDetailsPage : ""}`}
@@ -46,12 +49,12 @@ const FeedbackDetails = (props) => {
           <img src={arrowUp} alt="arrow" className={styles.arrow}></img>
         )}
         <h4 className={`${styles.counter} ${styles.upvotes}`}>
-          {props.info.get("upvotes")}
+          {props.info.get("userUpvotes").length}
         </h4>
       </div>
       <div className={styles.commentContainer}>
         <img src={commentIcon} alt="comment" className={styles.comment}></img>
-        <h4 className={styles.counter}>4</h4>
+        <h4 className={styles.counter}>{props.commentCounter}</h4>
       </div>
     </div>
   );

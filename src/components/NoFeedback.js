@@ -1,8 +1,15 @@
 import ButtonPrimary from "./ButtonPrimary";
 import styles from "../styles/NoFeedback.module.css";
 import empty from "../assets/suggestions/illustration-empty.svg";
+import { useNavigate } from "react-router-dom";
 
 const NoFeedback = () => {
+  let navigate = useNavigate();
+
+  const redirectHandler = () => {
+    navigate("/new-feedback");
+  };
+
   return (
     <div className={styles.container}>
       <img src={empty} alt="empty" />
@@ -15,6 +22,7 @@ const NoFeedback = () => {
         color="purple"
         title="Add Feedback"
         icon={true}
+        onBtnClick={redirectHandler}
       ></ButtonPrimary>
     </div>
   );

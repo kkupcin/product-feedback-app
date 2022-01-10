@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ButtonSecondary = (props) => {
   let navigate = useNavigate();
   const clickHandler = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   return (

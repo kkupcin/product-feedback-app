@@ -6,7 +6,8 @@ const ButtonPrimary = (props) => {
     <button
       className={`${styles.button} ${styles[props.class] || ""} ${
         styles[props.color] || ""
-      }`}
+      } ${props.demoMode && styles.demoMode}`}
+      onClick={props.onBtnClick}
     >
       {props.icon && <img src={icon} alt="plus" className={styles.icon} />}
       {props.title}
@@ -15,5 +16,3 @@ const ButtonPrimary = (props) => {
 };
 
 export default ButtonPrimary;
-
-// LINKS TO NAVIGATE TO / SUBMIT INFO

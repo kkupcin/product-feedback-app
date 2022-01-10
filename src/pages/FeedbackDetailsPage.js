@@ -20,15 +20,12 @@ const FeedbackDetailsPage = (props) => {
   };
 
   async function getFeedbackInfo() {
-    let query = new Parse.Query("ProductRequest");
-    query.equalTo("objectId", params.feedbackId);
-    let results = await query.find();
-    setCurrFeedback(results[0]);
+    let feedbackInfo = await Parse.Cloud.run("fetchFeedbackInfo", {
+      feedbackId: params.feedbackId,
+    });
 
-    let commentQuery = new Parse.Query("Comment");
-    commentQuery.equalTo("productFeedback", results[0]);
-    let commentResults = await commentQuery.find();
-    setCurrComments(commentResults);
+    setCurrFeedback(feedbackInfo.productRequest);
+    setCurrComments(feedbackInfo.comments);
     setIsLoading(false);
   }
 

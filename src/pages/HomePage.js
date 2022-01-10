@@ -22,14 +22,11 @@ const HomePage = () => {
   const [categorisedList, setCategorisedList] = useState(feedbackList);
 
   async function getList() {
-    setIsLoading(true);
-    let query = new Parse.Query("ProductRequest");
-    let results = await query.find();
+    let results = await Parse.Cloud.run("fetchAllRequests");
     setFeedbackList(results);
     setCategorisedList(results);
 
-    let commentQuery = new Parse.Query("Comment");
-    let commentResults = await commentQuery.find();
+    let commentResults = await Parse.Cloud.run("fetchAllComments");
     setComments(commentResults);
     setIsLoading(false);
   }

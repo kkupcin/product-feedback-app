@@ -37,8 +37,7 @@ const RoadmapPage = () => {
 
   async function getList() {
     setIsLoading(true);
-    let query = new Parse.Query("ProductRequest");
-    let results = await query.find();
+    let results = await Parse.Cloud.run("fetchAllRequests");
     let inprogressArray = results.filter(
       (item) => item.get("status") === "In-Progress"
     );

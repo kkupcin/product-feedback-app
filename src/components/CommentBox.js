@@ -13,10 +13,11 @@ const CommentBox = (props) => {
   };
 
   async function getUser() {
-    let query = new Parse.Query("User");
-    query.equalTo("objectId", props.info.get("user").id);
-    let results = await query.find();
-    setPoster(results[0]);
+    let result = await Parse.Cloud.run("fetchPosterById", {
+      userId: props.info.get("user").id,
+    });
+
+    setPoster(result);
   }
 
   useEffect(() => {
@@ -28,16 +29,16 @@ const CommentBox = (props) => {
       {poster && (
         <div className={styles.userCommentBox}>
           <img
-            src={poster.get("avatar").url()}
+            src={poster.avatar.url()}
             alt="user profile"
             className={styles.userIcon}
           />
           <div className={styles.userInfoContainer}>
             <div className={styles.userInfoText}>
-              <h3 className={styles.userInfoName}>{`${poster.get(
-                "firstName"
-              )} ${poster.get("lastName")}`}</h3>
-              <p className={styles.username}>{poster.get("username")}</p>
+              <h3
+                className={styles.userInfoName}
+              >{`${poster.firstName} ${poster.lastName}`}</h3>
+              <p className={styles.username}>@{poster.username}</p>
             </div>
           </div>
           <ButtonTertiary title="Reply" onClick={replyBtnHandler} />

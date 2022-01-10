@@ -1,0 +1,36 @@
+.wipBox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  left: 10px;
+  border-radius: 10px;
+  padding: 36px;
+  background-color: #fff;
+  box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.close {
+  position: absolute;
+  font-weight: 700;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+}
+
+.wip {
+  line-height: 2;
+  font-weight: 700;
+  text-align: center;
+}
+
+.wip p {
+  font-weight: 400;
+}
+
+@media screen and (min-width: 420px) {
+  .wipBox {
+    left: auto;
+  }
+}

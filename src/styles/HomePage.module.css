@@ -46,11 +46,12 @@
   .mainContent {
     grid-area: feedback;
     padding: 32px 0;
+    align-self: flex-start;
   }
 }
 
 @media screen and (min-width: 1280px) {
-    .mainContent {
-        min-width: 825px;
-    }
+  .mainContent {
+    min-width: 825px;
+  }
 }

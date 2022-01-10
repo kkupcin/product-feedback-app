@@ -21,7 +21,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/new-feedback" element={<NewFeedbackPage />} />
         <Route path="/edit-feedback" element={<EditFeedbackPage />} />
-        <Route path="/feedback-details" element={<FeedbackDetailsPage />} />
+        <Route
+          path="/feedback-details/:feedbackId"
+          element={<FeedbackDetailsPage />}
+        />
         <Route path="/roadmap" element={<RoadmapPage />} />
       </Routes>
     </div>

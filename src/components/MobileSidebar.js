@@ -10,7 +10,7 @@ const MobileSidebar = (props) => {
         <div className={styles.outerModal}>
           <div className={styles.container}>
             <Categories sidebar={true} />
-            <RoadmapWidget sidebar={true} />
+            <RoadmapWidget sidebar={true} feedback={props.feedback} />
           </div>
         </div>
       )}

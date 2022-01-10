@@ -7,16 +7,36 @@ import MobileSidebar from "../components/MobileSidebar";
 import Categories from "../components/Categories";
 import RoadmapWidget from "../components/RoadmapWidget";
 import Parse from "parse";
+import Wip from "../components/Wip";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const HomePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const [feedbackList, setFeedbackList] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [currSort, setCurrSort] = useState({
+    title: "Most Upvotes",
+    id: "most-upvotes",
+  });
+  const [categorisedList, setCategorisedList] = useState(feedbackList);
 
   async function getList() {
+    setIsLoading(true);
     let query = new Parse.Query("ProductRequest");
     let results = await query.find();
     setFeedbackList(results);
+    setCategorisedList(results);
+
+    let commentQuery = new Parse.Query("Comment");
+    let commentResults = await commentQuery.find();
+    setComments(commentResults);
+    setIsLoading(false);
   }
+
+  const sortList = (sortParam) => {
+    setCurrSort(sortParam);
+  };
 
   useEffect(() => {
     getList();
@@ -26,20 +46,43 @@ const HomePage = () => {
     setShowMenu(showSidebar);
   };
 
-  // FIX MOBILE SIDEBAR OVERFLOW
-  // ADD SIDEBAR ANIMATION
+  if (showMenu) {
+    document.body.style.overflow = "hidden";
+  } else if (!showMenu) {
+    document.body.style.overflow = "auto";
+  }
+
+  const onCategorySelection = (category) => {
+    const newList = feedbackList.filter(
+      (feedbackItem) => feedbackItem.get("category") === category
+    );
+    setCategorisedList(category !== "All" ? newList : feedbackList);
+  };
 
   return (
     <div className={styles.homePageWrapper}>
+      <Wip />
       <div className={styles.mainNav}>
         <Header onShowSidebar={showSidebarHandler} showCloseIcon={showMenu} />
-        <MobileSidebar showSidebar={showMenu} />
-        <Categories />
+        <MobileSidebar showSidebar={showMenu} feedback={feedbackList} />
+        <Categories selectedCategory={onCategorySelection} />
         <RoadmapWidget feedback={feedbackList} />
       </div>
       <div className={styles.mainContent}>
-        <FeedbackHeader feedbackCount={feedbackList.length} />
-        <FeedbackList feedback={feedbackList} />
+        {isLoading && <LoadingSpinner />}
+        {!isLoading && (
+          <React.Fragment>
+            <FeedbackHeader
+              feedbackCount={categorisedList.length}
+              onSort={sortList}
+            />
+            <FeedbackList
+              feedback={categorisedList}
+              sortOrder={currSort}
+              comments={comments}
+            />
+          </React.Fragment>
+        )}
       </div>
     </div>
   );

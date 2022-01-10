@@ -1,125 +1,93 @@
 import ButtonSecondary from "../components/ButtonSecondary";
 import ButtonPrimary from "../components/ButtonPrimary";
+import CommentBox from "../components/CommentBox";
 import styles from "../styles/FeedbackDetailsPage.module.css";
 import FeedbackDetails from "../components/FeedbackDetails";
-import icon from "../assets/shared/image-elijah.jpg";
-import { useState } from "react";
-import ButtonTertiary from "../components/ButtonTertiary";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Parse from "parse";
+import LoadingSpinner from "../components/LoadingSpinner";
 
-const FeedbackDetailsPage = () => {
-  const [replyBoxActive, setReplyBoxActive] = useState(false);
+const FeedbackDetailsPage = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [currFeedback, setCurrFeedback] = useState();
+  const [currComments, setCurrComments] = useState([]);
+  const params = useParams();
+  let navigate = useNavigate();
 
-  const replyBtnHandler = () => {
-    console.log("here");
-    setReplyBoxActive(!replyBoxActive);
+  const redirectHandler = () => {
+    navigate("/edit-feedback");
   };
+
+  async function getFeedbackInfo() {
+    let query = new Parse.Query("ProductRequest");
+    query.equalTo("objectId", params.feedbackId);
+    let results = await query.find();
+    setCurrFeedback(results[0]);
+
+    let commentQuery = new Parse.Query("Comment");
+    commentQuery.equalTo("productFeedback", results[0]);
+    let commentResults = await commentQuery.find();
+    setCurrComments(commentResults);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    getFeedbackInfo();
+  }, []);
 
   return (
     <div className={styles.container}>
-      <div className={styles.buttonContainer}>
-        <ButtonSecondary title="Go Back" icon={true} />
-        <ButtonPrimary title="Edit Feedback" icon={false} color="blue" />
-      </div>
-      <FeedbackDetails width="85%" feedbackDetailsPage={true} />
-      <div className={styles.commentsContainer}>
-        <h1 className={styles.commentCounter}>4 Comments</h1>
-        <div className={styles.userCommentBox}>
-          <img src={icon} alt="user profile" className={styles.userIcon} />
-          <div className={styles.userInfoContainer}>
-            <div className={styles.userInfoText}>
-              <h3 className={styles.userInfoName}>Elijah Moss</h3>
-              <p className={styles.username}>@hexagon.bestagon</p>
-            </div>
+      {isLoading && <LoadingSpinner />}
+      {!isLoading && (
+        <React.Fragment>
+          <div className={styles.buttonContainer}>
+            <ButtonSecondary title="Go Back" icon={true} />
+            <ButtonPrimary
+              title="Edit Feedback"
+              icon={false}
+              color="blue"
+              onBtnClick={redirectHandler}
+            />
           </div>
-          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
-          <p className={styles.commentText}>
-            Also, please allow styles to be applied based on system preferences.
-            I would love to be able to browse Frontend Mentor in the evening
-            after my device’s dark mode turns on without the bright background
-            it currently has.
-          </p>
-          {replyBoxActive && (
-            <div className={styles.replyInputBox}>
-              <textarea rows="3" className={styles.textInput} />
+          {currFeedback && (
+            <FeedbackDetails
+              width="85%"
+              feedbackDetailsPage={true}
+              info={currFeedback}
+              commentCounter={currComments.length}
+            />
+          )}
+          <div className={styles.commentsContainer}>
+            <h1 className={styles.commentCounter}>
+              {currComments.length} Comments
+            </h1>
+            {currComments &&
+              currComments.map((comment) => {
+                return <CommentBox info={comment} key={comment.id} />;
+              })}
+          </div>
+          <div className={styles.addCommentContainer}>
+            <h1 className={styles.inputTitle}>Add Comment</h1>
+            <textarea
+              rows="3"
+              placeholder="Type your comment here"
+              className={styles.textInput}
+            />
+            <span className={styles.messageSpan}></span>
+            <div className={styles.options}>
+              {/* <div className={styles.charCounter}>250 Characters left</div> */}
               <ButtonPrimary
-                title="Post Reply"
+                title="Post Comment"
                 color="purple"
-                class="buttonReply"
+                demoMode={process.env.REACT_APP_DEMO_MODE}
               />
             </div>
-          )}
-          <div></div>
-        </div>
-        <div className={styles.userCommentBox}>
-          <img src={icon} alt="user profile" className={styles.userIcon} />
-          <div className={styles.userInfoContainer}>
-            <div className={styles.userInfoText}>
-              <h3 className={styles.userInfoName}>Elijah Moss</h3>
-              <p className={styles.username}>@hexagon.bestagon</p>
-            </div>
           </div>
-          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
-          <p className={styles.commentText}>
-            Also, please allow styles to be applied based on system preferences.
-            I would love to be able to browse Frontend Mentor in the evening
-            after my device’s dark mode turns on without the bright background
-            it currently has.
-          </p>
-        </div>
-        <div className={styles.userReplyBox}>
-          <img src={icon} alt="user profile" className={styles.userIcon} />
-          <div className={styles.userInfoContainer}>
-            <div className={styles.userInfoText}>
-              <h3 className={styles.userInfoName}>Elijah Moss</h3>
-              <p className={styles.username}>@hexagon.bestagon</p>
-            </div>
-          </div>
-          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
-          <p className={styles.commentText}>
-            Also, please allow styles to be applied based on system preferences.
-            I would love to be able to browse Frontend Mentor in the evening
-            after my device’s dark mode turns on without the bright background
-            it currently has.
-          </p>
-        </div>
-        <div className={styles.userReplyBox}>
-          <img src={icon} alt="user profile" className={styles.userIcon} />
-          <div className={styles.userInfoContainer}>
-            <div className={styles.userInfoText}>
-              <h3 className={styles.userInfoName}>Elijah Moss</h3>
-              <p className={styles.username}>@hexagon.bestagon</p>
-            </div>
-          </div>
-          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
-          <p className={styles.commentText}>
-            Also, please allow styles to be applied based on system preferences.
-            I would love to be able to browse Frontend Mentor in the evening
-            after my device’s dark mode turns on without the bright background
-            it currently has.
-          </p>
-        </div>
-      </div>
-      <div className={styles.addCommentContainer}>
-        <h1 className={styles.inputTitle}>Add Comment</h1>
-        <textarea
-          rows="3"
-          placeholder="Type your comment here"
-          className={styles.textInput}
-        />
-        <span className={styles.messageSpan}></span>
-        <div className={styles.options}>
-          <div className={styles.charCounter}>250 Characters left</div>
-          <ButtonPrimary title="Post Comment" color="purple" />
-        </div>
-      </div>
+        </React.Fragment>
+      )}
     </div>
   );
 };
 
 export default FeedbackDetailsPage;
-
-// - Feedback details page
-
-// 		- Reply box + post reply button if reply is clicked
-
-// 	3.1- Reply container - same as comment container

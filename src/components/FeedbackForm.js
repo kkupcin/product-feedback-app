@@ -1,8 +1,15 @@
 import styles from "../styles/FeedbackForm.module.css";
 import ButtonPrimary from "./ButtonPrimary";
 import Dropdown from "./Dropdown";
+import { useNavigate } from "react-router";
 
 const FeedbackForm = (props) => {
+  let navigate = useNavigate();
+
+  const cancelHandler = () => {
+    navigate(-1);
+  };
+
   const categoryList = [
     { title: "Feature", id: "feature" },
     { title: "UI", id: "ui" },
@@ -73,12 +80,14 @@ const FeedbackForm = (props) => {
             color="purple"
             icon={false}
             class="buttonFeedbackEditor"
+            demoMode={process.env.REACT_APP_DEMO_MODE}
           ></ButtonPrimary>
           <ButtonPrimary
             title="Cancel"
             color="darkblue"
             icon={false}
             class="buttonFeedbackEditor"
+            onBtnClick={cancelHandler}
           ></ButtonPrimary>
         </div>
         {props.editForm && (
@@ -87,6 +96,7 @@ const FeedbackForm = (props) => {
             color="red"
             icon={false}
             class="buttonFeedbackEditor"
+            demoMode={process.env.REACT_APP_DEMO_MODE}
           ></ButtonPrimary>
         )}
       </div>

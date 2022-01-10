@@ -18,6 +18,9 @@ const Dropdown = (props) => {
       (dropdownItem) => dropdownItem.id === e.target.id
     );
     setSelectedItem(foundItem);
+    if (props.sortOrder) {
+      props.sortOrder(foundItem);
+    }
   };
 
   return (

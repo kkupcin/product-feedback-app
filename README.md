@@ -1,4 +1,4 @@
-# Product feedback app
+# Product feedback app - Work in Progress
 
 ## Table of contents
 
@@ -8,14 +8,32 @@
 
 ## Overview
 
+This is a product feedback app, meant for submitting feedback and responding to already submitted feedback by other users.
+
+This app is still in development.
+
+Current live features:
+
+- Sort feedback by: Most Upvotes, Least Upvotes, Most Comments, Least Comments
+- Filter feedback by category
+- View roadmap
+- View comments left on specific feedback
+
+Features still to come:
+
+- Add new feedback
+- Edit previously submitted feedback
+- Comment and reply to comments
+- Upvote feedback
+
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
+- [React](https://reactjs.org/) - JS library
+- Parse Backend Service
 - Flexbox
 - CSS Grid
+- CSS Modules
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
 
 ## Author
 

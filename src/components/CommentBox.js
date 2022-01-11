@@ -8,10 +8,12 @@ const CommentBox = (props) => {
   const [poster, setPoster] = useState();
   const [replyBoxActive, setReplyBoxActive] = useState(false);
 
+  // Toggle if reply box is visible
   const replyBtnHandler = () => {
     setReplyBoxActive(!replyBoxActive);
   };
 
+  // Get comment creator's information for displaying and set it in 'poster' state
   async function getUser() {
     let result = await Parse.Cloud.run("fetchPosterById", {
       userId: props.info.get("user").id,

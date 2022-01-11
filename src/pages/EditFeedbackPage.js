@@ -16,6 +16,7 @@ const EditFeedbackPage = () => {
     getFeedback();
   }, []);
 
+  // Fetches feedback to fill the form for editing
   async function getFeedback() {
     let query = new Parse.Query("ProductRequest");
     query.equalTo("objectId", params.feedbackId);

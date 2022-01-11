@@ -4,6 +4,7 @@ import styles from "../styles/Categories.module.css";
 const Categories = (props) => {
   const [clickedCategory, setClickedCategory] = useState("All");
 
+  // Pass chosen category for filtering
   const categoryClickHandler = (e) => {
     setClickedCategory(e.target.innerHTML);
     props.selectedCategory(e.target.innerHTML);

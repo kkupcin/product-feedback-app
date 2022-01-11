@@ -13,6 +13,7 @@ const FeedbackForm = (props) => {
   });
   let navigate = useNavigate();
 
+  // Navigates back a page when cancel is clicked
   const cancelHandler = () => {
     navigate(-1);
   };
@@ -32,6 +33,7 @@ const FeedbackForm = (props) => {
     { title: "Live", id: "live" },
   ];
 
+  // Passes on current choice index when in Editing form
   const currCatChoiceIndex = () => {
     for (let i = 0; i < categoryList.length; i++) {
       if (categoryList[i].title === fillerFeedback.category) {
@@ -48,6 +50,7 @@ const FeedbackForm = (props) => {
     }
   };
 
+  // Fills Editing form with info from feedback currently being edited
   const updateTitleHandler = (e) => {
     setFillerFeedback((prevState) => {
       let stateCopy = { ...prevState };

@@ -1,6 +1,8 @@
 import styles from "../styles/ButtonPrimary.module.css";
 import icon from "../assets/shared/icon-plus.svg";
 
+// Main button
+
 const ButtonPrimary = (props) => {
   return (
     <button

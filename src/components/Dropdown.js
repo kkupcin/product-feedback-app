@@ -11,10 +11,12 @@ const Dropdown = (props) => {
     props.currChoice || props.dropdownList[0]
   );
 
+  // Toggle if dropdown menu is displaying
   const menuDisplayHandler = () => {
     setDisplayMenu(!displayMenu);
   };
 
+  // Sets selected item in 'selectedItem' state
   const selectionHandler = (e) => {
     let foundItem = props.dropdownList.find(
       (dropdownItem) => dropdownItem.id === e.target.id

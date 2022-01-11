@@ -31,6 +31,7 @@ const HomePage = () => {
     setIsLoading(false);
   }
 
+  // Passes on sorting order
   const sortList = (sortParam) => {
     setCurrSort(sortParam);
   };
@@ -43,12 +44,14 @@ const HomePage = () => {
     setShowMenu(showSidebar);
   };
 
+  // Fixes sidebar menu overflow
   if (showMenu) {
     document.body.style.overflow = "hidden";
   } else if (!showMenu) {
     document.body.style.overflow = "auto";
   }
 
+  // Sorts feedback list by category
   const onCategorySelection = (category) => {
     const newList = feedbackList.filter(
       (feedbackItem) => feedbackItem.get("category") === category

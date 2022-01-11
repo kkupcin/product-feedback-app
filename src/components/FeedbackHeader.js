@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const FeedbackHeader = (props) => {
   let navigate = useNavigate();
 
+  // Redirects to the new feedback page on click
   const redirectHandler = () => {
     navigate("/new-feedback");
   };
@@ -18,6 +19,7 @@ const FeedbackHeader = (props) => {
     { title: "Least Comments", id: "least-comments" },
   ];
 
+  // Passes on chosen sort order for sorting
   const setSortOrder = (currSort) => {
     props.onSort(currSort);
   };

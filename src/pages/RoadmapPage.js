@@ -19,14 +19,17 @@ const RoadmapPage = () => {
   const [comments, setComments] = useState();
   let navigate = useNavigate();
 
+  // Redirects to the new feedback page
   const redirectHandler = () => {
     navigate("/new-feedback");
   };
 
+  // Listens for filter selection in mobile view
   const selectedFilterListener = (e) => {
     setSelectedFilter(e.target.id);
   };
 
+  // Redirects to the Feedback details page
   const feedbackClickHandler = (id) => {
     navigate(`/feedback-details/${id}`);
   };
@@ -36,6 +39,7 @@ const RoadmapPage = () => {
     (selectedFilter === "live" && styles.positionThree) ||
     (selectedFilter === "planned" && styles.positionOne);
 
+  // Fetches list and and sorts into categories
   async function getList() {
     setIsLoading(true);
     let results = await Parse.Cloud.run("fetchAllRequests");

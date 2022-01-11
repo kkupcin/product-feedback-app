@@ -15,10 +15,12 @@ const FeedbackDetailsPage = (props) => {
   const params = useParams();
   let navigate = useNavigate();
 
+  // Redirects to the editing page on click
   const redirectHandler = () => {
     navigate(`/edit-feedback/${params.feedbackId}`);
   };
 
+  // Fetches feedback info and comments for displaying
   async function getFeedbackInfo() {
     let feedbackInfo = await Parse.Cloud.run("fetchFeedbackInfo", {
       feedbackId: params.feedbackId,

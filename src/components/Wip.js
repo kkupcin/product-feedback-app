@@ -4,6 +4,7 @@ import styles from "../styles/Wip.module.css";
 const Wip = () => {
   const [closeWip, setCloseWip] = useState(false);
 
+  // Close the work in progress notice
   const onCloseWip = () => {
     setCloseWip(true);
   };

@@ -9,6 +9,7 @@ const RoadmapWidget = (props) => {
     planned: [],
   });
 
+  // Filters out feedback into three categories by status
   useEffect(() => {
     const inProgressArray = props.feedback.filter(
       (feedbackItem) => feedbackItem.get("status") === "In-Progress"

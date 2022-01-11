@@ -8,11 +8,13 @@ import Parse from "parse";
 const FeedbackDetails = (props) => {
   const [upvoteClicked, setUpvoteClicked] = useState();
 
+  // Triggers asyn func upon click
   const upvoteClickHandler = () => {
     onUpvoteClickSubmit();
   };
 
   useEffect(() => {
+    // Checks if user has upvoted and sets 'upvoteClicked' state
     const checkUpvotes = () => {
       let userUpvoteArray = props.info.get("userUpvotes");
       if (!userUpvoteArray.includes(Parse.User.current().id)) {
@@ -24,6 +26,7 @@ const FeedbackDetails = (props) => {
     checkUpvotes();
   }, []);
 
+  // Checks if user has upvoted and updates upvote status in Parse
   async function onUpvoteClickSubmit() {
     let userUpvoteArray = props.info.get("userUpvotes");
     if (!userUpvoteArray.includes(Parse.User.current().id)) {
@@ -39,8 +42,10 @@ const FeedbackDetails = (props) => {
     props.info.save();
   }
 
+  // Passes on current feedback id on click for redirecting
   const feedbackClickHandler = (e) => {
     console.log(e.target.parentElement.id, e.target.id);
+    // Excludes upvote container click from redirecting
     if (
       e.target.parentElement.id !== "upvoteContainer" &&
       e.target.id !== "upvoteContainer"

@@ -16,6 +16,7 @@ const RoadmapPage = () => {
     planned: [],
   });
   const [selectedFilter, setSelectedFilter] = useState("inProgress");
+  const [comments, setComments] = useState();
   let navigate = useNavigate();
 
   const redirectHandler = () => {
@@ -50,6 +51,9 @@ const RoadmapPage = () => {
       planned: plannedArray,
       live: liveArray,
     });
+
+    let commentResults = await Parse.Cloud.run("fetchAllComments");
+    setComments(commentResults);
     setIsLoading(false);
   }
 
@@ -123,6 +127,9 @@ const RoadmapPage = () => {
                 </p>
               </div>
               {feedbackList.inprogress.map((feedbackItem) => {
+                let filteredComments = comments.filter((comment) => {
+                  return comment.get("productFeedback").id === feedbackItem.id;
+                });
                 return (
                   <FeedbackDetails
                     roadmapPage={true}
@@ -130,6 +137,7 @@ const RoadmapPage = () => {
                     info={feedbackItem}
                     onFeedbackClick={feedbackClickHandler}
                     key={feedbackItem.id}
+                    commentCounter={filteredComments.length}
                   />
                 );
               })}
@@ -144,6 +152,9 @@ const RoadmapPage = () => {
                 </p>
               </div>
               {feedbackList.planned.map((feedbackItem) => {
+                let filteredComments = comments.filter((comment) => {
+                  return comment.get("productFeedback").id === feedbackItem.id;
+                });
                 return (
                   <FeedbackDetails
                     roadmapPage={true}
@@ -151,6 +162,7 @@ const RoadmapPage = () => {
                     info={feedbackItem}
                     onFeedbackClick={feedbackClickHandler}
                     key={feedbackItem.id}
+                    commentCounter={filteredComments.length}
                   />
                 );
               })}
@@ -165,6 +177,9 @@ const RoadmapPage = () => {
                 </p>
               </div>
               {feedbackList.live.map((feedbackItem) => {
+                let filteredComments = comments.filter((comment) => {
+                  return comment.get("productFeedback").id === feedbackItem.id;
+                });
                 return (
                   <FeedbackDetails
                     roadmapPage={true}
@@ -172,6 +187,7 @@ const RoadmapPage = () => {
                     info={feedbackItem}
                     onFeedbackClick={feedbackClickHandler}
                     key={feedbackItem.id}
+                    commentCounter={filteredComments.length}
                   />
                 );
               })}

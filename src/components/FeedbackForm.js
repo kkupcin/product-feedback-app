@@ -2,8 +2,15 @@ import styles from "../styles/FeedbackForm.module.css";
 import ButtonPrimary from "./ButtonPrimary";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const FeedbackForm = (props) => {
+  const [fillerFeedback, setFillerFeedback] = useState({
+    title: props.feedbackForEdit.get("title"),
+    category: props.feedbackForEdit.get("category"),
+    status: props.feedbackForEdit.get("status"),
+    description: props.feedbackForEdit.get("description"),
+  });
   let navigate = useNavigate();
 
   const cancelHandler = () => {
@@ -25,13 +32,45 @@ const FeedbackForm = (props) => {
     { title: "Live", id: "live" },
   ];
 
+  const currCatChoiceIndex = () => {
+    for (let i = 0; i < categoryList.length; i++) {
+      if (categoryList[i].title === fillerFeedback.category) {
+        return i;
+      }
+    }
+  };
+
+  const currStatusChoiceIndex = () => {
+    for (let i = 0; i < statusList.length; i++) {
+      if (statusList[i].title === fillerFeedback.status) {
+        return i;
+      }
+    }
+  };
+
+  const updateTitleHandler = (e) => {
+    setFillerFeedback((prevState) => {
+      let stateCopy = { ...prevState };
+      stateCopy.title = e.target.value;
+      return stateCopy;
+    });
+  };
+
+  const updateDescHandler = (e) => {
+    setFillerFeedback((prevState) => {
+      let stateCopy = { ...prevState };
+      stateCopy.desc = e.target.value;
+      return stateCopy;
+    });
+  };
+
   return (
     <div className={styles.container}>
       <img src={props.icon} alt="icon" className={styles.icon} />
       <div className={styles.formContainer}>
         <h1 className={styles.formTitle}>
           {props.editForm
-            ? `Editing "${props.feedbackTitle}"`
+            ? `Editing "${props.feedbackForEdit.get("title")}"`
             : "Create New Feedback"}
         </h1>
         <div className={styles.formBox}>
@@ -42,6 +81,8 @@ const FeedbackForm = (props) => {
           <input
             className={`${styles.textInput} ${styles.input}`}
             type="text"
+            value={fillerFeedback.title}
+            onChange={updateTitleHandler}
           ></input>
           <span className={styles.messageSpan}></span>
         </div>
@@ -50,13 +91,21 @@ const FeedbackForm = (props) => {
           <p className={styles.description}>
             Choose a category for your feedback
           </p>
-          <Dropdown dropdownClass="filterForm" dropdownList={categoryList} />
+          <Dropdown
+            dropdownClass="filterForm"
+            dropdownList={categoryList}
+            currChoice={categoryList[currCatChoiceIndex()]}
+          />
         </div>
         {props.editForm && (
           <div className={styles.formBox}>
             <p className={styles.label}>Update Status</p>
             <p className={styles.description}>Change feature state</p>
-            <Dropdown dropdownClass="filterForm" dropdownList={statusList} />
+            <Dropdown
+              dropdownClass="filterForm"
+              dropdownList={statusList}
+              currChoice={statusList[currStatusChoiceIndex()]}
+            />
           </div>
         )}
         <div className={`${styles.formBox}`}>
@@ -69,6 +118,8 @@ const FeedbackForm = (props) => {
             className={`${styles.largeTextInput} ${styles.input}`}
             type="textarea"
             rows="6"
+            defaultValue={fillerFeedback.description}
+            onChange={updateDescHandler}
           ></textarea>
           <span className={styles.messageSpan}></span>
         </div>

@@ -20,7 +20,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/new-feedback" element={<NewFeedbackPage />} />
-        <Route path="/edit-feedback" element={<EditFeedbackPage />} />
+        <Route
+          path="/edit-feedback/:feedbackId"
+          element={<EditFeedbackPage />}
+        />
         <Route
           path="/feedback-details/:feedbackId"
           element={<FeedbackDetailsPage />}

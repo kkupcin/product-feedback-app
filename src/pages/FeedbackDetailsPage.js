@@ -16,7 +16,7 @@ const FeedbackDetailsPage = (props) => {
   let navigate = useNavigate();
 
   const redirectHandler = () => {
-    navigate("/edit-feedback");
+    navigate(`/edit-feedback/${params.feedbackId}`);
   };
 
   async function getFeedbackInfo() {

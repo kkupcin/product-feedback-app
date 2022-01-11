@@ -18,13 +18,13 @@ Current live features:
 - Filter feedback by category
 - View roadmap
 - View comments left on specific feedback
+- Upvote feedback
 
 Features still to come:
 
 - Add new feedback
 - Edit previously submitted feedback
 - Comment and reply to comments
-- Upvote feedback
 
 ### Built with
 

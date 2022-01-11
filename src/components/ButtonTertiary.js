@@ -6,7 +6,10 @@ const ButtonTertiary = (props) => {
   };
 
   return (
-    <button className={styles.button} onClick={clickHandler}>
+    <button
+      className={`${styles.button} ${styles[props.class] || ""}`}
+      onClick={clickHandler}
+    >
       {props.title}
     </button>
   );

@@ -191,14 +191,15 @@
   .userCommentBox,
   .userReplyBox {
     grid-template-areas:
-      "icon . . userInfo . button"
-      ". . . text text text"
-      ". . . text text text"
+      "icon userInfo userInfo . . button"
+      ". text text text text text"
+      ". text text text text text"
       ". replyInput replyInput replyInput replyInput replyInput";
+    grid-template-columns: repeat(6, 1fr);
   }
 
   .userIcon {
-    margin-right: 32px;
+    justify-self: center;
   }
 
   .userInfoContainer {

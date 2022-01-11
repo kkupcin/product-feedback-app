@@ -41,7 +41,11 @@ const CommentBox = (props) => {
               <p className={styles.username}>@{poster.username}</p>
             </div>
           </div>
-          <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
+          <ButtonTertiary
+            title="Reply"
+            onClick={replyBtnHandler}
+            class="replyBtn"
+          />
           <p className={styles.commentText}>{props.info.get("content")}</p>
           {replyBoxActive && (
             <div className={styles.replyInputBox}>

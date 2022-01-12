@@ -2,14 +2,17 @@ import styles from "../styles/FeedbackForm.module.css";
 import ButtonPrimary from "./ButtonPrimary";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const FeedbackForm = (props) => {
   const [fillerFeedback, setFillerFeedback] = useState({
-    title: props.feedbackForEdit.get("title"),
-    category: props.feedbackForEdit.get("category"),
-    status: props.feedbackForEdit.get("status"),
-    description: props.feedbackForEdit.get("description"),
+    title: (props.feedbackForEdit && props.feedbackForEdit.get("title")) || "",
+    category:
+      (props.feedbackForEdit && props.feedbackForEdit.get("category")) || "",
+    status:
+      (props.feedbackForEdit && props.feedbackForEdit.get("status")) || "",
+    description:
+      (props.feedbackForEdit && props.feedbackForEdit.get("description")) || "",
   });
   let navigate = useNavigate();
 
@@ -37,6 +40,7 @@ const FeedbackForm = (props) => {
   const currCatChoiceIndex = () => {
     for (let i = 0; i < categoryList.length; i++) {
       if (categoryList[i].title === fillerFeedback.category) {
+        console.log(i);
         return i;
       }
     }

@@ -90,6 +90,18 @@
   line-height: 1.5;
 }
 
+.commentWithReplies {
+  border-bottom: none;
+  display: grid;
+  grid-template-areas:
+    "icon . userInfo . button"
+    "text text text text"
+    "replyInput replyInput replyInput replyButton"
+    ". . icon userInfo . button"
+    ". . text text text text"
+    ". . replyInput replyInput replyInput replyButton";
+}
+
 .userReplyBox {
   padding-left: 24px;
   border-left: 1px solid rgba(100, 113, 150, 0.1);
@@ -100,6 +112,7 @@
     "text text text text"
     "replyInput replyInput replyInput replyInput";
   align-items: center;
+  padding-bottom: 16px;
 }
 
 .addCommentContainer {

@@ -43,7 +43,6 @@ function App() {
     if (currUser.get("isDemo") === false) {
       setIsDemoAcc(false);
     }
-    console.log(isDemoAcc);
   }
 
   useEffect(() => {

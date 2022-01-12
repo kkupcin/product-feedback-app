@@ -10,7 +10,7 @@ import Parse from "parse";
 import Wip from "../components/Wip";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-const HomePage = () => {
+const HomePage = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const [feedbackList, setFeedbackList] = useState([]);
@@ -59,9 +59,10 @@ const HomePage = () => {
     setCategorisedList(category !== "All" ? newList : feedbackList);
   };
 
+  console.log(props.isDemo);
   return (
     <div className={styles.homePageWrapper}>
-      <Wip />
+      {props.isDemo && <Wip />}
       <div className={styles.mainNav}>
         <Header onShowSidebar={showSidebarHandler} showCloseIcon={showMenu} />
         <MobileSidebar showSidebar={showMenu} feedback={feedbackList} />

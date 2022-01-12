@@ -29,6 +29,10 @@
   font-weight: 400;
 }
 
+.styledLink {
+  font-weight: 700;
+}
+
 @media screen and (min-width: 420px) {
   .wipBox {
     left: auto;

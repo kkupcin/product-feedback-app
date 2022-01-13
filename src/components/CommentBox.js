@@ -2,7 +2,9 @@ import styles from "../styles/CommentBox.module.css";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonTertiary from "./ButtonTertiary";
 import Parse from "parse";
+import LoadingSpinner from "../components/LoadingSpinner";
 import React, { useState, useEffect } from "react";
+import ReplyBox from "./ReplyBox";
 
 const CommentBox = (props) => {
   const [commPoster, setCommPoster] = useState();
@@ -12,7 +14,7 @@ const CommentBox = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Toggle if reply box is visible
-  const replyBtnHandler = () => {
+  const replyBtnHandler = (e) => {
     setReplyBoxActive(!replyBoxActive);
   };
 
@@ -53,12 +55,54 @@ const CommentBox = (props) => {
 
   return (
     <React.Fragment>
-      {commPoster && (
-        <div
-          className={`${styles.userCommentBox} ${
-            currReplies.length > 0 && styles.commentWithReplies
-          }`}
-        >
+      {isLoading && <LoadingSpinner />}
+      {currReplies.length > 0 && commPoster && !isLoading && (
+        <div className={styles.commentAndReplyContainer}>
+          <div className={styles.commentWithReplies}>
+            <img
+              src={commPoster.avatar.url()}
+              alt="user profile"
+              className={styles.userIcon}
+            />
+            <div className={styles.userInfoContainer}>
+              <div className={styles.userInfoText}>
+                <h3
+                  className={styles.userInfoName}
+                >{`${commPoster.firstName} ${commPoster.lastName}`}</h3>
+                <p className={styles.username}>@{commPoster.username}</p>
+              </div>
+            </div>
+            <ButtonTertiary
+              title="Reply"
+              onClick={replyBtnHandler}
+              class="replyBtn"
+            />
+            <p className={styles.commentText}>{props.info.get("content")}</p>
+            <ReplyBox
+              replies={currReplies}
+              replyPosters={replyPosters}
+              replyBtnHandler={replyBtnHandler}
+            />
+            {replyBoxActive && (
+              <div className={styles.replyInputBox}>
+                <textarea
+                  rows="3"
+                  className={styles.textInput}
+                  maxLength="250"
+                />
+                <ButtonPrimary
+                  title="Post Reply"
+                  color="purple"
+                  class="buttonReply"
+                  demoMode={process.env.REACT_APP_DEMO_MODE}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+      {currReplies.length === 0 && commPoster && !isLoading && (
+        <div className={styles.userCommentBox}>
           <img
             src={commPoster.avatar.url()}
             alt="user profile"
@@ -91,32 +135,6 @@ const CommentBox = (props) => {
           )}
         </div>
       )}
-      {!isLoading &&
-        currReplies.map((reply) => {
-          const poster = replyPosters.find(
-            (replyPoster) => replyPoster.id === reply.get("user").id
-          );
-
-          return (
-            <div className={styles.userReplyBox} key={reply.id}>
-              <img
-                src={poster.avatar.url()}
-                alt="user profile"
-                className={styles.userIcon}
-              />
-              <div className={styles.userInfoContainer}>
-                <div className={styles.userInfoText}>
-                  <h3
-                    className={styles.userInfoName}
-                  >{`${poster.firstName} ${poster.lastName}`}</h3>
-                  <p className={styles.username}>{`@${poster.username}`}</p>
-                </div>
-              </div>
-              <ButtonTertiary title="Reply" onClick={replyBtnHandler} />
-              <p className={styles.commentText}>{reply.get("content")}</p>
-            </div>
-          );
-        })}
     </React.Fragment>
   );
 };

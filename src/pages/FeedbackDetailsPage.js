@@ -77,7 +77,7 @@ const FeedbackDetailsPage = (props) => {
               rows="3"
               placeholder="Type your comment here"
               className={styles.textInput}
-              maxlength="250"
+              maxLength="250"
               onChange={charCounterHandler}
             />
             <span className={styles.messageSpan}></span>

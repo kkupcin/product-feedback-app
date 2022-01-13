@@ -12,6 +12,7 @@ const FeedbackDetailsPage = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [currFeedback, setCurrFeedback] = useState();
   const [currComments, setCurrComments] = useState([]);
+  const [charCounter, setCharCounter] = useState(250);
   const params = useParams();
   let navigate = useNavigate();
 
@@ -30,6 +31,10 @@ const FeedbackDetailsPage = (props) => {
     setCurrComments(feedbackInfo.comments);
     setIsLoading(false);
   }
+
+  const charCounterHandler = (e) => {
+    setCharCounter(250 - e.target.value.length);
+  };
 
   useEffect(() => {
     getFeedbackInfo();
@@ -72,10 +77,14 @@ const FeedbackDetailsPage = (props) => {
               rows="3"
               placeholder="Type your comment here"
               className={styles.textInput}
+              maxlength="250"
+              onChange={charCounterHandler}
             />
             <span className={styles.messageSpan}></span>
             <div className={styles.options}>
-              {/* <div className={styles.charCounter}>250 Characters left</div> */}
+              <div className={styles.charCounter}>
+                {charCounter} Characters left
+              </div>
               <ButtonPrimary
                 title="Post Comment"
                 color="purple"

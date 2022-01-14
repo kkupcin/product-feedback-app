@@ -25,6 +25,35 @@ const Dropdown = (props) => {
     if (props.sortOrder) {
       props.sortOrder(foundItem);
     }
+    switch (foundItem.id) {
+      case "feature":
+        props.setChosenCategory(foundItem);
+      case "ui":
+        props.setChosenCategory(foundItem);
+      case "ux":
+        props.setChosenCategory(foundItem);
+      case "enhancement":
+        props.setChosenCategory(foundItem);
+      case "bug":
+        props.setChosenCategory(foundItem);
+      case "suggestion":
+        if (props.setChosenStatus) {
+          props.setChosenStatus(foundItem);
+        }
+      case "planned":
+        if (props.setChosenStatus) {
+          props.setChosenStatus(foundItem);
+        }
+      case "in-progress":
+        if (props.setChosenStatus) {
+          props.setChosenStatus(foundItem);
+        }
+      case "live":
+        if (props.setChosenStatus) {
+          props.setChosenStatus(foundItem);
+        }
+    }
+    console.log(foundItem);
   };
 
   return (

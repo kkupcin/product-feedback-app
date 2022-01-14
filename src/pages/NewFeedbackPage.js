@@ -15,5 +15,3 @@ const NewFeedbackPage = () => {
 };
 
 export default NewFeedbackPage;
-
-// DROPDOWNS AND BUTTONS!

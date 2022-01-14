@@ -25,7 +25,11 @@ const ReplyBox = (props) => {
                 <p className={styles.username}>{`@${poster.username}`}</p>
               </div>
             </div>
-            <ButtonTertiary title="Reply" onClick={props.replyBtnHandler} />
+            <ButtonTertiary
+              title="Reply"
+              onClick={props.replyBtnHandler}
+              class="replyBtn"
+            />
             <p className={styles.commentText}>{reply.get("content")}</p>
           </div>
         );

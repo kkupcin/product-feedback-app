@@ -59,7 +59,6 @@ const HomePage = (props) => {
     setCategorisedList(category !== "All" ? newList : feedbackList);
   };
 
-  console.log(props.isDemo);
   return (
     <div className={styles.homePageWrapper}>
       {props.isDemo && <Wip />}

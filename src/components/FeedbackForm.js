@@ -2,7 +2,8 @@ import styles from "../styles/FeedbackForm.module.css";
 import ButtonPrimary from "./ButtonPrimary";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Parse from "parse";
 
 const FeedbackForm = (props) => {
   const [fillerFeedback, setFillerFeedback] = useState({
@@ -19,6 +20,39 @@ const FeedbackForm = (props) => {
   // Navigates back a page when cancel is clicked
   const cancelHandler = () => {
     navigate(-1);
+  };
+
+  // Submit feedback to Parse
+  async function submitNewFeedback() {
+    const NewRequest = new Parse.Object.extend("ProductRequest");
+    const newRequest = new NewRequest();
+
+    newRequest.set("userUpvotes", []);
+    newRequest.set("creator", Parse.User.current());
+    newRequest.set("status", "Suggestion");
+    newRequest.set("title", fillerFeedback.title);
+    newRequest.set("description", fillerFeedback.description);
+    newRequest.set("category", fillerFeedback.category.title);
+
+    await newRequest.save();
+  }
+
+  async function submitEditedFeedback() {
+    let feedbackForEdit = props.feedbackForEdit;
+
+    feedbackForEdit.set("title", fillerFeedback.title);
+    feedbackForEdit.set("category", fillerFeedback.category.title);
+    feedbackForEdit.set("status", fillerFeedback.status.title);
+    feedbackForEdit.set("description", fillerFeedback.description);
+
+    await feedbackForEdit.save();
+  }
+
+  // Deletes feedback
+  const deleteFeedback = () => {
+    let feedbackForEdit = props.feedbackForEdit;
+
+    feedbackForEdit.destroy();
   };
 
   const categoryList = [
@@ -54,6 +88,23 @@ const FeedbackForm = (props) => {
     }
   };
 
+  // Sets category and status for submission
+  const setChosenCategory = (category) => {
+    setFillerFeedback((prevState) => {
+      let stateCopy = { ...prevState };
+      stateCopy.category = category;
+      return stateCopy;
+    });
+  };
+
+  const setChosenStatus = (status) => {
+    setFillerFeedback((prevState) => {
+      let stateCopy = { ...prevState };
+      stateCopy.status = status;
+      return stateCopy;
+    });
+  };
+
   // Fills Editing form with info from feedback currently being edited
   const updateTitleHandler = (e) => {
     setFillerFeedback((prevState) => {
@@ -66,7 +117,7 @@ const FeedbackForm = (props) => {
   const updateDescHandler = (e) => {
     setFillerFeedback((prevState) => {
       let stateCopy = { ...prevState };
-      stateCopy.desc = e.target.value;
+      stateCopy.description = e.target.value;
       return stateCopy;
     });
   };
@@ -102,6 +153,7 @@ const FeedbackForm = (props) => {
             dropdownClass="filterForm"
             dropdownList={categoryList}
             currChoice={categoryList[currCatChoiceIndex()]}
+            setChosenCategory={setChosenCategory}
           />
         </div>
         {props.editForm && (
@@ -112,6 +164,7 @@ const FeedbackForm = (props) => {
               dropdownClass="filterForm"
               dropdownList={statusList}
               currChoice={statusList[currStatusChoiceIndex()]}
+              setChosenStatus={setChosenStatus}
             />
           </div>
         )}
@@ -138,7 +191,9 @@ const FeedbackForm = (props) => {
             color="purple"
             icon={false}
             class="buttonFeedbackEditor"
-            demoMode={process.env.REACT_APP_DEMO_MODE}
+            onBtnClick={
+              props.editForm ? submitEditedFeedback : submitNewFeedback
+            }
           ></ButtonPrimary>
           <ButtonPrimary
             title="Cancel"
@@ -154,7 +209,7 @@ const FeedbackForm = (props) => {
             color="red"
             icon={false}
             class="buttonFeedbackEditor"
-            demoMode={process.env.REACT_APP_DEMO_MODE}
+            onBtnClick={deleteFeedback}
           ></ButtonPrimary>
         )}
       </div>

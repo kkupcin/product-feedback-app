@@ -77,6 +77,7 @@ const CommentBox = (props) => {
               onClick={replyBtnHandler}
               class="replyBtn"
             />
+            <span className={styles.borderSpan}></span>
             <p className={styles.commentText}>{props.info.get("content")}</p>
             <ReplyBox
               replies={currReplies}

@@ -185,6 +185,10 @@
   padding-top: 32px;
 }
 
+.replyInputBox textarea {
+  font-size: 13px;
+}
+
 @media screen and (min-width: 375px) {
   .options {
     flex-direction: row;
@@ -209,18 +213,23 @@
   .commentWithReplies {
     grid-template-areas:
       "icon userInfo userInfo . . button"
-      "text text text text text text"
-      "text text text text text text"
+      "border text text text text text"
+      "border text text text text text"
       "replyInput replyInput replyInput replyInput replyInput replyInput"
       "replyContainer replyContainer replyContainer replyContainer replyContainer replyContainer";
     grid-template-columns: repeat(6, 1fr);
   }
 
   .commentWithReplies .commentText {
-    border-left: 1px solid rgba(100, 113, 150, 0.1);
-    padding-left: 24px;
-    margin-left: 36px;
     box-sizing: border-box;
+  }
+
+  .commentWithReplies .borderSpan {
+    border-left: 1px solid rgba(100, 113, 150, 0.1);
+    grid-area: border;
+    height: 100%;
+    width: 100%;
+    margin-left: 36px;
   }
 
   .commentWithReplies .replyInputBox {

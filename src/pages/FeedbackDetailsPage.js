@@ -13,6 +13,7 @@ const FeedbackDetailsPage = (props) => {
   const [currFeedback, setCurrFeedback] = useState();
   const [currComments, setCurrComments] = useState([]);
   const [charCounter, setCharCounter] = useState(250);
+  const [newComment, setNewComment] = useState();
   const params = useParams();
   let navigate = useNavigate();
 
@@ -32,13 +33,25 @@ const FeedbackDetailsPage = (props) => {
     setIsLoading(false);
   }
 
-  const charCounterHandler = (e) => {
+  const commentChangeHandler = (e) => {
     setCharCounter(250 - e.target.value.length);
+    setNewComment(e.target.value);
   };
 
   useEffect(() => {
     getFeedbackInfo();
   }, []);
+
+  const commentSubmitHandler = () => {
+    let NewComment = Parse.Object.extend("Comment");
+    let newCommentSubmission = new NewComment();
+
+    newCommentSubmission.set("user", Parse.User.current());
+    newCommentSubmission.set("content", newComment);
+    newCommentSubmission.set("productFeedback", currFeedback);
+
+    newCommentSubmission.save();
+  };
 
   return (
     <div className={styles.container}>
@@ -78,7 +91,7 @@ const FeedbackDetailsPage = (props) => {
               placeholder="Type your comment here"
               className={styles.textInput}
               maxLength="250"
-              onChange={charCounterHandler}
+              onChange={commentChangeHandler}
             />
             <span className={styles.messageSpan}></span>
             <div className={styles.options}>
@@ -89,6 +102,7 @@ const FeedbackDetailsPage = (props) => {
                 title="Post Comment"
                 color="purple"
                 demoMode={process.env.REACT_APP_DEMO_MODE}
+                onBtnClick={commentSubmitHandler}
               />
             </div>
           </div>

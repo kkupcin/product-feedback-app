@@ -10,11 +10,24 @@ const CommentBox = (props) => {
   const [commPoster, setCommPoster] = useState();
   const [replyPosters, setReplyPosters] = useState([]);
   const [replyBoxActive, setReplyBoxActive] = useState(false);
+  const [newReplyContent, setNewReplyContent] = useState();
   const [currReplies, setCurrReplies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Toggle if reply box is visible
-  const replyBtnHandler = (e) => {
+  // Submit reply
+  const replySubmitHandler = () => {
+    let NewReply = Parse.Object.extend("Reply");
+    let newReply = new NewReply();
+
+    newReply.set("content", newReplyContent);
+    newReply.set("user", Parse.User.current());
+    newReply.set("comment", props.info);
+    // newReply.set("replyingTo", )
+
+    newReply.save();
+  };
+
+  const replyBtnHandler = () => {
     setReplyBoxActive(!replyBoxActive);
   };
 
@@ -30,6 +43,10 @@ const CommentBox = (props) => {
     getReplies();
     getCommentUser();
   }, []);
+
+  const replyChangeHandler = (e) => {
+    setNewReplyContent(e.target.value);
+  };
 
   // Get comment creator's information for displaying and set it in 'comment poster' state
   async function getCommentUser() {
@@ -90,12 +107,13 @@ const CommentBox = (props) => {
                   rows="3"
                   className={styles.textInput}
                   maxLength="250"
+                  onChange={replyChangeHandler}
                 />
                 <ButtonPrimary
                   title="Post Reply"
                   color="purple"
                   class="buttonReply"
-                  demoMode={process.env.REACT_APP_DEMO_MODE}
+                  onBtnClick={replySubmitHandler}
                 />
               </div>
             )}
@@ -125,12 +143,17 @@ const CommentBox = (props) => {
           <p className={styles.commentText}>{props.info.get("content")}</p>
           {replyBoxActive && (
             <div className={styles.replyInputBox}>
-              <textarea rows="3" className={styles.textInput} maxlength="250" />
+              <textarea
+                rows="3"
+                className={styles.textInput}
+                maxLength="250"
+                onChange={replyChangeHandler}
+              />
               <ButtonPrimary
                 title="Post Reply"
                 color="purple"
                 class="buttonReply"
-                demoMode={process.env.REACT_APP_DEMO_MODE}
+                onBtnClick={replySubmitHandler}
               />
             </div>
           )}

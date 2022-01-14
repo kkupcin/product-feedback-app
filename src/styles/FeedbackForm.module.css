@@ -7,6 +7,12 @@
   margin-bottom: 24px;
 }
 
+.message {
+  margin-top: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
 .icon {
   margin-top: -95px;
   margin-bottom: 48px;

@@ -15,6 +15,10 @@ const FeedbackForm = (props) => {
     description:
       (props.feedbackForEdit && props.feedbackForEdit.get("description")) || "",
   });
+  const [showMessage, setShowMessage] = useState({
+    show: false,
+    message: "",
+  });
   let navigate = useNavigate();
 
   // Navigates back a page when cancel is clicked
@@ -34,7 +38,13 @@ const FeedbackForm = (props) => {
     newRequest.set("description", fillerFeedback.description);
     newRequest.set("category", fillerFeedback.category.title);
 
-    await newRequest.save();
+    try {
+      await newRequest.save();
+      setShowMessage({ show: true, message: "Feedback submitted" });
+      navigate(`/feedback-details/${newRequest.id}`);
+    } catch (err) {
+      setShowMessage({ show: true, message: `Submission failed: ${err}` });
+    }
   }
 
   async function submitEditedFeedback() {
@@ -45,15 +55,30 @@ const FeedbackForm = (props) => {
     feedbackForEdit.set("status", fillerFeedback.status.title);
     feedbackForEdit.set("description", fillerFeedback.description);
 
-    await feedbackForEdit.save();
+    try {
+      await feedbackForEdit.save();
+      setShowMessage({ show: true, message: "Feedback edit submitted" });
+      navigate(`/feedback-details/${feedbackForEdit.id}`);
+    } catch (err) {
+      setShowMessage({ show: true, message: `Edit failed: ${err}` });
+    }
   }
 
   // Deletes feedback
-  const deleteFeedback = () => {
+  async function deleteFeedback() {
     let feedbackForEdit = props.feedbackForEdit;
 
-    feedbackForEdit.destroy();
-  };
+    try {
+      await feedbackForEdit.destroy();
+      setShowMessage({ show: true, message: "Feedback deleted" });
+      navigate("/");
+    } catch (err) {
+      setShowMessage({
+        show: true,
+        message: `Feedback deletion failed: ${err}`,
+      });
+    }
+  }
 
   const categoryList = [
     { title: "Feature", id: "feature" },
@@ -214,6 +239,9 @@ const FeedbackForm = (props) => {
           ></ButtonPrimary>
         )}
       </div>
+      {showMessage.show && (
+        <div className={styles.message}>{showMessage.message}</div>
+      )}
     </div>
   );
 };

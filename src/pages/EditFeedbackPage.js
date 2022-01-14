@@ -10,6 +10,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const EditFeedbackPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [feedbackForEdit, setFeedbackForEdit] = useState();
+  const [originalPoster, setOriginalPoster] = useState();
   let params = useParams();
 
   useEffect(() => {
@@ -21,7 +22,14 @@ const EditFeedbackPage = () => {
     let query = new Parse.Query("ProductRequest");
     query.equalTo("objectId", params.feedbackId);
     let result = await query.first();
-    setFeedbackForEdit(result);
+
+    if (result.get("creator").id === Parse.User.current().id) {
+      setFeedbackForEdit(result);
+      setOriginalPoster(true);
+    } else {
+      setOriginalPoster(false);
+    }
+
     setIsLoading(false);
   }
 
@@ -31,12 +39,17 @@ const EditFeedbackPage = () => {
         Go Back
       </ButtonSecondary>
       {isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {!isLoading && originalPoster && (
         <FeedbackForm
           icon={editIcon}
           editForm="true"
           feedbackForEdit={feedbackForEdit}
         />
+      )}
+      {!isLoading && !originalPoster && (
+        <div className={styles.noPermission}>
+          You do not have permission to edit this feedback
+        </div>
       )}
     </div>
   );

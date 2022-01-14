@@ -74,7 +74,6 @@ const FeedbackForm = (props) => {
   const currCatChoiceIndex = () => {
     for (let i = 0; i < categoryList.length; i++) {
       if (categoryList[i].title === fillerFeedback.category) {
-        console.log(i);
         return i;
       }
     }

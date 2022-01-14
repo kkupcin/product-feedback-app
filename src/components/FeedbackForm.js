@@ -141,6 +141,7 @@ const FeedbackForm = (props) => {
             type="text"
             value={fillerFeedback.title}
             onChange={updateTitleHandler}
+            maxLength="68"
           ></input>
           <span className={styles.messageSpan}></span>
         </div>
@@ -180,6 +181,7 @@ const FeedbackForm = (props) => {
             rows="6"
             defaultValue={fillerFeedback.description}
             onChange={updateDescHandler}
+            maxLength="250"
           ></textarea>
           <span className={styles.messageSpan}></span>
         </div>

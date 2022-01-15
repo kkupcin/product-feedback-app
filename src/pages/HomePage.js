@@ -21,7 +21,7 @@ const HomePage = (props) => {
   });
   const [categorisedList, setCategorisedList] = useState(feedbackList);
 
-  async function getList() {
+  const getList = async () => {
     let results = await Parse.Cloud.run("fetchAllRequests");
     setFeedbackList(results);
     setCategorisedList(results);
@@ -29,7 +29,7 @@ const HomePage = (props) => {
     let commentResults = await Parse.Cloud.run("fetchAllComments");
     setComments(commentResults);
     setIsLoading(false);
-  }
+  };
 
   // Passes on sorting order
   const sortList = (sortParam) => {

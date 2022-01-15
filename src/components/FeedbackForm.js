@@ -27,7 +27,7 @@ const FeedbackForm = (props) => {
   };
 
   // Submit feedback to Parse
-  async function submitNewFeedback() {
+  const submitNewFeedback = async () => {
     const NewRequest = new Parse.Object.extend("ProductRequest");
     const newRequest = new NewRequest();
 
@@ -45,9 +45,9 @@ const FeedbackForm = (props) => {
     } catch (err) {
       setShowMessage({ show: true, message: `Submission failed: ${err}` });
     }
-  }
+  };
 
-  async function submitEditedFeedback() {
+  const submitEditedFeedback = async () => {
     let feedbackForEdit = props.feedbackForEdit;
 
     feedbackForEdit.set("title", fillerFeedback.title);
@@ -62,10 +62,10 @@ const FeedbackForm = (props) => {
     } catch (err) {
       setShowMessage({ show: true, message: `Edit failed: ${err}` });
     }
-  }
+  };
 
   // Deletes feedback
-  async function deleteFeedback() {
+  const deleteFeedback = async () => {
     let feedbackForEdit = props.feedbackForEdit;
 
     try {
@@ -78,7 +78,7 @@ const FeedbackForm = (props) => {
         message: `Feedback deletion failed: ${err}`,
       });
     }
-  }
+  };
 
   const categoryList = [
     { title: "Feature", id: "feature" },

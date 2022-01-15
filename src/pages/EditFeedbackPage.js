@@ -18,7 +18,7 @@ const EditFeedbackPage = () => {
   }, []);
 
   // Fetches feedback to fill the form for editing
-  async function getFeedback() {
+  const getFeedback = async () => {
     let query = new Parse.Query("ProductRequest");
     query.equalTo("objectId", params.feedbackId);
     let result = await query.first();
@@ -31,7 +31,7 @@ const EditFeedbackPage = () => {
     }
 
     setIsLoading(false);
-  }
+  };
 
   return (
     <div className={styles.container}>

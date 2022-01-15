@@ -40,7 +40,7 @@ const RoadmapPage = () => {
     (selectedFilter === "planned" && styles.positionOne);
 
   // Fetches list and and sorts into categories
-  async function getList() {
+  const getList = async () => {
     setIsLoading(true);
     let results = await Parse.Cloud.run("fetchAllRequests");
     let inprogressArray = results.filter(
@@ -59,7 +59,7 @@ const RoadmapPage = () => {
     let commentResults = await Parse.Cloud.run("fetchAllComments");
     setComments(commentResults);
     setIsLoading(false);
-  }
+  };
 
   useEffect(() => {
     getList();

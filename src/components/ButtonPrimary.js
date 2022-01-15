@@ -8,7 +8,7 @@ const ButtonPrimary = (props) => {
     <button
       className={`${styles.button} ${styles[props.class] || ""} ${
         styles[props.color] || ""
-      } ${props.demoMode && styles.demoMode}`}
+      } ${props.isDisabled && styles.btnDisabled}`}
       onClick={props.onBtnClick}
     >
       {props.icon && <img src={icon} alt="plus" className={styles.icon} />}

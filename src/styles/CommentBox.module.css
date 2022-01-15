@@ -148,9 +148,22 @@
   border: 1px solid #4661e6;
 }
 
+.replyInputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldEmpty {
+  width: 100%;
+}
+
 .fieldEmpty .textInput {
   border: 1px solid #d73737;
   padding-bottom: 4px;
+}
+
+.fieldEmpty .messageSpan {
+  margin-top: 12px;
 }
 
 .fieldEmpty .messageSpan::after {

@@ -35,7 +35,7 @@ const LoginPage = () => {
     });
   };
 
-  async function login() {
+  const login = async () => {
     try {
       await Parse.User.logIn(
         enteredLoginDetails.username,
@@ -52,7 +52,7 @@ const LoginPage = () => {
         message: `Login failed: ${err}`,
       });
     }
-  }
+  };
 
   return (
     <div className={styles.outerContainer}>

@@ -13,7 +13,8 @@ const FeedbackDetailsPage = (props) => {
   const [currFeedback, setCurrFeedback] = useState();
   const [currComments, setCurrComments] = useState([]);
   const [charCounter, setCharCounter] = useState(250);
-  const [newComment, setNewComment] = useState();
+  const [newComment, setNewComment] = useState("");
+  const [fieldIsEmpty, setFieldIsEmpty] = useState(false);
   const params = useParams();
   let navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const FeedbackDetailsPage = (props) => {
   };
 
   // Fetches feedback info and comments for displaying
-  async function getFeedbackInfo() {
+  const getFeedbackInfo = async () => {
     let feedbackInfo = await Parse.Cloud.run("fetchFeedbackInfo", {
       feedbackId: params.feedbackId,
     });
@@ -31,26 +32,35 @@ const FeedbackDetailsPage = (props) => {
     setCurrFeedback(feedbackInfo.productRequest);
     setCurrComments(feedbackInfo.comments);
     setIsLoading(false);
-  }
+  };
 
   const commentChangeHandler = (e) => {
     setCharCounter(250 - e.target.value.length);
     setNewComment(e.target.value);
+    if (e.target.value.trim() === "") {
+      setFieldIsEmpty(true);
+    } else {
+      setFieldIsEmpty(false);
+    }
   };
 
   useEffect(() => {
     getFeedbackInfo();
   }, []);
 
-  const commentSubmitHandler = () => {
-    let NewComment = Parse.Object.extend("Comment");
-    let newCommentSubmission = new NewComment();
+  const commentSubmitHandler = async () => {
+    if (!fieldIsEmpty) {
+      let NewComment = Parse.Object.extend("Comment");
+      let newCommentSubmission = new NewComment();
 
-    newCommentSubmission.set("user", Parse.User.current());
-    newCommentSubmission.set("content", newComment);
-    newCommentSubmission.set("productFeedback", currFeedback);
+      newCommentSubmission.set("user", Parse.User.current());
+      newCommentSubmission.set("content", newComment);
+      newCommentSubmission.set("productFeedback", currFeedback);
 
-    newCommentSubmission.save();
+      await newCommentSubmission.save();
+      getFeedbackInfo();
+      setNewComment("");
+    }
   };
 
   return (
@@ -84,7 +94,11 @@ const FeedbackDetailsPage = (props) => {
                 return <CommentBox info={comment} key={comment.id} />;
               })}
           </div>
-          <div className={styles.addCommentContainer}>
+          <div
+            className={`${styles.addCommentContainer} ${
+              fieldIsEmpty && styles.fieldEmpty
+            }`}
+          >
             <h1 className={styles.inputTitle}>Add Comment</h1>
             <textarea
               rows="3"
@@ -92,6 +106,7 @@ const FeedbackDetailsPage = (props) => {
               className={styles.textInput}
               maxLength="250"
               onChange={commentChangeHandler}
+              value={newComment}
             />
             <span className={styles.messageSpan}></span>
             <div className={styles.options}>
@@ -101,8 +116,8 @@ const FeedbackDetailsPage = (props) => {
               <ButtonPrimary
                 title="Post Comment"
                 color="purple"
-                demoMode={process.env.REACT_APP_DEMO_MODE}
                 onBtnClick={commentSubmitHandler}
+                class={fieldIsEmpty && "btnDisabled"}
               />
             </div>
           </div>

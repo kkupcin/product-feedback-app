@@ -53,7 +53,6 @@ const Dropdown = (props) => {
           props.setChosenStatus(foundItem);
         }
     }
-    console.log(foundItem);
   };
 
   return (

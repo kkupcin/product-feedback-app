@@ -10,34 +10,50 @@ const CommentBox = (props) => {
   const [commPoster, setCommPoster] = useState();
   const [replyPosters, setReplyPosters] = useState([]);
   const [replyBoxActive, setReplyBoxActive] = useState(false);
-  const [newReplyContent, setNewReplyContent] = useState();
+  const [newReplyContent, setNewReplyContent] = useState("");
   const [currReplies, setCurrReplies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [fieldIsEmpty, setFieldIsEmpty] = useState(false);
+  const [replyingTo, setReplyingTo] = useState();
 
   // Submit reply
-  const replySubmitHandler = () => {
-    let NewReply = Parse.Object.extend("Reply");
-    let newReply = new NewReply();
+  const replySubmitHandler = async () => {
+    if (!fieldIsEmpty && replyingTo) {
+      let NewReply = Parse.Object.extend("Reply");
+      let newReply = new NewReply();
 
-    newReply.set("content", newReplyContent);
-    newReply.set("user", Parse.User.current());
-    newReply.set("comment", props.info);
-    // newReply.set("replyingTo", )
+      newReply.set("content", newReplyContent);
+      newReply.set("user", Parse.User.current());
+      newReply.set("comment", props.info);
+      newReply.set("replyingTo", replyingTo);
 
-    newReply.save();
+      await newReply.save();
+      getReplies();
+      replyBtnHandler();
+      setNewReplyContent("");
+    }
   };
 
-  const replyBtnHandler = () => {
+  const replyBtnHandler = async (poster) => {
     setReplyBoxActive(!replyBoxActive);
+    if (poster) {
+      let pointer = Parse.User.createWithoutData(poster.id);
+      setReplyingTo(pointer);
+    } else {
+      let pointer = Parse.User.createWithoutData(commPoster.id);
+      setReplyingTo(pointer);
+    }
   };
 
-  async function getReplies() {
+  const getReplies = async () => {
+    setIsLoading(true);
     let query = new Parse.Query("Reply");
     query.equalTo("comment", props.info);
+    query.include("replyingTo.username");
     let results = await query.find();
     setCurrReplies(results);
     getReplyUsers(results);
-  }
+  };
 
   useEffect(() => {
     getReplies();
@@ -46,19 +62,24 @@ const CommentBox = (props) => {
 
   const replyChangeHandler = (e) => {
     setNewReplyContent(e.target.value);
+    if (e.target.value.trim() === "") {
+      setFieldIsEmpty(true);
+    } else {
+      setFieldIsEmpty(false);
+    }
   };
 
   // Get comment creator's information for displaying and set it in 'comment poster' state
-  async function getCommentUser() {
+  const getCommentUser = async () => {
     let result = await Parse.Cloud.run("fetchPosterById", {
       userId: props.info.get("user").id,
     });
 
     setCommPoster(result);
-  }
+  };
 
   // Get comment creator's information for displaying and set it in 'reply poster' state
-  async function getReplyUsers(replies) {
+  const getReplyUsers = async (replies) => {
     let posterArray = [];
     for (let i = 0; i < replies.length; i++) {
       let result = await Parse.Cloud.run("fetchPosterById", {
@@ -68,7 +89,7 @@ const CommentBox = (props) => {
     }
     setReplyPosters(posterArray);
     setIsLoading(false);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -102,7 +123,11 @@ const CommentBox = (props) => {
               replyBtnHandler={replyBtnHandler}
             />
             {replyBoxActive && (
-              <div className={styles.replyInputBox}>
+              <div
+                className={`${styles.replyInputBox} ${
+                  fieldIsEmpty && styles.fieldEmpty
+                }`}
+              >
                 <textarea
                   rows="3"
                   className={styles.textInput}
@@ -114,6 +139,7 @@ const CommentBox = (props) => {
                   color="purple"
                   class="buttonReply"
                   onBtnClick={replySubmitHandler}
+                  class={fieldIsEmpty && "btnDisabled"}
                 />
               </div>
             )}
@@ -142,17 +168,25 @@ const CommentBox = (props) => {
           />
           <p className={styles.commentText}>{props.info.get("content")}</p>
           {replyBoxActive && (
-            <div className={styles.replyInputBox}>
-              <textarea
-                rows="3"
-                className={styles.textInput}
-                maxLength="250"
-                onChange={replyChangeHandler}
-              />
+            <div
+              className={`${styles.replyInputBox} ${
+                fieldIsEmpty && styles.fieldEmpty
+              }`}
+            >
+              <div className={styles.replyInputContainer}>
+                <textarea
+                  rows="3"
+                  className={styles.textInput}
+                  maxLength="250"
+                  onChange={replyChangeHandler}
+                />
+                <span className={styles.messageSpan}></span>
+              </div>
               <ButtonPrimary
                 title="Post Reply"
                 color="purple"
                 class="buttonReply"
+                isDisabled={fieldIsEmpty}
                 onBtnClick={replySubmitHandler}
               />
             </div>

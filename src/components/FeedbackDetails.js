@@ -27,7 +27,7 @@ const FeedbackDetails = (props) => {
   }, []);
 
   // Checks if user has upvoted and updates upvote status in Parse
-  async function onUpvoteClickSubmit() {
+  const onUpvoteClickSubmit = async () => {
     let userUpvoteArray = props.info.get("userUpvotes");
     if (!userUpvoteArray.includes(Parse.User.current().id)) {
       userUpvoteArray.push(Parse.User.current().id);
@@ -40,11 +40,10 @@ const FeedbackDetails = (props) => {
 
     props.info.set("userUpvotes", userUpvoteArray);
     props.info.save();
-  }
+  };
 
   // Passes on current feedback id on click for redirecting
   const feedbackClickHandler = (e) => {
-    console.log(e.target.parentElement.id, e.target.id);
     // Excludes upvote container click from redirecting
     if (
       e.target.parentElement.id !== "upvoteContainer" &&

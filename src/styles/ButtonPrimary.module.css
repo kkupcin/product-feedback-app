@@ -9,6 +9,8 @@
   transition: all 0.1s ease-in-out;
   cursor: pointer;
   white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+  grid-area: button;
 }
 
 .purple {
@@ -57,13 +59,18 @@
   pointer-events: none;
 }
 
-.buttonReply {
-  align-self: flex-start;
-}
-
 .icon {
   width: 7px;
   margin-right: 4px;
+}
+
+.btnDisabled {
+  pointer-events: none;
+  background-color: #a0a0a0;
+}
+
+.buttonReply {
+  align-self: flex-start;
 }
 
 @media screen and (min-width: 375px) {

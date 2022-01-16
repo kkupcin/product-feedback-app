@@ -14,6 +14,7 @@ const CommentBox = (props) => {
   const [currReplies, setCurrReplies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [fieldIsEmpty, setFieldIsEmpty] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [replyingTo, setReplyingTo] = useState();
 
   // Submit reply
@@ -64,8 +65,10 @@ const CommentBox = (props) => {
     setNewReplyContent(e.target.value);
     if (e.target.value.trim() === "") {
       setFieldIsEmpty(true);
+      setButtonDisabled(true);
     } else {
       setFieldIsEmpty(false);
+      setButtonDisabled(false);
     }
   };
 
@@ -143,7 +146,7 @@ const CommentBox = (props) => {
                   color="purple"
                   class="buttonReply"
                   onBtnClick={replySubmitHandler}
-                  class={fieldIsEmpty && "btnDisabled"}
+                  class={buttonDisabled && "btnDisabled"}
                 />
               </div>
             )}
@@ -192,7 +195,7 @@ const CommentBox = (props) => {
                 color="purple"
                 class="buttonReply"
                 onBtnClick={replySubmitHandler}
-                class={fieldIsEmpty && "btnDisabled"}
+                class={buttonDisabled && "btnDisabled"}
               />
             </div>
           )}

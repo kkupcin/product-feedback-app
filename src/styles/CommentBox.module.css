@@ -1,6 +1,11 @@
 .commentAndReplyContainer {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid rgba(140, 146, 179, 0.25);
+}
+
+.commentAndReplyContainer:last-child {
+  border-bottom: none;
 }
 
 .container {
@@ -40,7 +45,7 @@
   grid-template-areas:
     "icon userInfo . button"
     "text text text text"
-    "replyInput replyInput replyInput replyButton";
+    "replyInput replyInput replyInput replyInput";
   align-items: center;
 }
 
@@ -151,6 +156,8 @@
 .replyInputContainer {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  grid-area: replyInput;
 }
 
 .fieldEmpty {
@@ -163,24 +170,15 @@
 }
 
 .fieldEmpty .messageSpan {
-  margin-top: 12px;
+  display: inline-block;
+  margin-bottom: 16px;
+  align-self: flex-start;
 }
 
 .fieldEmpty .messageSpan::after {
   content: "Can't be empty";
   color: #d73737;
   font-size: 14px;
-}
-
-.fieldEmpty .options {
-  padding-top: 18px;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .charCounter {
@@ -193,9 +191,9 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  grid-area: replyInput;
   gap: 16px;
   padding-top: 32px;
+  align-self: stretch;
 }
 
 .replyInputBox textarea {
@@ -203,10 +201,6 @@
 }
 
 @media screen and (min-width: 375px) {
-  .options {
-    flex-direction: row;
-  }
-
   .charCounter {
     padding-bottom: 0;
   }
@@ -219,7 +213,7 @@
       "icon userInfo userInfo . . button"
       ". text text text text text"
       ". text text text text text"
-      ". replyInput replyInput replyInput replyInput replyInput";
+      ". replyInput replyInput replyInput replyInput .";
     grid-template-columns: repeat(6, 1fr);
   }
 
@@ -228,7 +222,7 @@
       "icon userInfo userInfo . . button"
       "border text text text text text"
       "border text text text text text"
-      "replyInput replyInput replyInput replyInput replyInput replyInput"
+      ". replyInput replyInput replyInput replyInput ."
       "replyContainer replyContainer replyContainer replyContainer replyContainer replyContainer";
     grid-template-columns: repeat(6, 1fr);
   }
@@ -245,10 +239,7 @@
     margin-left: 36px;
   }
 
-  .commentWithReplies .replyInputBox {
-    border-left: 1px solid rgba(100, 113, 150, 0.1);
-    padding-left: 24px;
-    margin-left: 36px;
+  .commentWithReplies .replyInputContainer {
     box-sizing: border-box;
   }
 
@@ -281,8 +272,12 @@
     font-size: 15px;
   }
 
+  .replyInputContainer {
+    max-width: 100%;
+  }
+
   .replyInputBox {
-    flex-direction: row;
+    align-items: flex-start;
   }
 }
 

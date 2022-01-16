@@ -123,17 +123,21 @@ const CommentBox = (props) => {
               replyBtnHandler={replyBtnHandler}
             />
             {replyBoxActive && (
-              <div
-                className={`${styles.replyInputBox} ${
-                  fieldIsEmpty && styles.fieldEmpty
-                }`}
-              >
-                <textarea
-                  rows="3"
-                  className={styles.textInput}
-                  maxLength="250"
-                  onChange={replyChangeHandler}
-                />
+              <div className={styles.replyInputContainer}>
+                <div
+                  className={`${styles.replyInputBox} ${
+                    fieldIsEmpty && styles.fieldEmpty
+                  }`}
+                >
+                  <textarea
+                    rows="3"
+                    className={styles.textInput}
+                    maxLength="250"
+                    onChange={replyChangeHandler}
+                    // defualtValue={`${replyingTo} ${newReplyContent}`}
+                  />
+                  <span className={styles.messageSpan}></span>
+                </div>
                 <ButtonPrimary
                   title="Post Reply"
                   color="purple"
@@ -168,17 +172,18 @@ const CommentBox = (props) => {
           />
           <p className={styles.commentText}>{props.info.get("content")}</p>
           {replyBoxActive && (
-            <div
-              className={`${styles.replyInputBox} ${
-                fieldIsEmpty && styles.fieldEmpty
-              }`}
-            >
-              <div className={styles.replyInputContainer}>
+            <div className={styles.replyInputContainer}>
+              <div
+                className={`${styles.replyInputBox} ${
+                  fieldIsEmpty && styles.fieldEmpty
+                }`}
+              >
                 <textarea
                   rows="3"
                   className={styles.textInput}
                   maxLength="250"
                   onChange={replyChangeHandler}
+                  // defualtValue={`${replyingTo} ${newReplyContent}`}
                 />
                 <span className={styles.messageSpan}></span>
               </div>
@@ -186,8 +191,8 @@ const CommentBox = (props) => {
                 title="Post Reply"
                 color="purple"
                 class="buttonReply"
-                isDisabled={fieldIsEmpty}
                 onBtnClick={replySubmitHandler}
+                class={fieldIsEmpty && "btnDisabled"}
               />
             </div>
           )}

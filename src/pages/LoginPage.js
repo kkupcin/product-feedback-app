@@ -5,30 +5,27 @@ import { useNavigate } from "react-router-dom";
 import Parse from "parse";
 
 const LoginPage = () => {
-  const [enteredLoginDetails, setEnteredLoginDetails] = useState({
+  const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
   });
-  const [showMessage, setShowMessage] = useState({
-    show: false,
-    message: "",
-  });
+  const [message, setMessage] = useState("");
   let navigate = useNavigate();
 
   const loginHandler = async () => {
     await login();
   };
 
-  const onEnteredUsername = (e) => {
-    setEnteredLoginDetails((prevState) => {
+  const onUsernameChange = (e) => {
+    setLoginDetails((prevState) => {
       let prevStateCopy = { ...prevState };
       prevStateCopy.username = e.target.value;
       return prevStateCopy;
     });
   };
 
-  const onEnteredPassword = (e) => {
-    setEnteredLoginDetails((prevState) => {
+  const onPasswordChange = (e) => {
+    setLoginDetails((prevState) => {
       let prevStateCopy = { ...prevState };
       prevStateCopy.password = e.target.value;
       return prevStateCopy;
@@ -37,20 +34,11 @@ const LoginPage = () => {
 
   const login = async () => {
     try {
-      await Parse.User.logIn(
-        enteredLoginDetails.username,
-        enteredLoginDetails.password
-      );
-      setShowMessage({
-        show: true,
-        message: "Login successful!",
-      });
+      await Parse.User.logIn(loginDetails.username, loginDetails.password);
+      setMessage("Login successful!");
       navigate("/");
     } catch (err) {
-      setShowMessage({
-        show: true,
-        message: `Login failed: ${err}`,
-      });
+      setMessage(`Login failed: ${err}`);
     }
   };
 
@@ -66,8 +54,8 @@ const LoginPage = () => {
             <input
               type="text"
               className={styles.input}
-              value={enteredLoginDetails.username}
-              onChange={onEnteredUsername}
+              value={loginDetails.username}
+              onChange={onUsernameChange}
             ></input>
           </div>
           <div className={styles.inputBox}>
@@ -75,8 +63,8 @@ const LoginPage = () => {
             <input
               type="password"
               className={styles.input}
-              value={enteredLoginDetails.password}
-              onChange={onEnteredPassword}
+              value={loginDetails.password}
+              onChange={onPasswordChange}
             ></input>
           </div>
           <ButtonPrimary
@@ -84,9 +72,7 @@ const LoginPage = () => {
             onBtnClick={loginHandler}
             title="Log In"
           />
-          {showMessage.show && (
-            <div className={styles.message}>{showMessage.message}</div>
-          )}
+          {message && <div className={styles.message}>{message}</div>}
         </div>
       </div>
     </div>

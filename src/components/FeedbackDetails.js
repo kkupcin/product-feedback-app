@@ -13,33 +13,30 @@ const FeedbackDetails = (props) => {
     onUpvoteClickSubmit();
   };
 
+  // Checks if user has upvoted and sets 'upvoteClicked' state
+  const checkUpvotes = () => {
+    let userUpvoteArray = props.info.get("userUpvotes");
+    if (!userUpvoteArray.includes(Parse.User.current().id)) {
+      setUpvoteClicked(false);
+    } else if (userUpvoteArray.includes(Parse.User.current().id)) {
+      setUpvoteClicked(true);
+    }
+  };
+
   useEffect(() => {
-    // Checks if user has upvoted and sets 'upvoteClicked' state
-    const checkUpvotes = () => {
-      let userUpvoteArray = props.info.get("userUpvotes");
-      if (!userUpvoteArray.includes(Parse.User.current().id)) {
-        setUpvoteClicked(false);
-      } else if (userUpvoteArray.includes(Parse.User.current().id)) {
-        setUpvoteClicked(true);
-      }
-    };
     checkUpvotes();
   }, []);
 
   // Checks if user has upvoted and updates upvote status in Parse
   const onUpvoteClickSubmit = async () => {
-    let userUpvoteArray = props.info.get("userUpvotes");
-    if (!userUpvoteArray.includes(Parse.User.current().id)) {
-      userUpvoteArray.push(Parse.User.current().id);
-      setUpvoteClicked(true);
-    } else if (userUpvoteArray.includes(Parse.User.current().id)) {
-      const index = userUpvoteArray.indexOf(Parse.User.current().id);
-      userUpvoteArray.splice(index, 1);
-      setUpvoteClicked(false);
+    try {
+      const response = await Parse.Cloud.run("toggleVote", {
+        feedbackId: props.info.id,
+      });
+      setUpvoteClicked(response);
+    } catch (err) {
+      alert(`Could not upvote: ${err}`);
     }
-
-    props.info.set("userUpvotes", userUpvoteArray);
-    props.info.save();
   };
 
   // Passes on current feedback id on click for redirecting

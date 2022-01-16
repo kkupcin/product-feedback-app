@@ -21,10 +21,13 @@ const Dropdown = (props) => {
     let foundItem = props.dropdownList.find(
       (dropdownItem) => dropdownItem.id === e.target.id
     );
+
     setSelectedItem(foundItem);
-    if (props.sortOrder) {
-      props.sortOrder(foundItem);
+
+    if (props.onSortOrderChange) {
+      props.onSortOrderChange(foundItem);
     }
+
     switch (foundItem.id) {
       case "feature":
         props.setChosenCategory(foundItem);
@@ -73,16 +76,18 @@ const Dropdown = (props) => {
       onClick={menuDisplayHandler}
     >
       {selectedItem.title}
-      {displayMenu ? (
-        props.feedbackComp ? (
-          <img src={arrowUpWhite} className={styles.arrow} alt="arrow" />
-        ) : (
-          <img src={arrowUp} className={styles.arrow} alt="arrow" />
-        )
-      ) : props.feedbackComp ? (
-        <img src={arrowDownWhite} className={styles.arrow} alt="arrow" />
+      {props.feedbackComp ? (
+        <img
+          src={displayMenu ? arrowUpWhite : arrowDownWhite}
+          className={styles.arrow}
+          alt="arrow"
+        />
       ) : (
-        <img src={arrowDown} className={styles.arrow} alt="arrow" />
+        <img
+          src={displayMenu ? arrowUp : arrowDown}
+          className={styles.arrow}
+          alt="arrow"
+        />
       )}
       {displayMenu && (
         <ul className={styles.filterList}>

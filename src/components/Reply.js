@@ -5,19 +5,22 @@ const Reply = (props) => {
   const handleReplyClick = (replyingTo) => {
     props.replyBtnHandler(props.poster);
   };
+
   return (
     <div className={styles.userReplyBox}>
       <img
-        src={props.poster.avatar.url()}
+        src={props.reply.get("user").get("avatar").url()}
         alt="user profile"
         className={styles.userIcon}
       />
       <div className={styles.userInfoContainer}>
         <div className={styles.userInfoText}>
-          <h3
-            className={styles.userInfoName}
-          >{`${props.poster.firstName} ${props.poster.lastName}`}</h3>
-          <p className={styles.username}>{`@${props.poster.username}`}</p>
+          <h3 className={styles.userInfoName}>{`${props.reply
+            .get("user")
+            .get("firstName")} ${props.reply.get("user").get("lastName")}`}</h3>
+          <p className={styles.username}>{`@${props.reply
+            .get("user")
+            .get("username")}`}</p>
         </div>
       </div>
       <ButtonTertiary

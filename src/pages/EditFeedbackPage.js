@@ -10,7 +10,6 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const EditFeedbackPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [feedbackForEdit, setFeedbackForEdit] = useState();
-  const [originalPoster, setOriginalPoster] = useState();
   let params = useParams();
 
   useEffect(() => {
@@ -19,34 +18,35 @@ const EditFeedbackPage = () => {
 
   // Fetches feedback to fill the form for editing
   const getFeedback = async () => {
-    let query = new Parse.Query("ProductRequest");
-    query.equalTo("objectId", params.feedbackId);
-    let result = await query.first();
+    let result = await Parse.Cloud.run("fetchProductRequestById", {
+      feedbackId: params.feedbackId,
+    });
 
     if (result.get("creator").id === Parse.User.current().id) {
       setFeedbackForEdit(result);
-      setOriginalPoster(true);
-    } else {
-      setOriginalPoster(false);
     }
 
     setIsLoading(false);
   };
+
+  const originalPoster =
+    feedbackForEdit &&
+    feedbackForEdit.get("creator").id === Parse.User.current().id;
 
   return (
     <div className={styles.container}>
       <ButtonSecondary title="Go Back" class="buttonForm" icon={true}>
         Go Back
       </ButtonSecondary>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && originalPoster && (
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : originalPoster ? (
         <FeedbackForm
           icon={editIcon}
           editForm="true"
           feedbackForEdit={feedbackForEdit}
         />
-      )}
-      {!isLoading && !originalPoster && (
+      ) : (
         <div className={styles.noPermission}>
           You do not have permission to edit this feedback
         </div>

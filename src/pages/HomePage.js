@@ -40,16 +40,18 @@ const HomePage = (props) => {
     getList();
   }, []);
 
+  useEffect(() => {
+    // Fixes sidebar menu overflow
+    if (showMenu) {
+      document.body.style.overflow = "hidden";
+    } else if (!showMenu) {
+      document.body.style.overflow = "auto";
+    }
+  }, [showMenu]);
+
   const showSidebarHandler = (showSidebar) => {
     setShowMenu(showSidebar);
   };
-
-  // Fixes sidebar menu overflow
-  if (showMenu) {
-    document.body.style.overflow = "hidden";
-  } else if (!showMenu) {
-    document.body.style.overflow = "auto";
-  }
 
   // Sorts feedback list by category
   const onCategorySelection = (category) => {
@@ -61,16 +63,17 @@ const HomePage = (props) => {
 
   return (
     <div className={styles.homePageWrapper}>
-      {props.isDemo && <Wip />}
+      {Parse.User.current() && Parse.User.current().get("isDemo") && <Wip />}
       <div className={styles.mainNav}>
         <Header onShowSidebar={showSidebarHandler} showCloseIcon={showMenu} />
-        <MobileSidebar showSidebar={showMenu} feedback={feedbackList} />
+        {showMenu && <MobileSidebar feedback={feedbackList} />}
         <Categories selectedCategory={onCategorySelection} />
         <RoadmapWidget feedback={feedbackList} />
       </div>
       <div className={styles.mainContent}>
-        {isLoading && <LoadingSpinner />}
-        {!isLoading && (
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
           <React.Fragment>
             <FeedbackHeader
               feedbackCount={categorisedList.length}
@@ -89,24 +92,3 @@ const HomePage = (props) => {
 };
 
 export default HomePage;
-
-// 1.- Frontend Mentor title component
-// 	1.- 5 sidebar components = Sidebar, Header, Categories, Roadmap widget, Mobile Sidebar
-// 	1.- Hamburger menu
-// 		- show mobile sidebar
-
-// Feature list and header component
-
-// 	2.- Feature request header component
-//  2.- Suggestions title - hidden in mobile
-// 	2.- Sort dropdown menu
-// 	2.- Add feedback button - SEPARATE COMPONENT
-
-// 	3.- List of feature requests
-// 	3.- No feedback yet page + Add feedback button (copied)
-
-// 	4.- Feature request component
-// 	4.- Feature request text
-// 	4.- Feature request category
-// 	4.- Feature request upvotes
-// 	4.- Feature request comment button + number

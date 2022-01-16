@@ -15,7 +15,6 @@ const FeedbackDetailsPage = (props) => {
   const [charCounter, setCharCounter] = useState(250);
   const [newComment, setNewComment] = useState("");
   const [fieldIsEmpty, setFieldIsEmpty] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(true);
   const params = useParams();
   let navigate = useNavigate();
 
@@ -40,10 +39,8 @@ const FeedbackDetailsPage = (props) => {
     setNewComment(e.target.value);
     if (e.target.value.trim() === "") {
       setFieldIsEmpty(true);
-      setButtonDisabled(true);
     } else {
       setFieldIsEmpty(false);
-      setButtonDisabled(false);
     }
   };
 
@@ -68,8 +65,9 @@ const FeedbackDetailsPage = (props) => {
 
   return (
     <div className={styles.container}>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
         <React.Fragment>
           <div className={styles.buttonContainer}>
             <ButtonSecondary title="Go Back" icon={true} />
@@ -80,22 +78,19 @@ const FeedbackDetailsPage = (props) => {
               onBtnClick={redirectHandler}
             />
           </div>
-          {currFeedback && (
-            <FeedbackDetails
-              width="85%"
-              feedbackDetailsPage={true}
-              info={currFeedback}
-              commentCounter={currComments.length}
-            />
-          )}
+          <FeedbackDetails
+            width="85%"
+            feedbackDetailsPage={true}
+            info={currFeedback}
+            commentCounter={currComments.length}
+          />
           <div className={styles.commentsContainer}>
             <h1 className={styles.commentCounter}>
               {currComments.length} Comments
             </h1>
-            {currComments &&
-              currComments.map((comment) => {
-                return <CommentBox info={comment} key={comment.id} />;
-              })}
+            {currComments.map((comment) => {
+              return <CommentBox info={comment} key={comment.id} />;
+            })}
           </div>
           <div
             className={`${styles.addCommentContainer} ${
@@ -120,7 +115,7 @@ const FeedbackDetailsPage = (props) => {
                 title="Post Comment"
                 color="purple"
                 onBtnClick={commentSubmitHandler}
-                class={buttonDisabled && "btnDisabled"}
+                class={newComment.length === 0 && "btnDisabled"}
               />
             </div>
           </div>

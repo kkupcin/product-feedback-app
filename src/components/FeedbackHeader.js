@@ -38,7 +38,7 @@ const FeedbackHeader = (props) => {
           dropdownList={sortList}
           dropdownClass="feedbackFilter"
           feedbackComp={true}
-          sortOrder={setSortOrder}
+          onSortOrderChange={setSortOrder}
         />
       </div>
       <ButtonPrimary

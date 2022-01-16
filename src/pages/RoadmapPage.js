@@ -67,8 +67,9 @@ const RoadmapPage = () => {
 
   return (
     <div className={styles.container}>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
         <React.Fragment>
           <div className={styles.topNav}>
             <div className={styles.navText}>

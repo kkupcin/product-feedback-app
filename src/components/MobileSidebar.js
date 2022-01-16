@@ -6,14 +6,12 @@ import RoadmapWidget from "./RoadmapWidget";
 const MobileSidebar = (props) => {
   return (
     <React.Fragment>
-      {props.showSidebar && (
-        <div className={styles.outerModal}>
-          <div className={styles.container}>
-            <Categories sidebar={true} />
-            <RoadmapWidget sidebar={true} feedback={props.feedback} />
-          </div>
+      <div className={styles.outerModal}>
+        <div className={styles.container}>
+          <Categories sidebar={true} />
+          <RoadmapWidget sidebar={true} feedback={props.feedback} />
         </div>
-      )}
+      </div>
     </React.Fragment>
   );
 };

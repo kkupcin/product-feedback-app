@@ -15,11 +15,14 @@ const FeedbackForm = (props) => {
     description:
       (props.feedbackForEdit && props.feedbackForEdit.get("description")) || "",
   });
+
   const [showMessage, setShowMessage] = useState({
     show: false,
     message: "",
   });
+
   const [fieldIsEmpty, setFieldIsEmpty] = useState(true);
+
   let navigate = useNavigate();
 
   // Navigates back a page when cancel is clicked
@@ -30,20 +33,18 @@ const FeedbackForm = (props) => {
   // Submit feedback to Parse
   const submitNewFeedback = async () => {
     if (!fieldIsEmpty) {
-      const NewRequest = new Parse.Object.extend("ProductRequest");
-      const newRequest = new NewRequest();
-
-      newRequest.set("userUpvotes", []);
-      newRequest.set("creator", Parse.User.current());
-      newRequest.set("status", "Suggestion");
-      newRequest.set("title", fillerFeedback.title);
-      newRequest.set("description", fillerFeedback.description);
-      newRequest.set("category", fillerFeedback.category.title || "Feature");
-
       try {
-        await newRequest.save();
+        let newRequest = await Parse.Cloud.run("newRequest", {
+          feedback: {
+            title: fillerFeedback.title,
+            description: fillerFeedback.description,
+            category: {
+              title: fillerFeedback.category.title,
+            },
+          },
+        });
         setShowMessage({ show: true, message: "Feedback submitted" });
-        navigate(`/feedback-details/${newRequest.id}`);
+        navigate(`/feedback-details/${newRequest}`);
       } catch (err) {
         setShowMessage({ show: true, message: `Submission failed: ${err}` });
       }
@@ -62,9 +63,20 @@ const FeedbackForm = (props) => {
       feedbackForEdit.set("description", fillerFeedback.description);
 
       try {
-        await feedbackForEdit.save();
+        let feedbackForEditId = await Parse.Cloud.run("submitEditedFeedback", {
+          feedback: {
+            title: fillerFeedback.title,
+            description: fillerFeedback.description,
+            status: {
+              title: fillerFeedback.status.title,
+            },
+            category: {
+              title: fillerFeedback.category.title,
+            },
+          },
+        });
         setShowMessage({ show: true, message: "Feedback edit submitted" });
-        navigate(`/feedback-details/${feedbackForEdit.id}`);
+        navigate(`/feedback-details/${feedbackForEditId}`);
       } catch (err) {
         setShowMessage({ show: true, message: `Edit failed: ${err}` });
       }
@@ -90,7 +102,7 @@ const FeedbackForm = (props) => {
   };
 
   const categoryList = [
-    { title: "Feature", id: "feature" },
+    { title: "Feature", id: "feature", type: "category" },
     { title: "UI", id: "ui" },
     { title: "UX", id: "ux" },
     { title: "Enhancement", id: "enhancement" },

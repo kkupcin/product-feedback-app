@@ -8,7 +8,6 @@ import ReplyBox from "./ReplyBox";
 
 const CommentBox = (props) => {
   const [commPoster, setCommPoster] = useState();
-  const [replyPosters, setReplyPosters] = useState([]);
   const [replyBoxActive, setReplyBoxActive] = useState(false);
   const [newReplyContent, setNewReplyContent] = useState("");
   const [currReplies, setCurrReplies] = useState([]);
@@ -20,15 +19,12 @@ const CommentBox = (props) => {
   // Submit reply
   const replySubmitHandler = async () => {
     if (!fieldIsEmpty && replyingTo) {
-      let NewReply = Parse.Object.extend("Reply");
-      let newReply = new NewReply();
+      await Parse.Cloud.run("newReply", {
+        newReplyContent: newReplyContent,
+        commentId: props.info.id,
+        posterId: replyingTo.id,
+      });
 
-      newReply.set("content", newReplyContent);
-      newReply.set("user", Parse.User.current());
-      newReply.set("comment", props.info);
-      newReply.set("replyingTo", replyingTo);
-
-      await newReply.save();
       getReplies();
       replyBtnHandler();
       setNewReplyContent("");
@@ -49,17 +45,15 @@ const CommentBox = (props) => {
 
   const getReplies = async () => {
     setIsLoading(true);
-    let query = new Parse.Query("Reply");
-    query.equalTo("comment", props.info);
-    query.include("replyingTo.username");
-    let results = await query.find();
+    let results = await Parse.Cloud.run("fetchRepliesByCommentId", {
+      commentId: props.info.id,
+    });
     setCurrReplies(results);
-    getReplyUsers(results);
+    getCommentUser();
   };
 
   useEffect(() => {
     getReplies();
-    getCommentUser();
   }, []);
 
   const replyChangeHandler = (e) => {
@@ -81,79 +75,71 @@ const CommentBox = (props) => {
     });
 
     setCommPoster(result);
-  };
-
-  // Get comment creator's information for displaying and set it in 'reply poster' state
-  const getReplyUsers = async (replies) => {
-    let posterArray = [];
-    for (let i = 0; i < replies.length; i++) {
-      let result = await Parse.Cloud.run("fetchPosterById", {
-        userId: replies[i].get("user").id,
-      });
-      posterArray.push(result);
-    }
-    setReplyPosters(posterArray);
     setIsLoading(false);
   };
 
   return (
     <React.Fragment>
-      {isLoading && <LoadingSpinner />}
-      {currReplies.length > 0 && commPoster && !isLoading && (
-        <div className={styles.commentAndReplyContainer}>
-          <div className={styles.commentWithReplies}>
-            <img
-              src={commPoster.avatar.url()}
-              alt="user profile"
-              className={styles.userIcon}
-            />
-            <div className={styles.userInfoContainer}>
-              <div className={styles.userInfoText}>
-                <h3
-                  className={styles.userInfoName}
-                >{`${commPoster.firstName} ${commPoster.lastName}`}</h3>
-                <p className={styles.username}>@{commPoster.username}</p>
-              </div>
-            </div>
-            <ButtonTertiary
-              title="Reply"
-              onClick={replyBtnHandler}
-              class="replyBtn"
-            />
-            <span className={styles.borderSpan}></span>
-            <p className={styles.commentText}>{props.info.get("content")}</p>
-            <ReplyBox
-              replies={currReplies}
-              replyPosters={replyPosters}
-              replyBtnHandler={replyBtnHandler}
-              isReplyBoxOpen={replyBoxActive}
-            />
-            {replyBoxActive && (
-              <div className={styles.replyInputContainer}>
-                <div
-                  className={`${styles.replyInputBox} ${
-                    fieldIsEmpty && styles.fieldEmpty
-                  }`}
-                >
-                  <textarea
-                    rows="3"
-                    className={styles.textInput}
-                    maxLength="250"
-                    onChange={replyChangeHandler}
-                  />
-                  <span className={styles.messageSpan}></span>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        currReplies.length > 0 &&
+        commPoster &&
+        !isLoading && (
+          <div className={styles.commentAndReplyContainer}>
+            <div className={styles.commentWithReplies}>
+              <img
+                src={commPoster.avatar.url()}
+                alt="user profile"
+                className={styles.userIcon}
+              />
+              <div className={styles.userInfoContainer}>
+                <div className={styles.userInfoText}>
+                  <h3
+                    className={styles.userInfoName}
+                  >{`${commPoster.firstName} ${commPoster.lastName}`}</h3>
+                  <p className={styles.username}>@{commPoster.username}</p>
                 </div>
-                <ButtonPrimary
-                  title="Post Reply"
-                  color="purple"
-                  class="buttonReply"
-                  onBtnClick={replySubmitHandler}
-                  isDisabled={buttonDisabled}
-                />
               </div>
-            )}
+              <ButtonTertiary
+                title="Reply"
+                onClick={replyBtnHandler}
+                class="replyBtn"
+              />
+              <span className={styles.borderSpan}></span>
+              <p className={styles.commentText}>{props.info.get("content")}</p>
+              <ReplyBox
+                replies={currReplies}
+                replyBtnHandler={replyBtnHandler}
+                isReplyBoxOpen={replyBoxActive}
+              />
+              {replyBoxActive && (
+                <div className={styles.replyInputContainer}>
+                  <div
+                    className={`${styles.replyInputBox} ${
+                      fieldIsEmpty && styles.fieldEmpty
+                    }`}
+                  >
+                    <textarea
+                      rows="3"
+                      className={styles.textInput}
+                      maxLength="250"
+                      onChange={replyChangeHandler}
+                    />
+                    <span className={styles.messageSpan}></span>
+                  </div>
+                  <ButtonPrimary
+                    title="Post Reply"
+                    color="purple"
+                    class="buttonReply"
+                    onBtnClick={replySubmitHandler}
+                    isDisabled={buttonDisabled}
+                  />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )
       )}
       {currReplies.length === 0 && commPoster && !isLoading && (
         <div className={styles.userCommentBox}>

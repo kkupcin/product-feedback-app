@@ -19,6 +19,7 @@ const FeedbackForm = (props) => {
     show: false,
     message: "",
   });
+  const [fieldIsEmpty, setFieldIsEmpty] = useState(true);
   let navigate = useNavigate();
 
   // Navigates back a page when cancel is clicked
@@ -28,39 +29,47 @@ const FeedbackForm = (props) => {
 
   // Submit feedback to Parse
   const submitNewFeedback = async () => {
-    const NewRequest = new Parse.Object.extend("ProductRequest");
-    const newRequest = new NewRequest();
+    if (!fieldIsEmpty) {
+      const NewRequest = new Parse.Object.extend("ProductRequest");
+      const newRequest = new NewRequest();
 
-    newRequest.set("userUpvotes", []);
-    newRequest.set("creator", Parse.User.current());
-    newRequest.set("status", "Suggestion");
-    newRequest.set("title", fillerFeedback.title);
-    newRequest.set("description", fillerFeedback.description);
-    newRequest.set("category", fillerFeedback.category.title);
+      newRequest.set("userUpvotes", []);
+      newRequest.set("creator", Parse.User.current());
+      newRequest.set("status", "Suggestion");
+      newRequest.set("title", fillerFeedback.title);
+      newRequest.set("description", fillerFeedback.description);
+      newRequest.set("category", fillerFeedback.category.title || "Feature");
 
-    try {
-      await newRequest.save();
-      setShowMessage({ show: true, message: "Feedback submitted" });
-      navigate(`/feedback-details/${newRequest.id}`);
-    } catch (err) {
-      setShowMessage({ show: true, message: `Submission failed: ${err}` });
+      try {
+        await newRequest.save();
+        setShowMessage({ show: true, message: "Feedback submitted" });
+        navigate(`/feedback-details/${newRequest.id}`);
+      } catch (err) {
+        setShowMessage({ show: true, message: `Submission failed: ${err}` });
+      }
+    } else {
+      setShowMessage({ show: true, message: "All fields must be filled" });
     }
   };
 
   const submitEditedFeedback = async () => {
-    let feedbackForEdit = props.feedbackForEdit;
+    if (!fieldIsEmpty) {
+      let feedbackForEdit = props.feedbackForEdit;
 
-    feedbackForEdit.set("title", fillerFeedback.title);
-    feedbackForEdit.set("category", fillerFeedback.category.title);
-    feedbackForEdit.set("status", fillerFeedback.status.title);
-    feedbackForEdit.set("description", fillerFeedback.description);
+      feedbackForEdit.set("title", fillerFeedback.title);
+      feedbackForEdit.set("category", fillerFeedback.category.title);
+      feedbackForEdit.set("status", fillerFeedback.status.title);
+      feedbackForEdit.set("description", fillerFeedback.description);
 
-    try {
-      await feedbackForEdit.save();
-      setShowMessage({ show: true, message: "Feedback edit submitted" });
-      navigate(`/feedback-details/${feedbackForEdit.id}`);
-    } catch (err) {
-      setShowMessage({ show: true, message: `Edit failed: ${err}` });
+      try {
+        await feedbackForEdit.save();
+        setShowMessage({ show: true, message: "Feedback edit submitted" });
+        navigate(`/feedback-details/${feedbackForEdit.id}`);
+      } catch (err) {
+        setShowMessage({ show: true, message: `Edit failed: ${err}` });
+      }
+    } else {
+      setShowMessage({ show: true, message: "All fields must be filled" });
     }
   };
 
@@ -131,6 +140,12 @@ const FeedbackForm = (props) => {
 
   // Fills Editing form with info from feedback currently being edited
   const updateTitleHandler = (e) => {
+    if (e.target.value.trim() !== "" && fillerFeedback.description !== "") {
+      setFieldIsEmpty(false);
+    } else {
+      setFieldIsEmpty(true);
+    }
+
     setFillerFeedback((prevState) => {
       let stateCopy = { ...prevState };
       stateCopy.title = e.target.value;
@@ -139,6 +154,12 @@ const FeedbackForm = (props) => {
   };
 
   const updateDescHandler = (e) => {
+    if (e.target.value.trim() !== "" && fillerFeedback.title !== "") {
+      setFieldIsEmpty(false);
+    } else {
+      setFieldIsEmpty(true);
+    }
+
     setFillerFeedback((prevState) => {
       let stateCopy = { ...prevState };
       stateCopy.description = e.target.value;

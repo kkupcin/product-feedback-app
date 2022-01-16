@@ -24,6 +24,7 @@ const Reply = (props) => {
         title="Reply"
         onClick={handleReplyClick}
         class="replyBtn"
+        isReplyBoxOpen={props.isReplyBoxOpen}
       />
       <p className={styles.commentText}>
         <span className={styles.replyUsername}>

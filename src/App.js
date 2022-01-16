@@ -22,7 +22,7 @@ function App() {
   // Logs in default demo account
   async function loginDemoAcc() {
     if (isDemoAcc) {
-      const user = await Parse.User.logIn(
+      await Parse.User.logIn(
         process.env.REACT_APP_DEMO_USERNAME,
         process.env.REACT_APP_DEMO_PASS
       );
@@ -47,7 +47,7 @@ function App() {
 
   useEffect(() => {
     checkIfDemo();
-  }, [Parse.User.current()]);
+  }, [Parse.User.current().id]);
 
   return (
     <div className="App">

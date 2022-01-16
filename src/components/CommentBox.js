@@ -37,6 +37,7 @@ const CommentBox = (props) => {
 
   const replyBtnHandler = async (poster) => {
     setReplyBoxActive(!replyBoxActive);
+
     if (poster) {
       let pointer = Parse.User.createWithoutData(poster.id);
       setReplyingTo(pointer);
@@ -66,6 +67,7 @@ const CommentBox = (props) => {
     if (e.target.value.trim() === "") {
       setFieldIsEmpty(true);
       setButtonDisabled(true);
+      props.isBtnDisabled(true);
     } else {
       setFieldIsEmpty(false);
       setButtonDisabled(false);
@@ -124,6 +126,7 @@ const CommentBox = (props) => {
               replies={currReplies}
               replyPosters={replyPosters}
               replyBtnHandler={replyBtnHandler}
+              isReplyBoxOpen={replyBoxActive}
             />
             {replyBoxActive && (
               <div className={styles.replyInputContainer}>
@@ -137,7 +140,6 @@ const CommentBox = (props) => {
                     className={styles.textInput}
                     maxLength="250"
                     onChange={replyChangeHandler}
-                    // defualtValue={`${replyingTo} ${newReplyContent}`}
                   />
                   <span className={styles.messageSpan}></span>
                 </div>
@@ -146,7 +148,7 @@ const CommentBox = (props) => {
                   color="purple"
                   class="buttonReply"
                   onBtnClick={replySubmitHandler}
-                  class={buttonDisabled && "btnDisabled"}
+                  isDisabled={buttonDisabled}
                 />
               </div>
             )}
@@ -186,7 +188,6 @@ const CommentBox = (props) => {
                   className={styles.textInput}
                   maxLength="250"
                   onChange={replyChangeHandler}
-                  // defualtValue={`${replyingTo} ${newReplyContent}`}
                 />
                 <span className={styles.messageSpan}></span>
               </div>
@@ -195,7 +196,7 @@ const CommentBox = (props) => {
                 color="purple"
                 class="buttonReply"
                 onBtnClick={replySubmitHandler}
-                class={buttonDisabled && "btnDisabled"}
+                isDisabled={buttonDisabled}
               />
             </div>
           )}

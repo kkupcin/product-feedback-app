@@ -1,5 +1,4 @@
 import React from "react";
-import ButtonTertiary from "./ButtonTertiary";
 import styles from "../styles/ReplyBox.module.css";
 import Reply from "./Reply";
 
@@ -16,6 +15,7 @@ const ReplyBox = (props) => {
             poster={poster}
             reply={reply}
             replyBtnHandler={props.replyBtnHandler}
+            isReplyBoxOpen={props.isReplyBoxOpen}
           />
         );
       })}

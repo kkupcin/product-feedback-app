@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Wip.module.css";
 
@@ -27,9 +27,9 @@ const Wip = (props) => {
               Editing of data is disabled. <br /> You have been logged in to a
               Demo account. <br />
               To log in to a different account, please go <br />
-              <a onClick={navigationHandler} className={styles.styledLink}>
+              <span onClick={navigationHandler} className={styles.styledLink}>
                 here
-              </a>
+              </span>
             </p>
           </div>
         </div>

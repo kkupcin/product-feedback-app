@@ -222,8 +222,8 @@
       "icon userInfo userInfo . . button"
       "border text text text text text"
       "border text text text text text"
-      ". replyInput replyInput replyInput replyInput ."
-      "replyContainer replyContainer replyContainer replyContainer replyContainer replyContainer";
+      "replyContainer replyContainer replyContainer replyContainer replyContainer replyContainer"
+      ". replyInput replyInput replyInput replyInput .";
     grid-template-columns: repeat(6, 1fr);
   }
 

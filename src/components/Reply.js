@@ -2,8 +2,8 @@ import styles from "../styles/ReplyBox.module.css";
 import ButtonTertiary from "./ButtonTertiary";
 
 const Reply = (props) => {
-  const handleReplyClick = (replyingTo) => {
-    props.replyBtnHandler(props.poster);
+  const handleReplyClick = () => {
+    props.replyBtnHandler(props.reply.get("user"));
   };
 
   return (
@@ -27,7 +27,6 @@ const Reply = (props) => {
         title="Reply"
         onClick={handleReplyClick}
         class="replyBtn"
-        isReplyBoxOpen={props.isReplyBoxOpen}
       />
       <p className={styles.commentText}>
         <span className={styles.replyUsername}>

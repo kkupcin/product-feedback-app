@@ -22,7 +22,7 @@ const CommentBox = (props) => {
       await Parse.Cloud.run("newReply", {
         newReplyContent: newReplyContent,
         commentId: props.info.id,
-        posterId: replyingTo.id,
+        posterId: replyingTo,
       });
 
       getReplies();

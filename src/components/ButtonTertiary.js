@@ -4,9 +4,7 @@ import styles from "../styles/ButtonTertiary.module.css";
 
 const ButtonTertiary = (props) => {
   const clickHandler = () => {
-    if (!props.isReplyBoxOpen) {
-      props.onClick();
-    }
+    props.onClick();
   };
 
   return (

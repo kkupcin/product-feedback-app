@@ -34,7 +34,12 @@ const LoginPage = () => {
 
   const login = async () => {
     try {
-      await Parse.User.logIn(loginDetails.username, loginDetails.password);
+      let token = await Parse.Cloud.run("login", {
+        username: loginDetails.username,
+        password: loginDetails.password,
+      });
+
+      await Parse.User.become(token);
       setMessage("Login successful!");
       navigate("/");
     } catch (err) {

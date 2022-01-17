@@ -19,15 +19,19 @@ const CommentBox = (props) => {
   // Submit reply
   const replySubmitHandler = async () => {
     if (!fieldIsEmpty && replyingTo) {
-      await Parse.Cloud.run("newReply", {
-        newReplyContent: newReplyContent,
-        commentId: props.info.id,
-        posterId: replyingTo,
-      });
+      try {
+        await Parse.Cloud.run("newReply", {
+          newReplyContent: newReplyContent,
+          commentId: props.info.id,
+          posterId: replyingTo,
+        });
 
-      getReplies();
-      replyBtnHandler();
-      setNewReplyContent("");
+        getReplies();
+        replyBtnHandler();
+        setNewReplyContent("");
+      } catch (err) {
+        alert(err);
+      }
     }
   };
 

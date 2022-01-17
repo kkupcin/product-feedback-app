@@ -91,10 +91,10 @@ const FeedbackForm = (props) => {
 
   // Deletes feedback
   const deleteFeedback = async () => {
-    let feedbackForEdit = props.feedbackForEdit;
-
     try {
-      await feedbackForEdit.destroy();
+      await Parse.Cloud.run("deleteRequest", {
+        feedbackId: props.feedbackForEdit.id,
+      });
       setMessage("Feedback deleted");
       navigate("/");
     } catch (err) {

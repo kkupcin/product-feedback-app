@@ -19,10 +19,12 @@ Parse.serverURL = PARSE_HOST_URL;
 function App() {
   // Logs in default demo account
   async function loginDemoAcc() {
-    await Parse.User.logIn(
-      process.env.REACT_APP_DEMO_USERNAME,
-      process.env.REACT_APP_DEMO_PASS
-    );
+    let token = await Parse.Cloud.run("login", {
+      username: process.env.REACT_APP_DEMO_USERNAME,
+      password: process.env.REACT_APP_DEMO_PASS,
+    });
+
+    await Parse.User.become(token);
   }
 
   // Checks if the user is a demo account

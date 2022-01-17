@@ -54,12 +54,16 @@ const FeedbackDetailsPage = (props) => {
 
   const commentSubmitHandler = async () => {
     if (!fieldIsEmpty) {
-      await Parse.Cloud.run("newComment", {
-        feedbackId: currFeedback.id,
-        comment: newComment,
-      });
-      getFeedbackInfo();
-      setNewComment("");
+      try {
+        await Parse.Cloud.run("newComment", {
+          feedbackId: currFeedback.id,
+          comment: newComment,
+        });
+        getFeedbackInfo();
+        setNewComment("");
+      } catch (err) {
+        alert(`Comment submission failed: ${err}`);
+      }
     }
   };
 

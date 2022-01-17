@@ -28,38 +28,11 @@ const Dropdown = (props) => {
       props.onSortOrderChange(foundItem);
     }
 
-    switch (foundItem.id) {
-      case "feature":
+    switch (foundItem.type) {
+      case "category":
         props.setChosenCategory(foundItem);
         break;
-      case "ui":
-        props.setChosenCategory(foundItem);
-        break;
-      case "ux":
-        props.setChosenCategory(foundItem);
-        break;
-      case "enhancement":
-        props.setChosenCategory(foundItem);
-        break;
-      case "bug":
-        props.setChosenCategory(foundItem);
-        break;
-      case "suggestion":
-        if (props.setChosenStatus) {
-          props.setChosenStatus(foundItem);
-        }
-        break;
-      case "planned":
-        if (props.setChosenStatus) {
-          props.setChosenStatus(foundItem);
-        }
-        break;
-      case "in-progress":
-        if (props.setChosenStatus) {
-          props.setChosenStatus(foundItem);
-        }
-        break;
-      case "live":
+      case "status":
         if (props.setChosenStatus) {
           props.setChosenStatus(foundItem);
         }

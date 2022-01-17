@@ -16,10 +16,7 @@ const FeedbackForm = (props) => {
       (props.feedbackForEdit && props.feedbackForEdit.get("description")) || "",
   });
 
-  const [showMessage, setShowMessage] = useState({
-    show: false,
-    message: "",
-  });
+  const [message, setMessage] = useState("");
 
   const [fieldIsEmpty, setFieldIsEmpty] = useState(true);
 
@@ -43,13 +40,13 @@ const FeedbackForm = (props) => {
             },
           },
         });
-        setShowMessage({ show: true, message: "Feedback submitted" });
+        setMessage("Feedback submitted");
         navigate(`/feedback-details/${newRequest}`);
       } catch (err) {
-        setShowMessage({ show: true, message: `Submission failed: ${err}` });
+        setMessage(`Submission failed: ${err}`);
       }
     } else {
-      setShowMessage({ show: true, message: "All fields must be filled" });
+      setMessage("All fields must be filled");
     }
   };
 
@@ -75,13 +72,13 @@ const FeedbackForm = (props) => {
             },
           },
         });
-        setShowMessage({ show: true, message: "Feedback edit submitted" });
+        setMessage("Feedback edit submitted");
         navigate(`/feedback-details/${feedbackForEditId}`);
       } catch (err) {
-        setShowMessage({ show: true, message: `Edit failed: ${err}` });
+        setMessage(`Edit failed: ${err}`);
       }
     } else {
-      setShowMessage({ show: true, message: "All fields must be filled" });
+      setMessage("All fields must be filled");
     }
   };
 
@@ -91,29 +88,26 @@ const FeedbackForm = (props) => {
 
     try {
       await feedbackForEdit.destroy();
-      setShowMessage({ show: true, message: "Feedback deleted" });
+      setMessage("Feedback deleted");
       navigate("/");
     } catch (err) {
-      setShowMessage({
-        show: true,
-        message: `Feedback deletion failed: ${err}`,
-      });
+      setMessage(`Feedback deletion failed: ${err}`);
     }
   };
 
   const categoryList = [
     { title: "Feature", id: "feature", type: "category" },
-    { title: "UI", id: "ui" },
-    { title: "UX", id: "ux" },
-    { title: "Enhancement", id: "enhancement" },
-    { title: "Bug", id: "bug" },
+    { title: "UI", id: "ui", type: "category" },
+    { title: "UX", id: "ux", type: "category" },
+    { title: "Enhancement", id: "enhancement", type: "category" },
+    { title: "Bug", id: "bug", type: "category" },
   ];
 
   const statusList = [
-    { title: "Suggestion", id: "suggestion" },
-    { title: "Planned", id: "planned" },
-    { title: "In-Progress", id: "in-progress" },
-    { title: "Live", id: "live" },
+    { title: "Suggestion", id: "suggestion", type: "status" },
+    { title: "Planned", id: "planned", type: "status" },
+    { title: "In-Progress", id: "in-progress", type: "status" },
+    { title: "Live", id: "live", type: "status" },
   ];
 
   // Passes on current choice index when in Editing form
@@ -272,9 +266,7 @@ const FeedbackForm = (props) => {
           ></ButtonPrimary>
         )}
       </div>
-      {showMessage.show && (
-        <div className={styles.message}>{showMessage.message}</div>
-      )}
+      {message && <div className={styles.message}>{message}</div>}
     </div>
   );
 };

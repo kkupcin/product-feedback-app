@@ -72,7 +72,7 @@ const HomePage = (props) => {
       </div>
       <div className={styles.mainContent}>
         {isLoading ? (
-          <LoadingSpinner />
+          <LoadingSpinner class="homePage" />
         ) : (
           <React.Fragment>
             <FeedbackHeader

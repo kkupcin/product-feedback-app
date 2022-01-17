@@ -1,8 +1,12 @@
 import styles from "../styles/LoadingSpinner.module.css";
 
-const LoadingSpinner = () => {
+const LoadingSpinner = (props) => {
   return (
-    <div className={styles.spinnerContainer}>
+    <div
+      className={`${styles.spinnerContainer} ${
+        props.class && styles[props.class]
+      }`}
+    >
       <div className={styles.ldsDualRing}></div>
     </div>
   );

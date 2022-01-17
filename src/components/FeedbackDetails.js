@@ -25,7 +25,7 @@ const FeedbackDetails = (props) => {
 
   useEffect(() => {
     checkUpvotes();
-  }, []);
+  }, [props.info]);
 
   // Checks if user has upvoted and updates upvote status in Parse
   const onUpvoteClickSubmit = async () => {
@@ -34,6 +34,7 @@ const FeedbackDetails = (props) => {
         feedbackId: props.info.id,
       });
       setUpvoteClicked(response);
+      props.onUpvote();
     } catch (err) {
       alert(`Could not upvote: ${err}`);
     }

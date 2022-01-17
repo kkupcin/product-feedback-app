@@ -36,6 +36,10 @@ const HomePage = (props) => {
     setCurrSort(sortParam);
   };
 
+  const upvoteHandler = () => {
+    getList();
+  };
+
   useEffect(() => {
     getList();
   }, []);
@@ -83,6 +87,7 @@ const HomePage = (props) => {
               feedback={categorisedList}
               sortOrder={currSort}
               comments={comments}
+              onUpvote={upvoteHandler}
             />
           </React.Fragment>
         )}

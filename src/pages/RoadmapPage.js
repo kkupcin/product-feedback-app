@@ -65,6 +65,10 @@ const RoadmapPage = () => {
     getList();
   }, []);
 
+  const upvoteHandler = () => {
+    getList();
+  };
+
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -143,6 +147,7 @@ const RoadmapPage = () => {
                     onFeedbackClick={feedbackClickHandler}
                     key={feedbackItem.id}
                     commentCounter={filteredComments.length}
+                    onUpvote={upvoteHandler}
                   />
                 );
               })}

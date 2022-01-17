@@ -44,6 +44,10 @@ const FeedbackDetailsPage = (props) => {
     }
   };
 
+  const upvoteHandler = () => {
+    getFeedbackInfo();
+  };
+
   useEffect(() => {
     getFeedbackInfo();
   }, []);
@@ -83,6 +87,7 @@ const FeedbackDetailsPage = (props) => {
             feedbackDetailsPage={true}
             info={currFeedback}
             commentCounter={currComments.length}
+            onUpvote={upvoteHandler}
           />
           <div className={styles.commentsContainer}>
             <h1 className={styles.commentCounter}>

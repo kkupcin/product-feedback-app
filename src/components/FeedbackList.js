@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 const FeedbackList = (props) => {
   let navigate = useNavigate();
 
+  const upvoteHandler = () => {
+    props.onUpvote();
+  };
+
   // Navigates to clicked feedback requests
   const feedbackClickHandler = (id) => {
     navigate(`/feedback-details/${id}`);
@@ -104,6 +108,7 @@ const FeedbackList = (props) => {
               key={feedbackItem.id}
               onFeedbackClick={feedbackClickHandler}
               commentCounter={filteredComments.length}
+              onUpvote={upvoteHandler}
             />
           );
         })

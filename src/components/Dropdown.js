@@ -28,18 +28,20 @@ const Dropdown = (props) => {
       props.onSortOrderChange(foundItem);
     }
 
-    switch (foundItem.type) {
-      case "category":
-        props.setChosenCategory(foundItem);
-        break;
-      case "status":
-        if (props.setChosenStatus) {
+    if (foundItem.type) {
+      switch (foundItem.type) {
+        case "category":
+          props.setChosenCategory(foundItem);
+          break;
+        case "status":
+          if (props.setChosenStatus) {
+            props.setChosenStatus(foundItem);
+          }
+          break;
+        default:
+          props.setChosenCategory(foundItem);
           props.setChosenStatus(foundItem);
-        }
-        break;
-      default:
-        props.setChosenCategory(foundItem);
-        props.setChosenStatus(foundItem);
+      }
     }
   };
 

@@ -54,14 +54,10 @@ const FeedbackDetailsPage = (props) => {
 
   const commentSubmitHandler = async () => {
     if (!fieldIsEmpty) {
-      let NewComment = Parse.Object.extend("Comment");
-      let newCommentSubmission = new NewComment();
-
-      newCommentSubmission.set("user", Parse.User.current());
-      newCommentSubmission.set("content", newComment);
-      newCommentSubmission.set("productFeedback", currFeedback);
-
-      await newCommentSubmission.save();
+      await Parse.Cloud.run("newComment", {
+        feedbackId: currFeedback.id,
+        comment: newComment,
+      });
       getFeedbackInfo();
       setNewComment("");
     }

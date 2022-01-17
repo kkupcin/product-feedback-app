@@ -35,11 +35,9 @@ const CommentBox = (props) => {
     setReplyBoxActive(!replyBoxActive);
 
     if (poster) {
-      let pointer = Parse.User.createWithoutData(poster.id);
-      setReplyingTo(pointer);
+      setReplyingTo(poster.id);
     } else {
-      let pointer = Parse.User.createWithoutData(commPoster.id);
-      setReplyingTo(pointer);
+      setReplyingTo(commPoster.id);
     }
   };
 

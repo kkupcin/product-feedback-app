@@ -18,7 +18,7 @@ const FeedbackForm = (props) => {
 
   const [message, setMessage] = useState("");
 
-  const [fieldIsEmpty, setFieldIsEmpty] = useState(true);
+  const [fieldIsEmpty, setFieldIsEmpty] = useState(checkIfFieldEmpty);
 
   let navigate = useNavigate();
 
@@ -26,6 +26,19 @@ const FeedbackForm = (props) => {
   const cancelHandler = () => {
     navigate(-1);
   };
+
+  function checkIfFieldEmpty() {
+    if (
+      fillerFeedback.title !== "" &&
+      fillerFeedback.description !== "" &&
+      fillerFeedback.category !== "" &&
+      fillerFeedback.status !== ""
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   // Submit feedback to Parse
   const submitNewFeedback = async () => {
@@ -52,15 +65,9 @@ const FeedbackForm = (props) => {
 
   const submitEditedFeedback = async () => {
     if (!fieldIsEmpty) {
-      let feedbackForEdit = props.feedbackForEdit;
-
-      feedbackForEdit.set("title", fillerFeedback.title);
-      feedbackForEdit.set("category", fillerFeedback.category.title);
-      feedbackForEdit.set("status", fillerFeedback.status.title);
-      feedbackForEdit.set("description", fillerFeedback.description);
-
       try {
         let feedbackForEditId = await Parse.Cloud.run("submitEditedFeedback", {
+          feedbackId: props.feedbackForEdit.id,
           feedback: {
             title: fillerFeedback.title,
             description: fillerFeedback.description,
@@ -134,6 +141,7 @@ const FeedbackForm = (props) => {
       stateCopy.category = category;
       return stateCopy;
     });
+    setFieldIsEmpty(false);
   };
 
   const setChosenStatus = (status) => {
@@ -142,6 +150,7 @@ const FeedbackForm = (props) => {
       stateCopy.status = status;
       return stateCopy;
     });
+    setFieldIsEmpty(false);
   };
 
   // Fills Editing form with info from feedback currently being edited

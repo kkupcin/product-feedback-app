@@ -94,6 +94,7 @@ const FeedbackDetailsPage = (props) => {
             info={currFeedback}
             commentCounter={currComments.length}
             onUpvote={upvoteHandler}
+            location="feedbackDetailsPage"
           />
           <div className={styles.commentsContainer}>
             <h1 className={styles.commentCounter}>

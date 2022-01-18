@@ -21,11 +21,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   // Logs in default demo account
   async function loginDemoAcc() {
-    // These env are not used as strings in Netlify so template literals should be used
-    let token = await Parse.Cloud.run("login", {
-      username: `${process.env.REACT_APP_DEMO_USERNAME}`,
-      password: `${process.env.REACT_APP_DEMO_PASS}`,
+    let response = await fetch("https://randomuser.me/api/?inc=login");
+    let user = await response.json();
+    let token = Parse.Cloud.run("loginAsDemo", {
+      username: user.results[0].login.username,
+      password: user.results[0].login.password,
     });
+    token = await token;
 
     await Parse.User.become(token);
   }

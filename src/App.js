@@ -19,10 +19,9 @@ Parse.serverURL = PARSE_HOST_URL;
 function App() {
   // Logs in default demo account
   async function loginDemoAcc() {
-    // These env are not used as strings in Netlify so template literals should be used
     let token = await Parse.Cloud.run("login", {
-      username: `${process.env.REACT_APP_DEMO_USERNAME}`,
-      password: `${process.env.REACT_APP_DEMO_PASS}`,
+      username: process.env.REACT_APP_DEMO_USERNAME,
+      password: process.env.REACT_APP_DEMO_PASS,
     });
 
     await Parse.User.become(token);

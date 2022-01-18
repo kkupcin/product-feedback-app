@@ -1,4 +1,4 @@
-# Product feedback app - Work in Progress
+# Product feedback app
 
 ## Table of contents
 

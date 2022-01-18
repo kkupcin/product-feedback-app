@@ -2,6 +2,7 @@ import styles from "../styles/ReplyBox.module.css";
 import ButtonTertiary from "./ButtonTertiary";
 
 const Reply = (props) => {
+  // Pass on the user to set 'replyingTo'
   const handleReplyClick = () => {
     props.replyBtnHandler(props.reply.get("user"));
   };

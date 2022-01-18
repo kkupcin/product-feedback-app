@@ -20,17 +20,17 @@ const RoadmapPage = () => {
 
   let navigate = useNavigate();
 
-  // Redirects to the new feedback page
+  // Redirect to the new feedback page
   const redirectHandler = () => {
     navigate("/new-feedback");
   };
 
-  // Listens for filter selection in mobile view
+  // Listen for filter selection in mobile view
   const selectedFilterListener = (e) => {
     setSelectedFilter(e.target.id);
   };
 
-  // Redirects to the Feedback details page
+  // Redirect to the Feedback details page
   const feedbackClickHandler = (id) => {
     navigate(`/feedback-details/${id}`);
   };
@@ -40,7 +40,7 @@ const RoadmapPage = () => {
     (selectedFilter === "live" && styles.positionThree) ||
     (selectedFilter === "planned" && styles.positionOne);
 
-  // Fetches list and and sorts into categories
+  // Fetch list and and sort it into categories
   const getList = async () => {
     setIsLoading(true);
 
@@ -71,6 +71,7 @@ const RoadmapPage = () => {
     getList();
   }, []);
 
+  // Get product request list again to refresh upvotes
   const upvoteHandler = () => {
     getList();
   };

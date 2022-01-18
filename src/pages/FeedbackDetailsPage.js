@@ -20,12 +20,12 @@ const FeedbackDetailsPage = (props) => {
   const params = useParams();
   let navigate = useNavigate();
 
-  // Redirects to the editing page on click
+  // Redirect to the editing page on click
   const redirectHandler = () => {
     navigate(`/edit-feedback/${params.feedbackId}`);
   };
 
-  // Fetches feedback info and comments for displaying
+  // Fetch feedback info and comments for displaying
   const getFeedbackInfo = async () => {
     let feedbackInfo = await Parse.Cloud.run("fetchFeedbackInfo", {
       feedbackId: params.feedbackId,
@@ -36,6 +36,7 @@ const FeedbackDetailsPage = (props) => {
     setIsLoading(false);
   };
 
+  // Update the comment input
   const commentChangeHandler = (e) => {
     setCharCounter(250 - e.target.value.length);
     setNewComment(e.target.value);
@@ -55,6 +56,7 @@ const FeedbackDetailsPage = (props) => {
     getFeedbackInfo();
   }, []);
 
+  // Submit new comment
   const commentSubmitHandler = async () => {
     if (!fieldIsEmpty) {
       try {

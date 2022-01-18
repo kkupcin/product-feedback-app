@@ -22,11 +22,12 @@ const FeedbackForm = (props) => {
 
   let navigate = useNavigate();
 
-  // Navigates back a page when cancel is clicked
+  // Navigate back a page when cancel is clicked
   const cancelHandler = () => {
     navigate(-1);
   };
 
+  // Check if input fields are empty
   function checkIfFieldEmpty() {
     if (
       fillerFeedback.title !== "" &&
@@ -40,7 +41,7 @@ const FeedbackForm = (props) => {
     }
   }
 
-  // Submit feedback to Parse
+  // Submit new feedback to Parse
   const submitNewFeedback = async () => {
     if (!fieldIsEmpty) {
       try {
@@ -64,6 +65,7 @@ const FeedbackForm = (props) => {
     }
   };
 
+  // Submit edited feeback to Parse
   const submitEditedFeedback = async () => {
     if (!fieldIsEmpty) {
       try {
@@ -91,7 +93,7 @@ const FeedbackForm = (props) => {
     }
   };
 
-  // Deletes feedback
+  // Delete feedback in editing
   const deleteFeedback = async () => {
     try {
       await Parse.Cloud.run("deleteRequest", {
@@ -120,7 +122,7 @@ const FeedbackForm = (props) => {
     { title: "Live", id: "live", type: "status" },
   ];
 
-  // Passes on current choice index when in Editing form
+  // Pass on current choice index when in Editing form
   const currCatChoiceIndex = () => {
     for (let i = 0; i < categoryList.length; i++) {
       if (categoryList[i].title === fillerFeedback.category) {
@@ -137,7 +139,7 @@ const FeedbackForm = (props) => {
     }
   };
 
-  // Sets category and status for submission
+  // Set category and status for submission
   const setChosenCategory = (category) => {
     setFillerFeedback((prevState) => {
       let stateCopy = { ...prevState };
@@ -158,7 +160,7 @@ const FeedbackForm = (props) => {
     setFieldIsEmpty(false);
   };
 
-  // Fills Editing form with info from feedback currently being edited
+  // Fill Editing form with info from feedback currently being edited and update new feedback with input value
   const updateTitleHandler = (e) => {
     if (e.target.value.trim() !== "" && fillerFeedback.description !== "") {
       setFieldIsEmpty(false);

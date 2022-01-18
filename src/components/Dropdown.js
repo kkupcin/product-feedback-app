@@ -17,7 +17,7 @@ const Dropdown = (props) => {
     setDisplayMenu(!displayMenu);
   };
 
-  // Sets selected item in 'selectedItem' state
+  // Set selected item in 'selectedItem' state
   const selectionHandler = (e) => {
     let foundItem = props.dropdownList.find(
       (dropdownItem) => dropdownItem.id === e.target.id
@@ -25,10 +25,12 @@ const Dropdown = (props) => {
 
     setSelectedItem(foundItem);
 
+    // Pass on selected item for sorting
     if (props.onSortOrderChange) {
       props.onSortOrderChange(foundItem);
     }
 
+    // Pass on selected item based on the type
     if (foundItem.type) {
       switch (foundItem.type) {
         case "category":

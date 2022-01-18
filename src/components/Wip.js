@@ -12,7 +12,7 @@ const Wip = (props) => {
     setCloseWip(true);
   };
 
-  // Navigate to login page
+  // Navigate to the login page
   const navigationHandler = () => {
     navigate("/login");
   };

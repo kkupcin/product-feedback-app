@@ -9,12 +9,12 @@ const FeedbackDetails = (props) => {
   const [upvoteClicked, setUpvoteClicked] = useState();
   const [message, setMessage] = useState("");
 
-  // Triggers asyn func upon click
+  // Trigger async function upon click
   const upvoteClickHandler = () => {
     onUpvoteClickSubmit();
   };
 
-  // Checks if user has upvoted and sets 'upvoteClicked' state
+  // Check if user has upvoted and set 'upvoteClicked' state
   const checkUpvotes = () => {
     let userUpvoteArray = props.info.get("userUpvotes");
 
@@ -29,7 +29,7 @@ const FeedbackDetails = (props) => {
     checkUpvotes();
   }, [props.info]);
 
-  // Checks if user has upvoted and updates upvote status in Parse
+  // Check if user has upvoted and update upvote status in Parse
   const onUpvoteClickSubmit = async () => {
     try {
       const response = await Parse.Cloud.run("toggleVote", {
@@ -44,9 +44,9 @@ const FeedbackDetails = (props) => {
     }
   };
 
-  // Passes on current feedback id on click for redirecting
+  // Pass on current feedback id on click for redirecting
   const feedbackClickHandler = (e) => {
-    // Excludes upvote container click from redirecting
+    // Exclude upvote container click from redirecting
     if (
       e.target.parentElement.id !== "upvoteContainer" &&
       e.target.id !== "upvoteContainer"

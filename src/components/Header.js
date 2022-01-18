@@ -3,8 +3,9 @@ import hamburgerLogo from "../assets/shared/mobile/icon-hamburger.svg";
 import closeLogo from "../assets/shared/mobile/icon-close.svg";
 
 const Header = (props) => {
+  // Set if sidebar is shown when clicking on the hamburger button
   const hamburgerHandler = () => {
-    props.onShowSidebar(!props.showCloseIcon)
+    props.onShowSidebar(!props.showCloseIcon);
   };
 
   return (

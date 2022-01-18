@@ -13,6 +13,7 @@ const LoginPage = () => {
 
   let navigate = useNavigate();
 
+  // Log user in
   const loginHandler = async () => {
     await login();
   };

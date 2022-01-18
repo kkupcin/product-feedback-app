@@ -21,6 +21,7 @@ const HomePage = (props) => {
   });
   const [categorisedList, setCategorisedList] = useState(feedbackList);
 
+  // Fetch all requests and comments for displaying
   const getList = async () => {
     let results = await Parse.Cloud.run("fetchAllRequests");
     setFeedbackList(results);
@@ -31,7 +32,7 @@ const HomePage = (props) => {
     setIsLoading(false);
   };
 
-  // Passes on sorting order
+  // Pass on sorting order
   const sortList = (sortParam) => {
     setCurrSort(sortParam);
   };
@@ -45,7 +46,7 @@ const HomePage = (props) => {
   }, []);
 
   useEffect(() => {
-    // Fixes sidebar menu overflow
+    // Fix sidebar menu overflow
     if (showMenu) {
       document.body.style.overflow = "hidden";
     } else if (!showMenu) {
@@ -57,7 +58,7 @@ const HomePage = (props) => {
     setShowMenu(showSidebar);
   };
 
-  // Sorts feedback list by category
+  // Sort feedback list by category
   const onCategorySelection = (category) => {
     const newList = feedbackList.filter(
       (feedbackItem) => feedbackItem.get("category") === category

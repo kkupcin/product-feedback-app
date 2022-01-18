@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 const FeedbackList = (props) => {
   let navigate = useNavigate();
 
+  // Pass on the upvote handler
   const upvoteHandler = () => {
     props.onUpvote();
   };
 
-  // Navigates to clicked feedback requests
+  // Navigate to clicked feedback requests
   const feedbackClickHandler = (id) => {
     navigate(`/feedback-details/${id}`);
   };
@@ -80,7 +81,7 @@ const FeedbackList = (props) => {
     return 0;
   };
 
-  // Chooses which sort function to use
+  // Choose which sort function to use
   const getSortFunc = () => {
     switch (props.sortOrder.id) {
       case "most-upvotes":

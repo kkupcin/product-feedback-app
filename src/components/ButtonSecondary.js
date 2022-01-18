@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const ButtonSecondary = (props) => {
   let navigate = useNavigate();
+
+  // Navigate back a page
   const clickHandler = () => {
     navigate(-1);
   };

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const NoFeedback = () => {
   let navigate = useNavigate();
 
-  // Redirects to new feedback page
+  // Redirect to the new feedback page
   const redirectHandler = () => {
     navigate("/new-feedback");
   };

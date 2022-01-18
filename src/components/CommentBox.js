@@ -17,7 +17,7 @@ const CommentBox = (props) => {
   const [replyingTo, setReplyingTo] = useState();
   const [message, setMessage] = useState("");
 
-  // Submit reply
+  // Submit reply to Parse
   const replySubmitHandler = async () => {
     if (!fieldIsEmpty && replyingTo) {
       try {
@@ -27,6 +27,7 @@ const CommentBox = (props) => {
           posterId: replyingTo,
         });
 
+        // Refresh the replies and reset the reply field
         getReplies();
         replyBtnHandler();
         setNewReplyContent("");
@@ -39,6 +40,7 @@ const CommentBox = (props) => {
   const replyBtnHandler = async (poster) => {
     setReplyBoxActive(!replyBoxActive);
 
+    // Set 'replyingTo' to the correct user
     if (poster) {
       setReplyingTo(poster.id);
     } else {
@@ -46,6 +48,7 @@ const CommentBox = (props) => {
     }
   };
 
+  // Fetch replies for displaying
   const getReplies = async () => {
     setIsLoading(true);
 
@@ -64,6 +67,7 @@ const CommentBox = (props) => {
   const replyChangeHandler = (e) => {
     setNewReplyContent(e.target.value);
 
+    // Adjust if the button is disabled and submission is allowed
     if (e.target.value.trim() === "") {
       setFieldIsEmpty(true);
       setButtonDisabled(true);

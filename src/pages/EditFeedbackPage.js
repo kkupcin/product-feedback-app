@@ -17,7 +17,7 @@ const EditFeedbackPage = () => {
     getFeedback();
   }, []);
 
-  // Fetches feedback to fill the form for editing
+  // Fetch feedback to fill the form for editing
   const getFeedback = async () => {
     let result = await Parse.Cloud.run("fetchProductRequestById", {
       feedbackId: params.feedbackId,
@@ -30,6 +30,7 @@ const EditFeedbackPage = () => {
     setIsLoading(false);
   };
 
+  // Check if user is the original poster
   const originalPoster =
     feedbackForEdit &&
     feedbackForEdit.get("creator").id === Parse.User.current().id;

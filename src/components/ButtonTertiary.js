@@ -3,6 +3,7 @@ import styles from "../styles/ButtonTertiary.module.css";
 // Tertiary button
 
 const ButtonTertiary = (props) => {
+  // Pass on the click handler
   const clickHandler = () => {
     props.onClick();
   };

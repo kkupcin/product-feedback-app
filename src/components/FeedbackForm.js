@@ -53,6 +53,7 @@ const FeedbackForm = (props) => {
             },
           },
         });
+
         setMessage("Feedback submitted");
         navigate(`/feedback-details/${newRequest}`);
       } catch (err) {
@@ -79,6 +80,7 @@ const FeedbackForm = (props) => {
             },
           },
         });
+
         setMessage("Feedback edit submitted");
         navigate(`/feedback-details/${feedbackForEditId}`);
       } catch (err) {
@@ -95,6 +97,7 @@ const FeedbackForm = (props) => {
       await Parse.Cloud.run("deleteRequest", {
         feedbackId: props.feedbackForEdit.id,
       });
+
       setMessage("Feedback deleted");
       navigate("/");
     } catch (err) {
@@ -141,6 +144,7 @@ const FeedbackForm = (props) => {
       stateCopy.category = category;
       return stateCopy;
     });
+
     setFieldIsEmpty(false);
   };
 
@@ -150,6 +154,7 @@ const FeedbackForm = (props) => {
       stateCopy.status = status;
       return stateCopy;
     });
+
     setFieldIsEmpty(false);
   };
 

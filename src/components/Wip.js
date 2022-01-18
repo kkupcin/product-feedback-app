@@ -4,6 +4,7 @@ import styles from "../styles/Wip.module.css";
 
 const Wip = (props) => {
   const [closeWip, setCloseWip] = useState(false);
+
   let navigate = useNavigate();
 
   // Close the work in progress notice

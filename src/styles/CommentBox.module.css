@@ -200,6 +200,11 @@
   font-size: 13px;
 }
 
+.errorMessage {
+  font-weight: 700;
+  margin-top: 12px;
+}
+
 @media screen and (min-width: 375px) {
   .charCounter {
     padding-bottom: 0;

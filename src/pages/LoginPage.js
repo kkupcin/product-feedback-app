@@ -10,6 +10,7 @@ const LoginPage = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
+
   let navigate = useNavigate();
 
   const loginHandler = async () => {
@@ -40,6 +41,7 @@ const LoginPage = () => {
       });
 
       await Parse.User.become(token);
+
       setMessage("Login successful!");
       navigate("/");
     } catch (err) {

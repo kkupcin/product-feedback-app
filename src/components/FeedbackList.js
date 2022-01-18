@@ -20,6 +20,7 @@ const FeedbackList = (props) => {
     if (a.get("userUpvotes").length < b.get("userUpvotes").length) {
       return -1;
     }
+
     if (a.get("userUpvotes").length > b.get("userUpvotes").length) {
       return 1;
     }
@@ -31,6 +32,7 @@ const FeedbackList = (props) => {
     if (a.get("userUpvotes").length > b.get("userUpvotes").length) {
       return -1;
     }
+
     if (a.get("userUpvotes").length < b.get("userUpvotes").length) {
       return 1;
     }
@@ -50,6 +52,7 @@ const FeedbackList = (props) => {
     if (aFilteredComments.length < bFilteredComments.length) {
       return -1;
     }
+
     if (aFilteredComments.length > bFilteredComments.length) {
       return 1;
     }
@@ -69,6 +72,7 @@ const FeedbackList = (props) => {
     if (aFilteredComments.length > bFilteredComments.length) {
       return -1;
     }
+
     if (aFilteredComments.length < bFilteredComments.length) {
       return 1;
     }

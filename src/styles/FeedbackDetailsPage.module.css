@@ -94,6 +94,11 @@
   margin-bottom: 24px;
 }
 
+.errorMessage {
+  font-weight: 700;
+  margin-top: 16px;
+}
+
 @media screen and (min-width: 375px) {
   .options {
     flex-direction: row;

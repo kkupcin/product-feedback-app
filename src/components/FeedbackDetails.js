@@ -2,11 +2,12 @@ import styles from "../styles/FeedbackDetails.module.css";
 import arrowUp from "../assets/shared/icon-arrow-up.svg";
 import commentIcon from "../assets/shared/icon-comments.svg";
 import arrowUpWhite from "../assets/shared/icon-arrow-up-white.svg";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Parse from "parse";
 
 const FeedbackDetails = (props) => {
   const [upvoteClicked, setUpvoteClicked] = useState();
+  const [message, setMessage] = useState("");
 
   // Triggers asyn func upon click
   const upvoteClickHandler = () => {
@@ -16,6 +17,7 @@ const FeedbackDetails = (props) => {
   // Checks if user has upvoted and sets 'upvoteClicked' state
   const checkUpvotes = () => {
     let userUpvoteArray = props.info.get("userUpvotes");
+
     if (!userUpvoteArray.includes(Parse.User.current().id)) {
       setUpvoteClicked(false);
     } else if (userUpvoteArray.includes(Parse.User.current().id)) {
@@ -33,10 +35,12 @@ const FeedbackDetails = (props) => {
       const response = await Parse.Cloud.run("toggleVote", {
         feedbackId: props.info.id,
       });
+
       setUpvoteClicked(response);
+
       props.onUpvote();
     } catch (err) {
-      alert(`Could not upvote: ${err}`);
+      setMessage(`Could not upvote: ${err}`);
     }
   };
 
@@ -54,60 +58,63 @@ const FeedbackDetails = (props) => {
   };
 
   return (
-    <div
-      onClick={feedbackClickHandler}
-      className={`${styles.container} ${
-        props.roadmapPage ? styles.cardRoadmap : ""
-      } ${props.feedbackDetailsPage ? styles.feedbackDetailsPage : ""}`}
-    >
-      <div className={styles.textContainer}>
-        {props.roadmapPage && (
-          <div className={styles.cardRoadmapInfo}>
-            <span
-              className={styles.cardRoadmapInfoSpan}
-              style={{ backgroundColor: props.color }}
-            />
-            {props.info.get("status")}
-          </div>
-        )}
-        <h3 className={styles.title}>{props.info.get("title")}</h3>
-        <p className={styles.description}>{props.info.get("description")}</p>
-        <div className={styles.category}>{props.info.get("category")}</div>
-      </div>
+    <React.Fragment>
       <div
-        className={`${styles.upvoteContainer} ${
-          upvoteClicked && styles.selected
-        }`}
-        onClick={upvoteClickHandler}
-        id="upvoteContainer"
+        onClick={feedbackClickHandler}
+        className={`${styles.container} ${
+          props.roadmapPage ? styles.cardRoadmap : ""
+        } ${props.feedbackDetailsPage ? styles.feedbackDetailsPage : ""}`}
       >
-        {upvoteClicked ? (
-          <img
-            src={arrowUpWhite}
-            alt="arrow"
-            className={styles.arrow}
-            id="upvoteIconWhite"
-          ></img>
-        ) : (
-          <img
-            src={arrowUp}
-            alt="arrow"
-            className={styles.arrow}
-            id="upvoteIconUp"
-          ></img>
-        )}
-        <h4
-          className={`${styles.counter} ${styles.upvotes}`}
-          id="upvoteCounter"
+        <div className={styles.textContainer}>
+          {props.roadmapPage && (
+            <div className={styles.cardRoadmapInfo}>
+              <span
+                className={styles.cardRoadmapInfoSpan}
+                style={{ backgroundColor: props.color }}
+              />
+              {props.info.get("status")}
+            </div>
+          )}
+          <h3 className={styles.title}>{props.info.get("title")}</h3>
+          <p className={styles.description}>{props.info.get("description")}</p>
+          <div className={styles.category}>{props.info.get("category")}</div>
+        </div>
+        <div
+          className={`${styles.upvoteContainer} ${
+            upvoteClicked && styles.selected
+          }`}
+          onClick={upvoteClickHandler}
+          id="upvoteContainer"
         >
-          {props.info.get("userUpvotes").length}
-        </h4>
+          {upvoteClicked ? (
+            <img
+              src={arrowUpWhite}
+              alt="arrow"
+              className={styles.arrow}
+              id="upvoteIconWhite"
+            ></img>
+          ) : (
+            <img
+              src={arrowUp}
+              alt="arrow"
+              className={styles.arrow}
+              id="upvoteIconUp"
+            ></img>
+          )}
+          <h4
+            className={`${styles.counter} ${styles.upvotes}`}
+            id="upvoteCounter"
+          >
+            {props.info.get("userUpvotes").length}
+          </h4>
+        </div>
+        <div className={styles.commentContainer}>
+          <img src={commentIcon} alt="comment" className={styles.comment}></img>
+          <h4 className={styles.counter}>{props.commentCounter}</h4>
+        </div>
       </div>
-      <div className={styles.commentContainer}>
-        <img src={commentIcon} alt="comment" className={styles.comment}></img>
-        <h4 className={styles.counter}>{props.commentCounter}</h4>
-      </div>
-    </div>
+      {message && <div className={styles.errorMessage}>{message}</div>}
+    </React.Fragment>
   );
 };
 

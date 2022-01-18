@@ -7,6 +7,7 @@ import arrowDownWhite from "../assets/shared/icon-arrow-down.svg";
 
 const Dropdown = (props) => {
   const [displayMenu, setDisplayMenu] = useState(false);
+
   const [selectedItem, setSelectedItem] = useState(
     props.currChoice || props.dropdownList[0]
   );

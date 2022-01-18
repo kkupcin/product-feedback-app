@@ -15,6 +15,8 @@ const FeedbackDetailsPage = (props) => {
   const [charCounter, setCharCounter] = useState(250);
   const [newComment, setNewComment] = useState("");
   const [fieldIsEmpty, setFieldIsEmpty] = useState(false);
+  const [message, setMessage] = useState("");
+
   const params = useParams();
   let navigate = useNavigate();
 
@@ -37,6 +39,7 @@ const FeedbackDetailsPage = (props) => {
   const commentChangeHandler = (e) => {
     setCharCounter(250 - e.target.value.length);
     setNewComment(e.target.value);
+
     if (e.target.value.trim() === "") {
       setFieldIsEmpty(true);
     } else {
@@ -59,10 +62,11 @@ const FeedbackDetailsPage = (props) => {
           feedbackId: currFeedback.id,
           comment: newComment,
         });
+
         getFeedbackInfo();
         setNewComment("");
       } catch (err) {
-        alert(`Comment submission failed: ${err}`);
+        setMessage(`Comment submission failed: ${err}`);
       }
     }
   };
@@ -123,6 +127,7 @@ const FeedbackDetailsPage = (props) => {
                 class={newComment.length === 0 && "btnDisabled"}
               />
             </div>
+            {message && <div className={styles.errorMessage}>{message}</div>}
           </div>
         </React.Fragment>
       )}

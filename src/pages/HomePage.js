@@ -62,6 +62,7 @@ const HomePage = (props) => {
     const newList = feedbackList.filter(
       (feedbackItem) => feedbackItem.get("category") === category
     );
+
     setCategorisedList(category !== "All" ? newList : feedbackList);
   };
 

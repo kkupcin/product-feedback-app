@@ -15,6 +15,7 @@ const CommentBox = (props) => {
   const [fieldIsEmpty, setFieldIsEmpty] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [replyingTo, setReplyingTo] = useState();
+  const [message, setMessage] = useState("");
 
   // Submit reply
   const replySubmitHandler = async () => {
@@ -30,7 +31,7 @@ const CommentBox = (props) => {
         replyBtnHandler();
         setNewReplyContent("");
       } catch (err) {
-        alert(err);
+        setMessage(`Could not submit reply: ${err}`);
       }
     }
   };
@@ -47,9 +48,11 @@ const CommentBox = (props) => {
 
   const getReplies = async () => {
     setIsLoading(true);
+
     let results = await Parse.Cloud.run("fetchRepliesByCommentId", {
       commentId: props.info.id,
     });
+
     setCurrReplies(results);
     getCommentUser();
   };
@@ -60,6 +63,7 @@ const CommentBox = (props) => {
 
   const replyChangeHandler = (e) => {
     setNewReplyContent(e.target.value);
+
     if (e.target.value.trim() === "") {
       setFieldIsEmpty(true);
       setButtonDisabled(true);
@@ -137,6 +141,9 @@ const CommentBox = (props) => {
                     onBtnClick={replySubmitHandler}
                     isDisabled={buttonDisabled}
                   />
+                  {message && (
+                    <div className={styles.errorMessage}>{message}</div>
+                  )}
                 </div>
               )}
             </div>
@@ -186,6 +193,7 @@ const CommentBox = (props) => {
                 onBtnClick={replySubmitHandler}
                 isDisabled={buttonDisabled}
               />
+              {message && <div className={styles.errorMessage}>{message}</div>}
             </div>
           )}
         </div>

@@ -17,6 +17,7 @@ const RoadmapPage = () => {
   });
   const [selectedFilter, setSelectedFilter] = useState("inProgress");
   const [comments, setComments] = useState();
+
   let navigate = useNavigate();
 
   // Redirects to the new feedback page
@@ -42,14 +43,19 @@ const RoadmapPage = () => {
   // Fetches list and and sorts into categories
   const getList = async () => {
     setIsLoading(true);
+
     let results = await Parse.Cloud.run("fetchAllRequests");
+
     let inprogressArray = results.filter(
       (item) => item.get("status") === "In-Progress"
     );
+
     let plannedArray = results.filter(
       (item) => item.get("status") === "Planned"
     );
+
     let liveArray = results.filter((item) => item.get("status") === "Live");
+
     setFeedbackList({
       inprogress: inprogressArray,
       planned: plannedArray,

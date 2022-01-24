@@ -23,10 +23,9 @@ const Wip = (props) => {
         <div className={styles.wipBox} onClick={onCloseWip}>
           <div className={styles.wip}>
             <h1 className={styles.close}>X</h1>
-            <h3>This website is a work in progress!</h3>
+            <h3>You have been logged in to a Demo account!</h3>
             <p>
-              Editing of data is disabled. <br /> You have been logged in to a
-              Demo account. <br />
+              Editing of data is disabled. <br />
               To log in to a different account, please go <br />
               <span onClick={navigationHandler} className={styles.styledLink}>
                 here

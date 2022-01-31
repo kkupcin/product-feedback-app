@@ -91,7 +91,7 @@ const RoadmapPage = () => {
                 color="#fff"
                 iconWhite={true}
               />
-              <h2 className={styles.mainTitle}>Roadmap</h2>
+              <h1 className={styles.mainTitle}>Roadmap</h1>
             </div>
             <ButtonPrimary
               title="Add Feedback"
@@ -100,8 +100,10 @@ const RoadmapPage = () => {
               onBtnClick={redirectHandler}
             />
           </div>
-          <div className={styles.mainNav}>
-            <div
+          <menu className={styles.mainNav}>
+            <li
+              tabIndex="0"
+              role="button"
               className={`${styles.mainNavItem} ${
                 selectedFilter === "planned" && styles.selected
               }`}
@@ -109,8 +111,10 @@ const RoadmapPage = () => {
               id="planned"
             >
               Planned ({feedbackList.planned.length})
-            </div>
-            <div
+            </li>
+            <li
+              tabIndex="0"
+              role="button"
               className={`${styles.mainNavItem} ${
                 selectedFilter === "inProgress" && styles.selected
               }`}
@@ -118,8 +122,10 @@ const RoadmapPage = () => {
               id="inProgress"
             >
               In-Progress ({feedbackList.inprogress.length})
-            </div>
-            <div
+            </li>
+            <li
+              tabIndex="0"
+              role="button"
               className={`${styles.mainNavItem} ${
                 selectedFilter === "live" && styles.selected
               }`}
@@ -127,17 +133,17 @@ const RoadmapPage = () => {
               id="live"
             >
               Live ({feedbackList.live.length})
-            </div>
+            </li>
             <span
               className={`${styles.selectionBar} ${selectedFilterSpan}`}
             ></span>
-          </div>
-          <div className={`${styles.mainContainer} ${styles[selectedFilter]}`}>
+          </menu>
+          <main className={`${styles.mainContainer} ${styles[selectedFilter]}`}>
             <div className={`${styles.mainList} ${styles.inProgressList}`}>
               <div className={styles.infoText}>
-                <h1 className={styles.largeTitle}>
+                <h2 className={styles.largeTitle}>
                   In-Progress ({feedbackList.inprogress.length})
-                </h1>
+                </h2>
                 <p className={styles.description}>
                   Features currently being developed
                 </p>
@@ -161,9 +167,9 @@ const RoadmapPage = () => {
             </div>
             <div className={`${styles.mainList} ${styles.plannedList}`}>
               <div className={styles.infoText}>
-                <h1 className={styles.largeTitle}>
+                <h2 className={styles.largeTitle}>
                   Planned ({feedbackList.planned.length})
-                </h1>
+                </h2>
                 <p className={styles.description}>
                   Features currently being developed
                 </p>
@@ -186,9 +192,9 @@ const RoadmapPage = () => {
             </div>
             <div className={`${styles.mainList} ${styles.liveList}`}>
               <div className={styles.infoText}>
-                <h1 className={styles.largeTitle}>
+                <h2 className={styles.largeTitle}>
                   Live ({feedbackList.live.length})
-                </h1>
+                </h2>
                 <p className={styles.description}>
                   Features currently being developed
                 </p>
@@ -209,7 +215,7 @@ const RoadmapPage = () => {
                 );
               })}
             </div>
-          </div>
+          </main>
         </React.Fragment>
       )}
     </div>

@@ -24,6 +24,10 @@
   opacity: 0.75;
 }
 
+.hamBtn {
+  background-color: transparent;
+}
+
 .icon {
   max-width: 20px;
 }
@@ -53,6 +57,10 @@
 
   .subtitle {
     font-size: 15px;
+  }
+
+  .hamBtn {
+    display: none;
   }
 
   .icon {

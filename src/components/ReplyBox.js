@@ -4,7 +4,7 @@ import Reply from "./Reply";
 
 const ReplyBox = (props) => {
   return (
-    <div className={styles.repliesContainer}>
+    <section className={styles.repliesContainer}>
       {props.replies.map((reply) => {
         return (
           <Reply
@@ -15,7 +15,7 @@ const ReplyBox = (props) => {
           />
         );
       })}
-    </div>
+    </section>
   );
 };
 export default ReplyBox;

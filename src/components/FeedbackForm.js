@@ -23,7 +23,8 @@ const FeedbackForm = (props) => {
   let navigate = useNavigate();
 
   // Navigate back a page when cancel is clicked
-  const cancelHandler = () => {
+  const cancelHandler = (e) => {
+    e.preventDefault();
     navigate(-1);
   };
 
@@ -42,7 +43,8 @@ const FeedbackForm = (props) => {
   }
 
   // Submit new feedback to Parse
-  const submitNewFeedback = async () => {
+  const submitNewFeedback = async (e) => {
+    e.preventDefault();
     if (!fieldIsEmpty) {
       try {
         let newRequest = await Parse.Cloud.run("newRequest", {
@@ -66,7 +68,8 @@ const FeedbackForm = (props) => {
   };
 
   // Submit edited feeback to Parse
-  const submitEditedFeedback = async () => {
+  const submitEditedFeedback = async (e) => {
+    e.preventDefault();
     if (!fieldIsEmpty) {
       try {
         let feedbackForEditId = await Parse.Cloud.run("submitEditedFeedback", {
@@ -94,7 +97,8 @@ const FeedbackForm = (props) => {
   };
 
   // Delete feedback in editing
-  const deleteFeedback = async () => {
+  const deleteFeedback = async (e) => {
+    e.preventDefault();
     try {
       await Parse.Cloud.run("deleteRequest", {
         feedbackId: props.feedbackForEdit.id,
@@ -190,7 +194,7 @@ const FeedbackForm = (props) => {
   };
 
   return (
-    <div className={styles.container}>
+    <form className={styles.container} aria-describedby="err-message">
       <img src={props.icon} alt="icon" className={styles.icon} />
       <div className={styles.formContainer}>
         <h1 className={styles.formTitle}>
@@ -199,7 +203,9 @@ const FeedbackForm = (props) => {
             : "Create New Feedback"}
         </h1>
         <div className={styles.formBox}>
-          <label className={styles.label}>Feedback Title</label>
+          <label className={styles.label} for="form-title">
+            Feedback Title
+          </label>
           <p className={styles.description}>
             Add a short, descriptive headline
           </p>
@@ -209,15 +215,19 @@ const FeedbackForm = (props) => {
             value={fillerFeedback.title}
             onChange={updateTitleHandler}
             maxLength="68"
+            id="form-title"
           ></input>
           <span className={styles.messageSpan}></span>
         </div>
         <div className={styles.formBox}>
-          <label className={styles.label}>Category</label>
+          <label className={styles.label} for="category-dropdown">
+            Category
+          </label>
           <p className={styles.description}>
             Choose a category for your feedback
           </p>
           <Dropdown
+            id="category-dropdown"
             dropdownClass="filterForm"
             dropdownList={categoryList}
             currChoice={categoryList[currCatChoiceIndex()]}
@@ -226,9 +236,12 @@ const FeedbackForm = (props) => {
         </div>
         {props.editForm && (
           <div className={styles.formBox}>
-            <p className={styles.label}>Update Status</p>
+            <p className={styles.label} for="status-dropdown">
+              Update Status
+            </p>
             <p className={styles.description}>Change feature state</p>
             <Dropdown
+              id="status-dropdown"
               dropdownClass="filterForm"
               dropdownList={statusList}
               currChoice={statusList[currStatusChoiceIndex()]}
@@ -237,12 +250,15 @@ const FeedbackForm = (props) => {
           </div>
         )}
         <div className={`${styles.formBox}`}>
-          <label className={styles.label}>Feedback Detail</label>
+          <label className={styles.label} for="feedback-detail-input">
+            Feedback Detail
+          </label>
           <p className={styles.description}>
             Include any specific comments on what should be improved, added,
             etc.
           </p>
           <textarea
+            id="feedback-detail-input"
             className={`${styles.largeTextInput} ${styles.input}`}
             type="textarea"
             rows="6"
@@ -282,8 +298,12 @@ const FeedbackForm = (props) => {
           ></ButtonPrimary>
         )}
       </div>
-      {message && <div className={styles.message}>{message}</div>}
-    </div>
+      {message && (
+        <div className={styles.message} id="err-message">
+          {message}
+        </div>
+      )}
+    </form>
   );
 };
 

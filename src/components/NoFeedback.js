@@ -12,7 +12,7 @@ const NoFeedback = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <img src={empty} alt="empty" />
       <h1 className={styles.title}>There is no feedback yet.</h1>
       <p className={styles.description}>
@@ -25,7 +25,7 @@ const NoFeedback = () => {
         icon={true}
         onBtnClick={redirectHandler}
       ></ButtonPrimary>
-    </div>
+    </section>
   );
 };
 

@@ -8,10 +8,10 @@ const Reply = (props) => {
   };
 
   return (
-    <div className={styles.userReplyBox}>
+    <article className={styles.userReplyBox}>
       <img
         src={props.reply.get("user").get("avatar").url()}
-        alt="user profile"
+        alt="User profile picture"
         className={styles.userIcon}
       />
       <div className={styles.userInfoContainer}>
@@ -35,7 +35,7 @@ const Reply = (props) => {
         </span>
         {props.reply.get("content")}
       </p>
-    </div>
+    </article>
   );
 };
 

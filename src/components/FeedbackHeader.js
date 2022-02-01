@@ -28,7 +28,7 @@ const FeedbackHeader = (props) => {
     <div className={styles.container}>
       <div className={styles.textContainer}>
         <div className={styles.mainTitleBox}>
-          <img src={icon} alt="suggestions" className={styles.icon} />
+          <img src={icon} alt="Suggestions icon" className={styles.icon} />
           <h1 className={styles.mainTitle}>
             {props.feedbackCount} Suggestions
           </h1>

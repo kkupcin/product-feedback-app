@@ -48,8 +48,11 @@ const FeedbackDetails = (props) => {
   const feedbackClickHandler = (e) => {
     // Exclude upvote container click from redirecting
     if (
-      e.target.parentElement.id !== "upvoteContainer" &&
-      e.target.id !== "upvoteContainer"
+      (e.target.parentElement.id !== "upvoteContainer" &&
+        e.target.id !== "upvoteContainer") ||
+      (e.target.parentElement.id !== "upvoteContainer" &&
+        e.target.id !== "upvoteContainer" &&
+        e.charCode == 13)
     ) {
       if (props.onFeedbackClick) {
         props.onFeedbackClick(props.info.id);
@@ -59,8 +62,12 @@ const FeedbackDetails = (props) => {
 
   return (
     <React.Fragment>
-      <div
+      <article
+        id="feedback-el"
+        tabindex="0"
+        role="button"
         onClick={feedbackClickHandler}
+        onKeyPress={feedbackClickHandler}
         className={`${styles.container} ${
           props.roadmapPage ? styles.cardRoadmap : ""
         } ${props.feedbackDetailsPage ? styles.feedbackDetailsPage : ""}`}
@@ -75,7 +82,7 @@ const FeedbackDetails = (props) => {
               {props.info.get("status")}
             </div>
           )}
-          <h3 className={styles.title}>{props.info.get("title")}</h3>
+          <h2 className={styles.title}>{props.info.get("title")}</h2>
           <p className={styles.description}>{props.info.get("description")}</p>
           <div className={styles.category}>{props.info.get("category")}</div>
         </div>
@@ -101,18 +108,18 @@ const FeedbackDetails = (props) => {
               id="upvoteIconUp"
             ></img>
           )}
-          <h4
+          <h3
             className={`${styles.counter} ${styles.upvotes}`}
             id="upvoteCounter"
           >
             {props.info.get("userUpvotes").length}
-          </h4>
+          </h3>
         </div>
         <div className={styles.commentContainer}>
           <img src={commentIcon} alt="comment" className={styles.comment}></img>
-          <h4 className={styles.counter}>{props.commentCounter}</h4>
+          <h3 className={styles.counter}>{props.commentCounter}</h3>
         </div>
-      </div>
+      </article>
       {message && <div className={styles.errorMessage}>{message}</div>}
     </React.Fragment>
   );

@@ -15,21 +15,21 @@ const Header = (props) => {
         <p className={styles.subtitle}>Feedback Board</p>
       </div>
       {props.showCloseIcon ? (
-        <img
-          src={closeLogo}
-          alt="Close"
-          className={styles.icon}
-          onClick={hamburgerHandler}
-          id="close"
-        />
+        <button onClick={hamburgerHandler} id="close" className={styles.hamBtn}>
+          <img src={closeLogo} alt="Close" className={styles.icon} />
+        </button>
       ) : (
-        <img
-          src={hamburgerLogo}
-          alt="Hamburger"
-          className={styles.icon}
+        <button
           onClick={hamburgerHandler}
           id="hamburger"
-        />
+          className={styles.hamBtn}
+        >
+          <img
+            src={hamburgerLogo}
+            alt="Hamburger button"
+            className={styles.icon}
+          />
+        </button>
       )}
     </div>
   );

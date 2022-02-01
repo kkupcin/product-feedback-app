@@ -7,10 +7,10 @@ const MobileSidebar = (props) => {
   return (
     <React.Fragment>
       <div className={styles.outerModal}>
-        <div className={styles.container}>
+        <section className={styles.container}>
           <Categories sidebar={true} />
           <RoadmapWidget sidebar={true} feedback={props.feedback} />
-        </div>
+        </section>
       </div>
     </React.Fragment>
   );

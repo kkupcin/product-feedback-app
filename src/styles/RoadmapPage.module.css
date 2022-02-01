@@ -29,7 +29,6 @@
   font-size: 13px;
   color: rgba(58, 67, 116, 0.4);
   font-weight: 700;
-  padding: 18px 0;
   letter-spacing: -0.18px;
   position: relative;
 }
@@ -39,6 +38,8 @@
   text-align: center;
   cursor: pointer;
   list-style: none;
+  background-color: transparent;
+  padding: 18px 0;
 }
 
 .selected {

@@ -101,9 +101,7 @@ const RoadmapPage = () => {
             />
           </div>
           <menu className={styles.mainNav}>
-            <li
-              tabIndex="0"
-              role="button"
+            <button
               className={`${styles.mainNavItem} ${
                 selectedFilter === "planned" && styles.selected
               }`}
@@ -111,10 +109,8 @@ const RoadmapPage = () => {
               id="planned"
             >
               Planned ({feedbackList.planned.length})
-            </li>
-            <li
-              tabIndex="0"
-              role="button"
+            </button>
+            <button
               className={`${styles.mainNavItem} ${
                 selectedFilter === "inProgress" && styles.selected
               }`}
@@ -122,10 +118,8 @@ const RoadmapPage = () => {
               id="inProgress"
             >
               In-Progress ({feedbackList.inprogress.length})
-            </li>
-            <li
-              tabIndex="0"
-              role="button"
+            </button>
+            <button
               className={`${styles.mainNavItem} ${
                 selectedFilter === "live" && styles.selected
               }`}
@@ -133,7 +127,7 @@ const RoadmapPage = () => {
               id="live"
             >
               Live ({feedbackList.live.length})
-            </li>
+            </button>
             <span
               className={`${styles.selectionBar} ${selectedFilterSpan}`}
             ></span>

@@ -74,12 +74,12 @@ const FeedbackDetailsPage = (props) => {
   };
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <React.Fragment>
-          <div className={styles.buttonContainer}>
+          <menu className={styles.buttonContainer}>
             <ButtonSecondary title="Go Back" icon={true} />
             <ButtonPrimary
               title="Edit Feedback"
@@ -87,7 +87,7 @@ const FeedbackDetailsPage = (props) => {
               color="blue"
               onBtnClick={redirectHandler}
             />
-          </div>
+          </menu>
           <FeedbackDetails
             width="85%"
             feedbackDetailsPage={true}
@@ -97,9 +97,9 @@ const FeedbackDetailsPage = (props) => {
             location="feedbackDetailsPage"
           />
           <div className={styles.commentsContainer}>
-            <h1 className={styles.commentCounter}>
+            <h2 className={styles.commentCounter}>
               {currComments.length} Comments
-            </h1>
+            </h2>
             {currComments.map((comment) => {
               return <CommentBox info={comment} key={comment.id} />;
             })}
@@ -108,8 +108,15 @@ const FeedbackDetailsPage = (props) => {
             className={`${styles.addCommentContainer} ${
               fieldIsEmpty && styles.fieldEmpty
             }`}
+            aria-describedby="err-message"
           >
-            <h1 className={styles.inputTitle}>Add Comment</h1>
+            <label
+              className={styles.inputTitle}
+              for="add-comment-box"
+              aria-describedby="message-span"
+            >
+              Add Comment
+            </label>
             <textarea
               rows="3"
               placeholder="Type your comment here"
@@ -117,8 +124,9 @@ const FeedbackDetailsPage = (props) => {
               maxLength="250"
               onChange={commentChangeHandler}
               value={newComment}
+              id="add-comment-box"
             />
-            <span className={styles.messageSpan}></span>
+            <span className={styles.messageSpan} id="message-span"></span>
             <div className={styles.options}>
               <div className={styles.charCounter}>
                 {charCounter} Characters left
@@ -130,11 +138,15 @@ const FeedbackDetailsPage = (props) => {
                 class={newComment.length === 0 && "btnDisabled"}
               />
             </div>
-            {message && <div className={styles.errorMessage}>{message}</div>}
+            {message && (
+              <div className={styles.errorMessage} id="err-message ">
+                {message}
+              </div>
+            )}
           </div>
         </React.Fragment>
       )}
-    </div>
+    </section>
   );
 };
 

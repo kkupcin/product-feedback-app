@@ -38,6 +38,7 @@
 }
 
 .inputTitle {
+  display: inline-block;
   font-size: 18px;
   color: #3a4374;
   letter-spacing: -0.25px;

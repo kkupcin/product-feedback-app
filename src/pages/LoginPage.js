@@ -14,7 +14,8 @@ const LoginPage = () => {
   let navigate = useNavigate();
 
   // Log user in
-  const loginHandler = async () => {
+  const loginHandler = async (e) => {
+    e.preventDefault();
     await login();
   };
 
@@ -52,14 +53,17 @@ const LoginPage = () => {
 
   return (
     <div className={styles.outerContainer}>
-      <div className={styles.container}>
+      <section className={styles.container}>
         <div className={styles.accent}>
           <h1>Log In</h1>
         </div>
-        <div className={styles.infoContainer}>
+        <form className={styles.infoContainer} aria-describedby="err-message">
           <div className={styles.inputBox}>
-            <label className={styles.inputTitle}>Username</label>
+            <label className={styles.inputTitle} for="username">
+              Username
+            </label>
             <input
+              id="username"
               type="text"
               className={styles.input}
               value={loginDetails.username}
@@ -67,8 +71,11 @@ const LoginPage = () => {
             ></input>
           </div>
           <div className={styles.inputBox}>
-            <label className={styles.inputTitle}>Password</label>
+            <label className={styles.inputTitle} for="password">
+              Password
+            </label>
             <input
+              id="password"
               type="password"
               className={styles.input}
               value={loginDetails.password}
@@ -80,9 +87,13 @@ const LoginPage = () => {
             onBtnClick={loginHandler}
             title="Log In"
           />
-          {message && <div className={styles.message}>{message}</div>}
-        </div>
-      </div>
+          {message && (
+            <div className={styles.message} id="err-message">
+              {message}
+            </div>
+          )}
+        </form>
+      </section>
     </div>
   );
 };

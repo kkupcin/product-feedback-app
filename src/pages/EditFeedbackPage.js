@@ -36,7 +36,7 @@ const EditFeedbackPage = () => {
     feedbackForEdit.get("creator").id === Parse.User.current().id;
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <ButtonSecondary title="Go Back" class="buttonForm" icon={true}>
         Go Back
       </ButtonSecondary>
@@ -53,7 +53,7 @@ const EditFeedbackPage = () => {
           You do not have permission to edit this feedback
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

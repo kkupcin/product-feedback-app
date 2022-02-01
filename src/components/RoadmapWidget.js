@@ -31,7 +31,7 @@ const RoadmapWidget = (props) => {
   }, [props.feedback]);
 
   return (
-    <div
+    <section
       className={`${styles.container} ${props.sidebar ? styles.sidebar : ""}`}
     >
       <div className={styles.headerContainer}>
@@ -40,8 +40,8 @@ const RoadmapWidget = (props) => {
           View
         </Link>
       </div>
-      <div className={styles.listContainer}>
-        <div className={styles.listItem}>
+      <ul className={styles.listContainer}>
+        <li className={styles.listItem}>
           <div className={styles.itemTitleBox}>
             <span
               className={styles.itemSpan}
@@ -50,8 +50,8 @@ const RoadmapWidget = (props) => {
             <h2 className={styles.itemTitle}>In-Progress</h2>
           </div>
           <p className={styles.counter}>{sortedList.inprogress.length}</p>
-        </div>
-        <div className={styles.listItem}>
+        </li>
+        <li className={styles.listItem}>
           <div className={styles.itemTitleBox}>
             <span
               className={styles.itemSpan}
@@ -60,8 +60,8 @@ const RoadmapWidget = (props) => {
             <h2 className={styles.itemTitle}>Planned</h2>
           </div>
           <p className={styles.counter}>{sortedList.planned.length}</p>
-        </div>
-        <div className={styles.listItem}>
+        </li>
+        <li className={styles.listItem}>
           <div className={styles.itemTitleBox}>
             <span
               className={styles.itemSpan}
@@ -70,9 +70,9 @@ const RoadmapWidget = (props) => {
             <h2 className={styles.itemTitle}>Live</h2>
           </div>
           <p className={styles.counter}>{sortedList.live.length}</p>
-        </div>
-      </div>
-    </div>
+        </li>
+      </ul>
+    </section>
   );
 };
 

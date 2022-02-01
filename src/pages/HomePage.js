@@ -70,13 +70,13 @@ const HomePage = (props) => {
   return (
     <div className={styles.homePageWrapper}>
       {Parse.User.current() && Parse.User.current().get("isDemo") && <Wip />}
-      <div className={styles.mainNav}>
+      <menu className={styles.mainNav}>
         <Header onShowSidebar={showSidebarHandler} showCloseIcon={showMenu} />
         {showMenu && <MobileSidebar feedback={feedbackList} />}
         <Categories selectedCategory={onCategorySelection} />
         <RoadmapWidget feedback={feedbackList} />
-      </div>
-      <div className={styles.mainContent}>
+      </menu>
+      <main className={styles.mainContent}>
         {isLoading ? (
           <LoadingSpinner class="homePage" />
         ) : (
@@ -93,7 +93,7 @@ const HomePage = (props) => {
             />
           </React.Fragment>
         )}
-      </div>
+      </main>
     </div>
   );
 };
